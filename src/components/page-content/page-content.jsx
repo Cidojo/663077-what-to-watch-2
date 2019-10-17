@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {genresPropTypes, movieCardsPropTypes, cardsPerPagePropTypes} from "./../../global-custom-types.jsx";
-import {GenreList} from "../genre-list/genre-list.jsx";
-import {Footer} from "../footer/footer.jsx";
+import {genresPropTypes, movieCardsPropTypes, cardsPerPagePropTypes} from './../../global-custom-types.js';
+import {GenreList} from '../genre-list/genre-list.jsx';
+import {Footer} from '../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
 
 const PageContent = (props) => {

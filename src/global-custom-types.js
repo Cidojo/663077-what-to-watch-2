@@ -1,4 +1,4 @@
-import * as PropTypes from "prop-types";
+import * as PropTypes from 'prop-types';
 
 const movieCardPropTypes = PropTypes.exact({
   id: PropTypes.number || PropTypes.string,

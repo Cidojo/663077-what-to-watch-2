@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {genresPropTypes} from "./../../global-custom-types.jsx";
+import {genresPropTypes} from './../../global-custom-types.js';
 
 const GenreList = (props) => {
   const {genresDictionary} = props;
