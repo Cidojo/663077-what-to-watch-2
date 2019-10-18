@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Header} from "../header/header.jsx";
-import {movieCardPropTypes, userDataPropTypes} from "./../../global-custom-types.jsx";
+import {Header} from '../header/header.jsx';
+import {movieCardPropTypes, userDataPropTypes} from './../../global-custom-types.js';
 
 const MovieCard = (props) => {
   const {card, userData} = props;

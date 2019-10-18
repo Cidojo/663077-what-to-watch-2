@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import {MainPage} from './components/main-page/main-page.jsx';
 
-import {Genres as MockGenres, MovieCards as MockMovieCards} from './mock/mock.js';
+import {Genres as MockGenres, movieCards as mockMovieCards} from './mock/mock.js';
 
 const settings = {
   currentVideoID: 21,
   genres: MockGenres,
-  movieCards: MockMovieCards,
+  movieCards: mockMovieCards,
   userData: {
     avatar: `img/avatar.jpg`
   },

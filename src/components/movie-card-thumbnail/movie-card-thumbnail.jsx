@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {movieCardPropTypes} from "./../../global-custom-types.jsx";
+import {movieCardPropTypes} from './../../global-custom-types.js';
 
 const MovieCardThumbnail = (props) => {
   const {card} = props;

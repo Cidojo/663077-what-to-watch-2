@@ -41,7 +41,7 @@ const Genres = {
   }
 };
 
-const MovieCards = [{
+const movieCards = [{
   id: 1,
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   link: `movie-page.html`,
@@ -232,4 +232,4 @@ const MovieCards = [{
   year: 2014
 }];
 
-export {Genres, MovieCards};
+export {Genres, movieCards};

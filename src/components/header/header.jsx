@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {userDataPropTypes} from "./../../global-custom-types.jsx";
+import {userDataPropTypes} from './../../global-custom-types.js';
 
 
 const Header = (props) => {

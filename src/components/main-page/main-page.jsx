@@ -5,7 +5,7 @@ import {
   userDataPropTypes,
   currentVideoIDPropTypes,
   cardsPerPagePropTypes
-} from './../../global-custom-types.jsx';
+} from './../../global-custom-types.js';
 
 import {MovieCard} from './../movie-card/movie-card.jsx';
 import {PageContent} from './../page-content/page-content.jsx';
@@ -58,14 +58,14 @@ const MainPage = (props) => {
   const currentVideoCard = movieCards.find((card) => card.id === currentVideoID);
 
   return (
-    <div>
+    <React.Fragment>
       <LogoSVG />
       <MovieCard
         card={currentVideoCard || movieCards[0]}
         userData={userData}
       />
       <PageContent genres={genres} movieCards={movieCards} cardsPerPage={cardsPerPage} />
-    </div>
+    </React.Fragment>
   );
 };
 
