@@ -15,6 +15,7 @@ it(`should render component without errors`, () => {
         genre: ``,
         year: 0
       }}
+      onThumbnailClick={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

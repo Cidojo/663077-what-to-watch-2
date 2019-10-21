@@ -26,6 +26,7 @@ it(`should render component without errors`, () => {
         year: 0
       }]}
       cardsPerPage={0}
+      handleCurrentVideoIDChange={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

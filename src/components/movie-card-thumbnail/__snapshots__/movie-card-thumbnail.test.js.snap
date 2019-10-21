@@ -20,6 +20,7 @@ exports[`should render component without errors 1`] = `
     <a
       className="small-movie-card__link"
       href=""
+      onClick={[Function]}
     >
       
     </a>
