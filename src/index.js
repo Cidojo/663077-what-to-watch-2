@@ -22,6 +22,7 @@ const init = () => {
         userData={settings.userData}
         currentVideoID={settings.currentVideoID}
         cardsPerPage={settings.cardsPerPage}
+        handleCurrentVideoIDChange={() => {}}
       />,
       document.getElementById(`root`)
   );

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {userDataPropTypes} from './../../global-custom-types.js';
-
+import * as PropTypes from 'prop-types';
 
 const Header = (props) => {
-  const {userData} = props;
+  const {avatar} = props;
   return (
     <header className="page-header movie-card__head">
       <div className="logo">
@@ -16,7 +15,7 @@ const Header = (props) => {
 
       <div className="user-block">
         <div className="user-block__avatar">
-          <img src={userData.avatar} alt="User avatar" width="63" height="63"/>
+          <img src={avatar} alt="User avatar" width="63" height="63"/>
         </div>
       </div>
     </header>
@@ -24,7 +23,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  userData: userDataPropTypes
+  avatar: PropTypes.string
 };
 
 export {Header};
