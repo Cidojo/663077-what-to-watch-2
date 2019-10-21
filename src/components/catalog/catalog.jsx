@@ -1,6 +1,7 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import {MovieCardThumbnail} from '../movie-card-thumbnail/movie-card-thumbnail.jsx';
-import {movieCardsPropTypes, cardsPerPagePropTypes} from './../../global-custom-types.js';
+import {movieCardsPropTypes} from './../../global-custom-types.js';
 
 const Catalog = (props) => {
   const {movieCards, cardsPerPage} = props;
@@ -14,7 +15,7 @@ const Catalog = (props) => {
 
 Catalog.propTypes = {
   movieCards: movieCardsPropTypes,
-  cardsPerPage: cardsPerPagePropTypes
+  cardsPerPage: PropTypes.number
 };
 
 export {Catalog};

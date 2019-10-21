@@ -1,9 +1,10 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import {Header} from '../header/header.jsx';
-import {movieCardPropTypes, userDataPropTypes} from './../../global-custom-types.js';
+import {movieCardPropTypes} from './../../global-custom-types.js';
 
 const MovieCard = (props) => {
-  const {card, userData} = props;
+  const {card, userAvatar} = props;
 
   return (
     <section className="movie-card">
@@ -13,7 +14,7 @@ const MovieCard = (props) => {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <Header userData={userData} />
+      <Header avatar={userAvatar} />
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -51,7 +52,7 @@ const MovieCard = (props) => {
 };
 
 MovieCard.propTypes = {
-  userData: userDataPropTypes,
+  userAvatar: PropTypes.string,
   card: movieCardPropTypes
 };
 

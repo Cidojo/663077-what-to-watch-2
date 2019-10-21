@@ -24,15 +24,9 @@ const userDataPropTypes = PropTypes.shape({
   avatar: PropTypes.string
 });
 
-const currentVideoIDPropTypes = PropTypes.number || PropTypes.string;
-
-const cardsPerPagePropTypes = PropTypes.number;
-
 export {
   movieCardPropTypes,
   genresPropTypes,
   movieCardsPropTypes,
-  userDataPropTypes,
-  currentVideoIDPropTypes,
-  cardsPerPagePropTypes
+  userDataPropTypes
 };
