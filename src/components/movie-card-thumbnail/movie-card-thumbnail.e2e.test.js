@@ -20,9 +20,35 @@ it(`handles thumbnail click`, () => {
       year: 0
     }}
     onThumbnailClick={onThumbnailClick}
+    onThumbnailMouseOver={() => {}}
   />);
 
   const thumbNailTitle = movieCardThumbnail.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
   expect(onThumbnailClick).toHaveBeenCalledTimes(1);
+});
+
+it(`handles thumbnail click`, () => {
+  const onThumbnailMouseOver = jest.fn();
+
+  const card = {
+    id: 0,
+    title: ``,
+    link: ``,
+    imgSrc: ``,
+    posterSrc: ``,
+    imgDescription: ``,
+    genre: ``,
+    year: 0
+  };
+
+  const movieCardThumbnail = shallow(<MovieCardThumbnail
+    card={card}
+    onThumbnailClick={()=> {}}
+    onThumbnailMouseOver={onThumbnailMouseOver}
+  />);
+
+  const movieCardElement = movieCardThumbnail.find(`.small-movie-card`);
+  movieCardElement.simulate(`mouseOver`);
+  expect(onThumbnailMouseOver).toHaveBeenCalledWith(card);
 });

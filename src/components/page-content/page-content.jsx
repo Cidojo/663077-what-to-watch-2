@@ -6,7 +6,7 @@ import {Footer} from '../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
 
 const PageContent = (props) => {
-  const {genres, movieCards, cardsPerPage, handleCurrentVideoIDChange} = props;
+  const {genres, movieCards, cardsPerPage, onCurrentVideoIDChange} = props;
 
   return (
     <div className="page-content">
@@ -16,7 +16,7 @@ const PageContent = (props) => {
         <Catalog
           movieCards={movieCards}
           cardsPerPage={cardsPerPage}
-          handleCurrentVideoIDChange={handleCurrentVideoIDChange}
+          onCurrentVideoIDChange={onCurrentVideoIDChange}
         />
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -31,7 +31,7 @@ PageContent.propTypes = {
   movieCards: movieCardsPropTypes,
   genres: genresPropTypes,
   cardsPerPage: PropTypes.number,
-  handleCurrentVideoIDChange: PropTypes.func
+  onCurrentVideoIDChange: PropTypes.func.isRequired
 };
 
 export {PageContent};
