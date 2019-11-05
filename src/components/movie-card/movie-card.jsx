@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Header} from '../header/header.jsx';
-import {movieCardPropTypes} from './../../global-custom-types.js';
 
 const MovieCard = (props) => {
   const {card, userAvatar} = props;
@@ -53,7 +52,22 @@ const MovieCard = (props) => {
 
 MovieCard.propTypes = {
   userAvatar: PropTypes.string,
-  card: movieCardPropTypes
+  card: PropTypes.exact({
+    id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    imgSrc: PropTypes.string,
+    posterSrc: PropTypes.string,
+    imgDescription: PropTypes.string,
+    link: PropTypes.string,
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    year: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ])
+  })
 };
 
 export {MovieCard};

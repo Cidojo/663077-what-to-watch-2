@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {MovieCardThumbnail} from '../movie-card-thumbnail/movie-card-thumbnail.jsx';
-import {movieCardsPropTypes} from './../../global-custom-types.js';
 
 class Catalog extends React.PureComponent {
   constructor(props) {
@@ -45,7 +44,22 @@ class Catalog extends React.PureComponent {
 }
 
 Catalog.propTypes = {
-  movieCards: movieCardsPropTypes,
+  movieCards: PropTypes.arrayOf(PropTypes.exact({
+    id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    imgSrc: PropTypes.string,
+    posterSrc: PropTypes.string,
+    imgDescription: PropTypes.string,
+    link: PropTypes.string,
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    year: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ])
+  })),
   cardsPerPage: PropTypes.number,
   onCurrentVideoIDChange: PropTypes.func.isRequired
 };
