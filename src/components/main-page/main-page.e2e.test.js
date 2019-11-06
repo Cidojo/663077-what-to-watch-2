@@ -6,7 +6,7 @@ import {MainPage} from './main-page.jsx';
 configure({adapter: new Adapter()});
 
 it(`handles thumbnail click`, () => {
-  const handleCurrentVideoIDChange = jest.fn();
+  const onCurrentVideoIDChange = jest.fn();
 
   const mainPage = mount(<MainPage
     userData={{
@@ -30,10 +30,10 @@ it(`handles thumbnail click`, () => {
       year: 0
     }]}
     cardsPerPage={1}
-    handleCurrentVideoIDChange={handleCurrentVideoIDChange}
+    onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);
 
   const thumbNailTitle = mainPage.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(handleCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
 });

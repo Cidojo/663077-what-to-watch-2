@@ -16,6 +16,7 @@ it(`should render component without errors`, () => {
         year: 0
       }}
       onThumbnailClick={() => {}}
+      onThumbnailMouseOver={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

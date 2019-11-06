@@ -1,12 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {genresPropTypes, movieCardsPropTypes} from './../../global-custom-types.js';
 import {GenreList} from '../genre-list/genre-list.jsx';
 import {Footer} from '../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
 
 const PageContent = (props) => {
-  const {genres, movieCards, cardsPerPage, handleCurrentVideoIDChange} = props;
+  const {genres, movieCards, cardsPerPage, onCurrentVideoIDChange} = props;
 
   return (
     <div className="page-content">
@@ -16,7 +15,7 @@ const PageContent = (props) => {
         <Catalog
           movieCards={movieCards}
           cardsPerPage={cardsPerPage}
-          handleCurrentVideoIDChange={handleCurrentVideoIDChange}
+          onCurrentVideoIDChange={onCurrentVideoIDChange}
         />
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -28,10 +27,30 @@ const PageContent = (props) => {
 };
 
 PageContent.propTypes = {
-  movieCards: movieCardsPropTypes,
-  genres: genresPropTypes,
+  movieCards: PropTypes.arrayOf(PropTypes.exact({
+    id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    imgSrc: PropTypes.string,
+    posterSrc: PropTypes.string,
+    imgDescription: PropTypes.string,
+    link: PropTypes.string,
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    year: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ])
+  })),
+  genres: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      name: PropTypes.string,
+      link: PropTypes.string
+    })
+  }),
   cardsPerPage: PropTypes.number,
-  handleCurrentVideoIDChange: PropTypes.func
+  onCurrentVideoIDChange: PropTypes.func.isRequired
 };
 
 export {PageContent};

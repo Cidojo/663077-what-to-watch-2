@@ -1,17 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {
-  genresPropTypes,
-  movieCardsPropTypes,
-  userDataPropTypes
-} from './../../global-custom-types.js';
-
 import {MovieCard} from './../movie-card/movie-card.jsx';
 import {PageContent} from './../page-content/page-content.jsx';
 import {Logotype} from './../logotype/logotype.jsx';
 
 const MainPage = (props) => {
-  const {currentVideoID, movieCards, genres, userData, cardsPerPage, handleCurrentVideoIDChange} = props;
+  const {currentVideoID, movieCards, genres, userData, cardsPerPage, onCurrentVideoIDChange} = props;
   const currentVideoCard = movieCards.find((card) => card.id === currentVideoID);
 
   return (
@@ -25,22 +19,44 @@ const MainPage = (props) => {
         genres={genres}
         movieCards={movieCards}
         cardsPerPage={cardsPerPage}
-        handleCurrentVideoIDChange={handleCurrentVideoIDChange}
+        onCurrentVideoIDChange={onCurrentVideoIDChange}
       />
     </React.Fragment>
   );
 };
 
 MainPage.propTypes = {
-  genres: genresPropTypes,
-  movieCards: movieCardsPropTypes,
-  userData: userDataPropTypes,
+  genres: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      name: PropTypes.string,
+      link: PropTypes.string
+    })
+  }),
+  movieCards: PropTypes.arrayOf(PropTypes.exact({
+    id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    imgSrc: PropTypes.string,
+    posterSrc: PropTypes.string,
+    imgDescription: PropTypes.string,
+    link: PropTypes.string,
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    year: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ])
+  })),
+  userData: PropTypes.shape({
+    avatar: PropTypes.string
+  }),
   currentVideoID: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string
   ]),
   cardsPerPage: PropTypes.number,
-  handleCurrentVideoIDChange: PropTypes.func
+  onCurrentVideoIDChange: PropTypes.func.isRequired
 };
 
 export {MainPage};

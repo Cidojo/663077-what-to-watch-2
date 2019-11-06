@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {genresPropTypes} from './../../global-custom-types.js';
+import * as PropTypes from "prop-types";
 
 const GenreList = (props) => {
   const {genresDictionary} = props;
@@ -20,7 +20,12 @@ const GenreList = (props) => {
 };
 
 GenreList.propTypes = {
-  genresDictionary: genresPropTypes
+  genresDictionary: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      name: PropTypes.string,
+      link: PropTypes.string
+    })
+  })
 };
 
 export {GenreList};

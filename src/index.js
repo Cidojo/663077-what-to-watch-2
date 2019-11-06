@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import {MainPage} from './components/main-page/main-page.jsx';
 
-import {Genres as MockGenres, movieCards as mockMovieCards} from './mock/mock.js';
+import {Genres as MockGenres, movieCards as mockMovieCards} from './mocks/films.js';
 
 const settings = {
   currentVideoID: 21,
@@ -22,7 +22,7 @@ const init = () => {
         userData={settings.userData}
         currentVideoID={settings.currentVideoID}
         cardsPerPage={settings.cardsPerPage}
-        handleCurrentVideoIDChange={() => {}}
+        onCurrentVideoIDChange={() => {}}
       />,
       document.getElementById(`root`)
   );
