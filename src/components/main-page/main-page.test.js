@@ -23,9 +23,15 @@ it(`should render component without errors`, () => {
         posterSrc: ``,
         imgDescription: ``,
         genre: ``,
-        year: 0
+        year: 0,
+        director: ``,
+        starring: [],
+        rating: {
+          score: ``,
+          level: ``,
+          count: 0
+        }
       }]}
-      cardsPerPage={0}
       onCurrentVideoIDChange={() => {}}
     />)
     .toJSON();

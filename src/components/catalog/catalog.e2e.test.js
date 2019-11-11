@@ -17,9 +17,15 @@ it(`handles thumbnail click`, () => {
       posterSrc: ``,
       imgDescription: ``,
       genre: ``,
-      year: 0
+      year: 0,
+      director: ``,
+      starring: [],
+      rating: {
+        score: ``,
+        level: ``,
+        count: 0
+      }
     }]}
-    cardsPerPage={1}
     onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);
 

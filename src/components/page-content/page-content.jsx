@@ -5,7 +5,7 @@ import {Footer} from '../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
 
 const PageContent = (props) => {
-  const {genres, movieCards, cardsPerPage, onCurrentVideoIDChange} = props;
+  const {genres, movieCards, onCurrentVideoIDChange} = props;
 
   return (
     <div className="page-content">
@@ -14,7 +14,6 @@ const PageContent = (props) => {
         <GenreList genresDictionary={genres} />
         <Catalog
           movieCards={movieCards}
-          cardsPerPage={cardsPerPage}
           onCurrentVideoIDChange={onCurrentVideoIDChange}
         />
         <div className="catalog__more">
@@ -41,7 +40,14 @@ PageContent.propTypes = {
     year: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string
-    ])
+    ]),
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    rating: PropTypes.shape({
+      score: PropTypes.string,
+      level: PropTypes.string,
+      count: PropTypes.number
+    })
   })),
   genres: PropTypes.shape({
     [PropTypes.string]: PropTypes.shape({
@@ -49,7 +55,6 @@ PageContent.propTypes = {
       link: PropTypes.string
     })
   }),
-  cardsPerPage: PropTypes.number,
   onCurrentVideoIDChange: PropTypes.func.isRequired
 };
 

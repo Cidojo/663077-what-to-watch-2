@@ -10,29 +10,27 @@ class Catalog extends React.PureComponent {
       activeCard: null
     };
 
-    this.onCardMouseOver = this.onCardMouseOver.bind(this);
+    this.handleCardMouseOver = this.handleCardMouseOver.bind(this);
   }
 
-  onCardMouseOver(activeCard) {
-    this.setState(() => {
-      return ({
-        activeCard
-      });
+  handleCardMouseOver(activeCard) {
+    this.setState({
+      activeCard
     });
   }
 
   render() {
-    const {movieCards, cardsPerPage, onCurrentVideoIDChange} = this.props;
+    const {movieCards, onCurrentVideoIDChange} = this.props;
 
     return (
       <div className="catalog__movies-list">
         {
-          movieCards.slice(0, cardsPerPage).map((card, i) => {
+          movieCards.map((card) => {
             return (
               <MovieCardThumbnail
-                key={`${card.id}_${i}`}
+                key={`${card.id}`}
                 card={card}
-                onThumbnailMouseOver={this.onCardMouseOver}
+                onThumbnailMouseOver={this.handleCardMouseOver}
                 onThumbnailClick={onCurrentVideoIDChange}
               />
             );
@@ -58,9 +56,15 @@ Catalog.propTypes = {
     year: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string
-    ])
+    ]),
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    rating: PropTypes.shape({
+      score: PropTypes.string,
+      level: PropTypes.string,
+      count: PropTypes.number
+    })
   })),
-  cardsPerPage: PropTypes.number,
   onCurrentVideoIDChange: PropTypes.func.isRequired
 };
 
