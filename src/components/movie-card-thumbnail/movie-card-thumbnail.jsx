@@ -1,35 +1,29 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-class MovieCardThumbnail extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const MovieCardThumbnail = (props) => {
+  const {card, onThumbnailClick, onThumbnailMouseOver} = props;
 
-  render() {
-    const {card, onThumbnailClick, onThumbnailMouseOver} = this.props;
-
-    return (
-      <article
-        className="small-movie-card catalog__movies-card"
-        onMouseOver={onThumbnailMouseOver.bind(null, card)}
-      >
-        <div className="small-movie-card__image">
-          <img src={card.imgSrc} alt={card.imgDescription} width="280" height="175"/>
-        </div>
-        <h3 className="small-movie-card__title">
-          <a
-            className="small-movie-card__link"
-            href={card.link}
-            onClick={onThumbnailClick}
-          >
-            {card.title}
-          </a>
-        </h3>
-      </article>
-    );
-  }
-}
+  return (
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseOver={onThumbnailMouseOver.bind(null, card)}
+    >
+      <div className="small-movie-card__image">
+        <img src={card.imgSrc} alt={card.imgDescription} width="280" height="175"/>
+      </div>
+      <h3 className="small-movie-card__title">
+        <a
+          className="small-movie-card__link"
+          href={card.link}
+          onClick={onThumbnailClick}
+        >
+          {card.title}
+        </a>
+      </h3>
+    </article>
+  );
+};
 
 MovieCardThumbnail.propTypes = {
   card: PropTypes.exact({
@@ -46,7 +40,14 @@ MovieCardThumbnail.propTypes = {
     year: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string
-    ])
+    ]),
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    rating: PropTypes.shape({
+      score: PropTypes.string,
+      level: PropTypes.string,
+      count: PropTypes.number
+    })
   }),
   onThumbnailClick: PropTypes.func.isRequired,
   onThumbnailMouseOver: PropTypes.func.isRequired

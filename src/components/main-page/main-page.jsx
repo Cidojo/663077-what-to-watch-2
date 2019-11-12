@@ -5,7 +5,7 @@ import {PageContent} from './../page-content/page-content.jsx';
 import {Logotype} from './../logotype/logotype.jsx';
 
 const MainPage = (props) => {
-  const {currentVideoID, movieCards, genres, userData, cardsPerPage, onCurrentVideoIDChange} = props;
+  const {currentVideoID, movieCards, genres, userData, onCurrentVideoIDChange} = props;
   const currentVideoCard = movieCards.find((card) => card.id === currentVideoID);
 
   return (
@@ -18,7 +18,6 @@ const MainPage = (props) => {
       <PageContent
         genres={genres}
         movieCards={movieCards}
-        cardsPerPage={cardsPerPage}
         onCurrentVideoIDChange={onCurrentVideoIDChange}
       />
     </React.Fragment>
@@ -46,7 +45,14 @@ MainPage.propTypes = {
     year: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string
-    ])
+    ]),
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    rating: PropTypes.shape({
+      score: PropTypes.string,
+      level: PropTypes.string,
+      count: PropTypes.number
+    })
   })),
   userData: PropTypes.shape({
     avatar: PropTypes.string

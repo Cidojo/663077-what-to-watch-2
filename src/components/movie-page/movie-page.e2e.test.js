@@ -1,26 +1,36 @@
 import * as React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {MainPage} from './main-page.jsx';
+import {MoviePage} from './movie-page.jsx';
 
 configure({adapter: new Adapter()});
 
 it(`handles thumbnail click`, () => {
   const onCurrentVideoIDChange = jest.fn();
 
-  const mainPage = mount(<MainPage
+  const mainPage = mount(<MoviePage
     userData={{
       avatar: ``
     }}
-    currentVideoID={`000`}
-    genres={{
-      ALL: {
-        name: ``,
-        link: ``
+    currentCard={{
+      id: 0,
+      title: ``,
+      link: ``,
+      imgSrc: ``,
+      posterSrc: ``,
+      imgDescription: ``,
+      genre: ``,
+      year: 0,
+      director: ``,
+      starring: [],
+      rating: {
+        score: ``,
+        level: ``,
+        count: 0
       }
     }}
-    movieCards={[{
-      id: `000`,
+    moviesLikeThis={[{
+      id: 0,
       title: ``,
       link: ``,
       imgSrc: ``,

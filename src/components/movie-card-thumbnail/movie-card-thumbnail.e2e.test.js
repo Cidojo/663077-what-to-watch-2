@@ -17,7 +17,14 @@ it(`handles thumbnail click`, () => {
       posterSrc: ``,
       imgDescription: ``,
       genre: ``,
-      year: 0
+      year: 0,
+      director: ``,
+      starring: [],
+      rating: {
+        score: ``,
+        level: ``,
+        count: 0
+      }
     }}
     onThumbnailClick={onThumbnailClick}
     onThumbnailMouseOver={() => {}}
@@ -28,7 +35,7 @@ it(`handles thumbnail click`, () => {
   expect(onThumbnailClick).toHaveBeenCalledTimes(1);
 });
 
-it(`handles thumbnail click`, () => {
+it(`handles thumbnail mouseOver`, () => {
   const onThumbnailMouseOver = jest.fn();
 
   const card = {
@@ -39,7 +46,14 @@ it(`handles thumbnail click`, () => {
     posterSrc: ``,
     imgDescription: ``,
     genre: ``,
-    year: 0
+    year: 0,
+    director: ``,
+    starring: [],
+    rating: {
+      score: ``,
+      level: ``,
+      count: 0
+    }
   };
 
   const movieCardThumbnail = shallow(<MovieCardThumbnail

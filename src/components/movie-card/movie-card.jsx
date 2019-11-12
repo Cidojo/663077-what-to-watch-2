@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Header} from '../header/header.jsx';
+import {MovieCardButtons} from '../movie-card-buttons/movie-card-buttons.jsx';
 
 const MovieCard = (props) => {
   const {card, userAvatar} = props;
@@ -29,20 +30,7 @@ const MovieCard = (props) => {
               <span className="movie-card__year">{card.year}</span>
             </p>
 
-            <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
-            </div>
+            <MovieCardButtons />
           </div>
         </div>
       </div>
@@ -66,7 +54,14 @@ MovieCard.propTypes = {
     year: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string
-    ])
+    ]),
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    rating: PropTypes.shape({
+      score: PropTypes.string,
+      level: PropTypes.string,
+      count: PropTypes.number
+    })
   })
 };
 
