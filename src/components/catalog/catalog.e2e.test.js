@@ -24,7 +24,8 @@ it(`handles thumbnail click`, () => {
         score: ``,
         level: ``,
         count: 0
-      }
+      },
+      src: ``
     }]}
     onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);

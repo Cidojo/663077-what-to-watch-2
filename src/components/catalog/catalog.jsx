@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {MovieCardThumbnail} from '../movie-card-thumbnail/movie-card-thumbnail.jsx';
+import {MovieCardThumbnail} from './../movie-card-thumbnail/movie-card-thumbnail.jsx';
+import {movieCardPropTypes} from './../../global-custom-types';
 
 class Catalog extends React.PureComponent {
   constructor(props) {
@@ -10,10 +11,10 @@ class Catalog extends React.PureComponent {
       activeCard: null
     };
 
-    this.handleCardMouseOver = this.handleCardMouseOver.bind(this);
+    this.handleCardMouseEnter = this.handleCardMouseEnter.bind(this);
   }
 
-  handleCardMouseOver(activeCard) {
+  handleCardMouseEnter(activeCard) {
     this.setState({
       activeCard
     });
@@ -30,7 +31,7 @@ class Catalog extends React.PureComponent {
               <MovieCardThumbnail
                 key={`${card.id}`}
                 card={card}
-                onThumbnailMouseOver={this.handleCardMouseOver}
+                onThumbnailMouseEnter={this.handleCardMouseEnter}
                 onThumbnailClick={onCurrentVideoIDChange}
               />
             );
@@ -42,30 +43,8 @@ class Catalog extends React.PureComponent {
 }
 
 Catalog.propTypes = {
-  movieCards: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    imgSrc: PropTypes.string,
-    posterSrc: PropTypes.string,
-    imgDescription: PropTypes.string,
-    link: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    rating: PropTypes.shape({
-      score: PropTypes.string,
-      level: PropTypes.string,
-      count: PropTypes.number
-    })
-  })),
-  onCurrentVideoIDChange: PropTypes.func.isRequired
+  movieCards: PropTypes.arrayOf(movieCardPropTypes),
+  onCurrentVideoIDChange: PropTypes.func
 };
 
 export {Catalog};

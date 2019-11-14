@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import {MovieCard} from './../movie-card/movie-card.jsx';
 import {PageContent} from './../page-content/page-content.jsx';
 import {Logotype} from './../logotype/logotype.jsx';
+import {movieCardPropTypes} from './../../global-custom-types';
 
 const MainPage = (props) => {
   const {currentVideoID, movieCards, genres, userData, onCurrentVideoIDChange} = props;
@@ -31,29 +32,7 @@ MainPage.propTypes = {
       link: PropTypes.string
     })
   }),
-  movieCards: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    imgSrc: PropTypes.string,
-    posterSrc: PropTypes.string,
-    imgDescription: PropTypes.string,
-    link: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    rating: PropTypes.shape({
-      score: PropTypes.string,
-      level: PropTypes.string,
-      count: PropTypes.number
-    })
-  })),
+  movieCards: PropTypes.arrayOf(movieCardPropTypes),
   userData: PropTypes.shape({
     avatar: PropTypes.string
   }),
@@ -62,7 +41,7 @@ MainPage.propTypes = {
     PropTypes.string
   ]),
   cardsPerPage: PropTypes.number,
-  onCurrentVideoIDChange: PropTypes.func.isRequired
+  onCurrentVideoIDChange: PropTypes.func
 };
 
 export {MainPage};

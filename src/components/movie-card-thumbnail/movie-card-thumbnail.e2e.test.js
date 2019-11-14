@@ -8,26 +8,29 @@ configure({adapter: new Adapter()});
 it(`handles thumbnail click`, () => {
   const onThumbnailClick = jest.fn();
 
+  const card = {
+    id: 0,
+    title: ``,
+    link: ``,
+    imgSrc: ``,
+    posterSrc: ``,
+    imgDescription: ``,
+    genre: ``,
+    year: 0,
+    director: ``,
+    starring: [],
+    rating: {
+      score: ``,
+      level: ``,
+      count: 0
+    },
+    src: ``
+  };
+
   const movieCardThumbnail = shallow(<MovieCardThumbnail
-    card={{
-      id: 0,
-      title: ``,
-      link: ``,
-      imgSrc: ``,
-      posterSrc: ``,
-      imgDescription: ``,
-      genre: ``,
-      year: 0,
-      director: ``,
-      starring: [],
-      rating: {
-        score: ``,
-        level: ``,
-        count: 0
-      }
-    }}
+    card={card}
     onThumbnailClick={onThumbnailClick}
-    onThumbnailMouseOver={() => {}}
+    onThumbnailMouseEnter={() => {}}
   />);
 
   const thumbNailTitle = movieCardThumbnail.find(`.small-movie-card__link`);
@@ -35,8 +38,8 @@ it(`handles thumbnail click`, () => {
   expect(onThumbnailClick).toHaveBeenCalledTimes(1);
 });
 
-it(`handles thumbnail mouseOver`, () => {
-  const onThumbnailMouseOver = jest.fn();
+it(`handles thumbnail mouseEnter`, () => {
+  const onThumbnailMouseEnter = jest.fn();
 
   const card = {
     id: 0,
@@ -59,10 +62,10 @@ it(`handles thumbnail mouseOver`, () => {
   const movieCardThumbnail = shallow(<MovieCardThumbnail
     card={card}
     onThumbnailClick={()=> {}}
-    onThumbnailMouseOver={onThumbnailMouseOver}
+    onThumbnailMouseEnter={onThumbnailMouseEnter}
   />);
 
   const movieCardElement = movieCardThumbnail.find(`.small-movie-card`);
-  movieCardElement.simulate(`mouseOver`);
-  expect(onThumbnailMouseOver).toHaveBeenCalledWith(card);
+  movieCardElement.simulate(`mouseEnter`);
+  expect(onThumbnailMouseEnter).toHaveBeenCalledWith(card);
 });

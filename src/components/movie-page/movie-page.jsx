@@ -4,6 +4,7 @@ import {Logotype} from './../logotype/logotype.jsx';
 import {MovieCardButtons} from '../movie-card-buttons/movie-card-buttons.jsx';
 import {Catalog} from '../catalog/catalog.jsx';
 import {Header} from '../header/header.jsx';
+import {movieCardPropTypes} from './../../global-custom-types';
 
 const MoviePage = (props) => {
   const {currentCard, moviesLikeThis, onCurrentVideoIDChange} = props;
@@ -96,56 +97,12 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  moviesLikeThis: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    imgSrc: PropTypes.string,
-    posterSrc: PropTypes.string,
-    imgDescription: PropTypes.string,
-    link: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    rating: PropTypes.shape({
-      score: PropTypes.string,
-      level: PropTypes.string,
-      count: PropTypes.number
-    })
-  })),
+  moviesLikeThis: PropTypes.arrayOf(movieCardPropTypes),
   userData: PropTypes.shape({
     avatar: PropTypes.string
   }),
-  currentCard: PropTypes.exact({
-    id: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    imgSrc: PropTypes.string,
-    posterSrc: PropTypes.string,
-    imgDescription: PropTypes.string,
-    link: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    rating: PropTypes.shape({
-      score: PropTypes.string,
-      level: PropTypes.string,
-      count: PropTypes.number
-    })
-  }),
-  onCurrentVideoIDChange: PropTypes.func.isRequired
+  currentCard: movieCardPropTypes,
+  onCurrentVideoIDChange: PropTypes.func
 };
 
 export {MoviePage};

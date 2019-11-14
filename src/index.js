@@ -19,7 +19,7 @@ const getCurrentMovieCard = (id, list) => {
 };
 
 const getMoviesLikeThis = (genre, list) => {
-  return [...list].filter((card) => card.genre === genre);
+  return list.filter((card) => card.genre === genre);
 };
 
 const pagesProps = {

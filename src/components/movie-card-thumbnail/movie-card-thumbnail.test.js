@@ -20,10 +20,11 @@ it(`should render component without errors`, () => {
           score: ``,
           level: ``,
           count: 0
-        }
+        },
+        src: ``
       }}
       onThumbnailClick={() => {}}
-      onThumbnailMouseOver={() => {}}
+      onThumbnailMouseEnter={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

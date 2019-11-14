@@ -2,7 +2,7 @@ import * as React from 'react';
 import {MainPage} from './main-page.jsx';
 import * as renderer from 'react-test-renderer';
 
-it(`should render component without errors`, () => {
+it(`should render MainPage component without errors`, () => {
   const tree = renderer
     .create(<MainPage
       userData={{
@@ -30,7 +30,8 @@ it(`should render component without errors`, () => {
           score: ``,
           level: ``,
           count: 0
-        }
+        },
+        src: ``
       }]}
       onCurrentVideoIDChange={() => {}}
     />)
