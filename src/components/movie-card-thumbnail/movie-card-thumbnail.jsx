@@ -1,16 +1,31 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {ThumbnailPlayer} from '../thumbnail-player/thumbnail-player.jsx';
+import {movieCardPropTypes} from './../../global-custom-types';
 
 const MovieCardThumbnail = (props) => {
-  const {card, onThumbnailClick, onThumbnailMouseOver} = props;
+  const {card, isPlaying, onThumbnailMouseEnter, onThumbnailMouseLeave, onThumbnailClick} = props;
+
+  const _handleThumbnailMouseEnter = () => {
+    onThumbnailMouseEnter(card);
+  };
+
+  const _handleThumbnailMouseLeave = () => {
+    onThumbnailMouseLeave();
+  };
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseOver={onThumbnailMouseOver.bind(null, card)}
+      onMouseEnter={_handleThumbnailMouseEnter}
+      onMouseLeave={_handleThumbnailMouseLeave}
     >
       <div className="small-movie-card__image">
-        <img src={card.imgSrc} alt={card.imgDescription} width="280" height="175"/>
+        <ThumbnailPlayer
+          src={card.src}
+          posterSrc={card.posterSrc}
+          isPlaying={isPlaying}
+        />
       </div>
       <h3 className="small-movie-card__title">
         <a
@@ -26,31 +41,11 @@ const MovieCardThumbnail = (props) => {
 };
 
 MovieCardThumbnail.propTypes = {
-  card: PropTypes.exact({
-    id: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    imgSrc: PropTypes.string,
-    posterSrc: PropTypes.string,
-    imgDescription: PropTypes.string,
-    link: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    rating: PropTypes.shape({
-      score: PropTypes.string,
-      level: PropTypes.string,
-      count: PropTypes.number
-    })
-  }),
-  onThumbnailClick: PropTypes.func.isRequired,
-  onThumbnailMouseOver: PropTypes.func.isRequired
+  card: movieCardPropTypes,
+  onThumbnailClick: PropTypes.func,
+  onThumbnailMouseEnter: PropTypes.func,
+  onThumbnailMouseLeave: PropTypes.func,
+  isPlaying: PropTypes.bool
 };
 
 export {MovieCardThumbnail};

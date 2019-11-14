@@ -5,8 +5,18 @@ import {Catalog} from './catalog.jsx';
 
 configure({adapter: new Adapter()});
 
-it(`handles thumbnail click`, () => {
+it(`should call thumbnail title click handler on click`, () => {
   const onCurrentVideoIDChange = jest.fn();
+
+  const loadStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `load`)
+    .mockImplementation(() => {});
+  const playStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `play`)
+    .mockImplementation(() => {});
+  const pauseStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `pause`)
+    .mockImplementation(() => {});
 
   const catalog = mount(<Catalog
     movieCards={[{
@@ -24,7 +34,8 @@ it(`handles thumbnail click`, () => {
         score: ``,
         level: ``,
         count: 0
-      }
+      },
+      src: ``
     }]}
     onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);
@@ -32,4 +43,7 @@ it(`handles thumbnail click`, () => {
   const thumbNailTitle = catalog.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
   expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  loadStub.mockRestore();
+  playStub.mockRestore();
+  pauseStub.mockRestore();
 });

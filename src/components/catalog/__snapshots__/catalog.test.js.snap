@@ -6,16 +6,15 @@ exports[`should render component without errors 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt=""
-        height="175"
-        src=""
-        width="280"
+      <video
+        className="player__video"
+        poster=""
       />
     </div>
     <h3

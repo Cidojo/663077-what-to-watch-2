@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import {GenreList} from '../genre-list/genre-list.jsx';
 import {Footer} from '../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
+import {movieCardPropTypes} from './../../global-custom-types';
 
 const PageContent = (props) => {
   const {genres, movieCards, onCurrentVideoIDChange} = props;
@@ -26,36 +27,14 @@ const PageContent = (props) => {
 };
 
 PageContent.propTypes = {
-  movieCards: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    imgSrc: PropTypes.string,
-    posterSrc: PropTypes.string,
-    imgDescription: PropTypes.string,
-    link: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    rating: PropTypes.shape({
-      score: PropTypes.string,
-      level: PropTypes.string,
-      count: PropTypes.number
-    })
-  })),
+  movieCards: PropTypes.arrayOf(movieCardPropTypes),
   genres: PropTypes.shape({
     [PropTypes.string]: PropTypes.shape({
       name: PropTypes.string,
       link: PropTypes.string
     })
   }),
-  onCurrentVideoIDChange: PropTypes.func.isRequired
+  onCurrentVideoIDChange: PropTypes.func
 };
 
 export {PageContent};
