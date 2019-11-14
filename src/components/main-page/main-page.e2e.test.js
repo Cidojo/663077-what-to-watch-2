@@ -8,6 +8,10 @@ configure({adapter: new Adapter()});
 it(`handles thumbnail click`, () => {
   const onCurrentVideoIDChange = jest.fn();
 
+  const loadStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `load`)
+    .mockImplementation(() => {});
+
   const mainPage = mount(<MainPage
     userData={{
       avatar: ``
@@ -42,4 +46,5 @@ it(`handles thumbnail click`, () => {
   const thumbNailTitle = mainPage.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
   expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  loadStub.mockRestore();
 });

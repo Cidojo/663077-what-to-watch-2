@@ -8,6 +8,10 @@ configure({adapter: new Adapter()});
 it(`handles thumbnail click`, () => {
   const onCurrentVideoIDChange = jest.fn();
 
+  const loadStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `load`)
+    .mockImplementation(() => {});
+
   const catalog = mount(<Catalog
     movieCards={[{
       id: `string`,
@@ -33,4 +37,5 @@ it(`handles thumbnail click`, () => {
   const thumbNailTitle = catalog.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
   expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  loadStub.mockRestore();
 });

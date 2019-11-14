@@ -92,7 +92,6 @@ class ThumbnailPlayer extends React.Component {
 ThumbnailPlayer.propTypes = {
   src: PropTypes.string,
   posterSrc: PropTypes.string,
-  bindVideoEl: PropTypes.func,
   subscribeMouseEnter: PropTypes.func,
   subscribeMouseLeave: PropTypes.func,
 };

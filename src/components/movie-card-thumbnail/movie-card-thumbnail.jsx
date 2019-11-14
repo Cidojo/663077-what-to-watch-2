@@ -51,7 +51,6 @@ class MovieCardThumbnail extends React.PureComponent {
           <ThumbnailPlayer
             src={card.src}
             posterSrc={card.posterSrc}
-            bindVideoEl={this.bindVideoEl}
             subscribeMouseLeave={this.subscribeMouseLeave}
             subscribeMouseEnter={this.subscribeMouseEnter}
           />
