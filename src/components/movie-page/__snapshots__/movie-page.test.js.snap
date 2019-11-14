@@ -373,7 +373,6 @@ Array [
             <video
               className="player__video"
               poster=""
-              type="video/mp4"
             />
           </div>
           <h3

@@ -5,11 +5,17 @@ import {PageContent} from './page-content.jsx';
 
 configure({adapter: new Adapter()});
 
-it(`handles thumbnail click`, () => {
+it(`should call video id change handler from props`, () => {
   const onCurrentVideoIDChange = jest.fn();
 
   const loadStub = jest
     .spyOn(window.HTMLMediaElement.prototype, `load`)
+    .mockImplementation(() => {});
+  const playStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `play`)
+    .mockImplementation(() => {});
+  const pauseStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `pause`)
     .mockImplementation(() => {});
 
   const pageContent = mount(<PageContent
@@ -43,4 +49,6 @@ it(`handles thumbnail click`, () => {
   thumbNailTitle.simulate(`click`);
   expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
   loadStub.mockRestore();
+  playStub.mockRestore();
+  pauseStub.mockRestore();
 });

@@ -11,6 +11,12 @@ it(`handles thumbnail click`, () => {
   const loadStub = jest
     .spyOn(window.HTMLMediaElement.prototype, `load`)
     .mockImplementation(() => {});
+  const playStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `play`)
+    .mockImplementation(() => {});
+  const pauseStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `pause`)
+    .mockImplementation(() => {});
 
   const mainPage = mount(<MainPage
     userData={{
@@ -47,4 +53,6 @@ it(`handles thumbnail click`, () => {
   thumbNailTitle.simulate(`click`);
   expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
   loadStub.mockRestore();
+  playStub.mockRestore();
+  pauseStub.mockRestore();
 });

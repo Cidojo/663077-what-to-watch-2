@@ -5,6 +5,5 @@ exports[`should render ThumbNail component without errors 1`] = `
   className="player__video"
   poster=""
   src=""
-  type="video/mp4"
 />
 `;

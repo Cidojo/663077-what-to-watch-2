@@ -13,7 +13,6 @@ exports[`should render component without errors 1`] = `
       className="player__video"
       poster=""
       src=""
-      type="video/mp4"
     />
   </div>
   <h3

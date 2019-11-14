@@ -5,30 +5,36 @@ import {ThumbnailPlayer} from './thumbnail-player.jsx';
 
 configure({adapter: new Adapter()});
 
-it(`handles thumbnail states`, () => {
+it(`should play video when isPlaying prop is true`, () => {
+  const onVideoPlay = jest.fn();
 
-  const loadStub = jest
-    .spyOn(window.HTMLMediaElement.prototype, `load`)
-    .mockImplementation(() => {});
+  const playStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `play`)
+    .mockImplementation(onVideoPlay);
 
-  const mouseEnterCallBacks = [];
-  const mouseLeaveCallBacks = [];
-
-  const thumbnailPlayer = mount(<ThumbnailPlayer
+  mount(<ThumbnailPlayer
     src={``}
     posterSrc={``}
-    subscribeMouseEnter={(cb) => {
-      mouseEnterCallBacks.push(cb);
-    }}
-    subscribeMouseLeave={(cb) => {
-      mouseLeaveCallBacks.push(cb);
-    }}
+    isPlaying={true}
   />);
 
-  mouseEnterCallBacks.forEach((cb) => cb());
+  expect(onVideoPlay).toHaveBeenCalledTimes(1);
+  playStub.mockRestore();
+});
 
-  setTimeout(() => {
-    expect(thumbnailPlayer.state().isPlaying).toEqual(true);
-  }, 1000);
-  loadStub.mockRestore();
+it(`should reset video when isPlaying prop is false`, () => {
+  const onVideoPause = jest.fn();
+
+  const pauseStub = jest
+    .spyOn(window.HTMLMediaElement.prototype, `pause`)
+    .mockImplementation(onVideoPause);
+
+  mount(<ThumbnailPlayer
+    src={``}
+    posterSrc={``}
+    isPlaying={false}
+  />);
+
+  expect(onVideoPause).toHaveBeenCalledTimes(1);
+  pauseStub.mockRestore();
 });

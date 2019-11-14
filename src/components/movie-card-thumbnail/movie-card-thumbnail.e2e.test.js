@@ -5,7 +5,7 @@ import {MovieCardThumbnail} from './movie-card-thumbnail.jsx';
 
 configure({adapter: new Adapter()});
 
-it(`handles thumbnail click`, () => {
+it(`should run onThumbnailClick handler from props on thumbnail click`, () => {
   const onThumbnailClick = jest.fn();
 
   const card = {
@@ -31,6 +31,7 @@ it(`handles thumbnail click`, () => {
     card={card}
     onThumbnailClick={onThumbnailClick}
     onThumbnailMouseEnter={() => {}}
+    onThumbnailMouseLeave={() => {}}
   />);
 
   const thumbNailTitle = movieCardThumbnail.find(`.small-movie-card__link`);
@@ -38,7 +39,7 @@ it(`handles thumbnail click`, () => {
   expect(onThumbnailClick).toHaveBeenCalledTimes(1);
 });
 
-it(`handles thumbnail mouseEnter`, () => {
+it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () => {
   const onThumbnailMouseEnter = jest.fn();
 
   const card = {
@@ -63,9 +64,43 @@ it(`handles thumbnail mouseEnter`, () => {
     card={card}
     onThumbnailClick={()=> {}}
     onThumbnailMouseEnter={onThumbnailMouseEnter}
+    onThumbnailMouseLeave={() => {}}
   />);
 
   const movieCardElement = movieCardThumbnail.find(`.small-movie-card`);
   movieCardElement.simulate(`mouseEnter`);
   expect(onThumbnailMouseEnter).toHaveBeenCalledWith(card);
+});
+
+it(`should run onThumbnailMouseLeave handler from props on thumbnail click`, () => {
+  const onThumbnailMouseLeave = jest.fn();
+
+  const card = {
+    id: 0,
+    title: ``,
+    link: ``,
+    imgSrc: ``,
+    posterSrc: ``,
+    imgDescription: ``,
+    genre: ``,
+    year: 0,
+    director: ``,
+    starring: [],
+    rating: {
+      score: ``,
+      level: ``,
+      count: 0
+    }
+  };
+
+  const movieCardThumbnail = shallow(<MovieCardThumbnail
+    card={card}
+    onThumbnailClick={()=> {}}
+    onThumbnailMouseEnter={() => {}}
+    onThumbnailMouseLeave={onThumbnailMouseLeave}
+  />);
+
+  const movieCardElement = movieCardThumbnail.find(`.small-movie-card`);
+  movieCardElement.simulate(`mouseLeave`);
+  expect(onThumbnailMouseLeave).toHaveBeenCalledTimes(1);
 });
