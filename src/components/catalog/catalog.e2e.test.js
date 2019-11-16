@@ -31,7 +31,7 @@ it(`should call thumbnail title click handler on click`, () => {
       director: ``,
       starring: [],
       rating: 0,
-      scoresCount: 0,
+      ratingCount: 0,
       runTime: 0,
       src: ``
     }]}
@@ -41,7 +41,7 @@ it(`should call thumbnail title click handler on click`, () => {
 
   const thumbNailTitle = catalog.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onCurrentVideoIDChange).toHaveBeenCalledWith(`string`);
+  expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
   loadStub.mockRestore();
   playStub.mockRestore();
   pauseStub.mockRestore();

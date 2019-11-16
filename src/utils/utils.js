@@ -1,20 +1,21 @@
 const evalRatingLevel = (rating) => {
-  const BreakPointToLevel = {
-    0: `bad`,
-    3: `normal`,
-    5: `good`,
-    8: `very good`,
-    10: `awesome`
-  };
-  const breakPoints = Object.keys(BreakPointToLevel);
-  let score = 0;
-  let counter = 0;
-
-  while (breakPoints[counter] < rating && counter < breakPoints.length) {
-    score = breakPoints[counter];
-    counter++;
+  if (rating === undefined) {
+    return;
   }
-  return BreakPointToLevel[score];
+
+  const breakPointToLevel = new Map([
+    [3, `bad`],
+    [5, `normal`],
+    [8, `good`],
+    [10, `very good`],
+    [-1, `awesome`]
+  ]);
+
+  const breakpointValue = [...breakPointToLevel.keys()].find((breakpoint) => {
+    return breakpoint > rating;
+  }) || -1;
+
+  return breakPointToLevel.get(breakpointValue);
 };
 
 const formatRunTime = (minutes) => {

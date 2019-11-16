@@ -20,7 +20,7 @@ it(`should run onThumbnailClick handler from props on thumbnail click`, () => {
     director: ``,
     starring: [],
     rating: 0,
-    scoresCount: 0,
+    ratingCount: 0,
     runTime: 0,
     src: ``
   };
@@ -52,7 +52,7 @@ it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () 
     director: ``,
     starring: [],
     rating: 0,
-    scoresCount: 0,
+    ratingCount: 0,
     runTime: 0,
     src: ``
   };
@@ -84,7 +84,7 @@ it(`should run onThumbnailMouseLeave handler from props on thumbnail click`, () 
     director: ``,
     starring: [],
     rating: 0,
-    scoresCount: 0,
+    ratingCount: 0,
     runTime: 0,
     src: ``
   };

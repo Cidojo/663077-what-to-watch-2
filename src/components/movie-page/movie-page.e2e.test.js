@@ -34,7 +34,7 @@ it(`handles thumbnail click`, () => {
       director: ``,
       starring: [],
       rating: 0,
-      scoresCount: 0,
+      ratingCount: 0,
       runTime: 0,
       src: ``
     }}
@@ -50,7 +50,7 @@ it(`handles thumbnail click`, () => {
       director: ``,
       starring: [],
       rating: 0,
-      scoresCount: 0,
+      ratingCount: 0,
       runTime: 0,
       src: ``
     }]}
@@ -59,7 +59,7 @@ it(`handles thumbnail click`, () => {
 
   const thumbNailTitle = mainPage.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  expect(onCurrentVideoIDChange).toHaveBeenCalledWith(0);
   loadStub.mockRestore();
   playStub.mockRestore();
   pauseStub.mockRestore();

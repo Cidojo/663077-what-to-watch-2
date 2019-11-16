@@ -23,7 +23,7 @@ const movieCardPropTypes = PropTypes.exact({
   director: PropTypes.string,
   starring: PropTypes.arrayOf(PropTypes.string),
   rating: PropTypes.number,
-  scoresCount: PropTypes.number,
+  ratingCount: PropTypes.number,
   runTime: PropTypes.number
 });
 

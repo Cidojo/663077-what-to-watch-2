@@ -41,7 +41,7 @@ it(`handles thumbnail click`, () => {
       director: ``,
       starring: [],
       rating: 0,
-      scoresCount: 0,
+      ratingCount: 0,
       runTime: 0,
       src: ``
     }]}

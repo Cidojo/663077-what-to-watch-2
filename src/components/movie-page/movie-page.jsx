@@ -94,7 +94,7 @@ class MoviePage extends React.PureComponent {
 
                 <MovieRating
                   rating={currentCard.rating}
-                  scores={currentCard.scoresCount}
+                  scores={currentCard.ratingCount}
                 />
 
                 <ActiveTabComponent card={currentCard} />

@@ -37,7 +37,7 @@ it(`should call video id change handler from props`, () => {
       director: ``,
       starring: [],
       rating: 0,
-      scoresCount: 0,
+      ratingCount: 0,
       runTime: 0,
       src: ``
     }]}

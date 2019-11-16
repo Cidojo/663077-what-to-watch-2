@@ -23,7 +23,7 @@ it(`should render component without errors`, () => {
         director: ``,
         starring: [],
         rating: 0,
-        scoresCount: 0,
+        ratingCount: 0,
         src: ``
       }]}
       onCurrentVideoIDChange={()=> {}}
