@@ -14,6 +14,10 @@ const MovieCardThumbnail = (props) => {
     onThumbnailMouseLeave();
   };
 
+  const _handleThumbnailClick = () => {
+    onThumbnailClick(card.id);
+  };
+
   return (
     <article
       className="small-movie-card catalog__movies-card"
@@ -31,7 +35,7 @@ const MovieCardThumbnail = (props) => {
         <a
           className="small-movie-card__link"
           href={card.link}
-          onClick={onThumbnailClick}
+          onClick={_handleThumbnailClick}
         >
           {card.title}
         </a>

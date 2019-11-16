@@ -30,19 +30,18 @@ it(`should call thumbnail title click handler on click`, () => {
       year: 0,
       director: ``,
       starring: [],
-      rating: {
-        score: ``,
-        level: ``,
-        count: 0
-      },
+      rating: 0,
+      scoresCount: 0,
+      runTime: 0,
       src: ``
     }]}
+    max={1}
     onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);
 
   const thumbNailTitle = catalog.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  expect(onCurrentVideoIDChange).toHaveBeenCalledWith(`string`);
   loadStub.mockRestore();
   playStub.mockRestore();
   pauseStub.mockRestore();

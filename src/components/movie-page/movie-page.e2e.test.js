@@ -33,11 +33,10 @@ it(`handles thumbnail click`, () => {
       year: 0,
       director: ``,
       starring: [],
-      rating: {
-        score: ``,
-        level: ``,
-        count: 0
-      }
+      rating: 0,
+      scoresCount: 0,
+      runTime: 0,
+      src: ``
     }}
     moviesLikeThis={[{
       id: 0,
@@ -50,11 +49,10 @@ it(`handles thumbnail click`, () => {
       year: 0,
       director: ``,
       starring: [],
-      rating: {
-        score: ``,
-        level: ``,
-        count: 0
-      }
+      rating: 0,
+      scoresCount: 0,
+      runTime: 0,
+      src: ``
     }]}
     onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);

@@ -5,7 +5,7 @@ import {App} from './components/app/app.jsx';
 import {Genres as MockGenres, movieCards as mockMovieCards} from './mocks/films.js';
 
 const settings = {
-  currentVideoID: 21,
+  defaultVideoID: 21,
   genres: MockGenres,
   movieCards: mockMovieCards,
   userData: {
@@ -27,14 +27,12 @@ const pagesProps = {
     genres: settings.genres,
     movieCards: settings.movieCards,
     userData: settings.userData,
-    currentVideoID: settings.currentVideoID,
-    onCurrentVideoIDChange: () => {}
+    currentVideoID: settings.defaultVideoID
   },
   MOVIE: {
-    currentCard: getCurrentMovieCard(settings.currentVideoID, settings.movieCards),
-    moviesLikeThis: getMoviesLikeThis(getCurrentMovieCard(settings.currentVideoID, settings.movieCards).genre, settings.movieCards),
+    currentCard: getCurrentMovieCard(settings.defaultVideoID, settings.movieCards),
+    moviesLikeThis: getMoviesLikeThis(getCurrentMovieCard(settings.defaultVideoID, settings.movieCards).genre, settings.movieCards),
     userData: settings.userData,
-    onCurrentVideoIDChange: () => {}
   }
 };
 

@@ -19,11 +19,9 @@ it(`should run onThumbnailClick handler from props on thumbnail click`, () => {
     year: 0,
     director: ``,
     starring: [],
-    rating: {
-      score: ``,
-      level: ``,
-      count: 0
-    },
+    rating: 0,
+    scoresCount: 0,
+    runTime: 0,
     src: ``
   };
 
@@ -36,7 +34,7 @@ it(`should run onThumbnailClick handler from props on thumbnail click`, () => {
 
   const thumbNailTitle = movieCardThumbnail.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onThumbnailClick).toHaveBeenCalledTimes(1);
+  expect(onThumbnailClick).toHaveBeenCalledWith(0);
 });
 
 it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () => {
@@ -53,11 +51,10 @@ it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () 
     year: 0,
     director: ``,
     starring: [],
-    rating: {
-      score: ``,
-      level: ``,
-      count: 0
-    }
+    rating: 0,
+    scoresCount: 0,
+    runTime: 0,
+    src: ``
   };
 
   const movieCardThumbnail = shallow(<MovieCardThumbnail
@@ -86,11 +83,10 @@ it(`should run onThumbnailMouseLeave handler from props on thumbnail click`, () 
     year: 0,
     director: ``,
     starring: [],
-    rating: {
-      score: ``,
-      level: ``,
-      count: 0
-    }
+    rating: 0,
+    scoresCount: 0,
+    runTime: 0,
+    src: ``
   };
 
   const movieCardThumbnail = shallow(<MovieCardThumbnail

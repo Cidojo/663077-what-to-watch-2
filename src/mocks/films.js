@@ -44,6 +44,10 @@ const Genres = {
 const movieCards = [{
   id: 1,
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
@@ -53,14 +57,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 2,
   title: `Bohemian Rhapsody`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/bohemian-rhapsody.jpg`,
@@ -70,14 +76,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 3,
   title: `Macbeth`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/macbeth.jpg`,
@@ -87,14 +95,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 4,
   title: `Aviator`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/aviator.jpg`,
@@ -104,14 +114,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 5,
   title: `We need to talk about Kevin`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/we-need-to-talk-about-kevin.jpg`,
@@ -121,14 +133,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 6,
   title: `What We Do in the Shadows`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/what-we-do-in-the-shadows.jpg`,
@@ -138,14 +152,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 7,
   title: `Revenant`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/revenant.jpg`,
@@ -155,14 +171,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 8,
   title: `Johnny English`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/johnny-english.jpg`,
@@ -172,14 +190,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 9,
   title: `Shutter Island`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/shutter-island.jpg`,
@@ -189,14 +209,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 10,
   title: `Pulp Fiction`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/pulp-fiction.jpg`,
@@ -206,14 +228,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 11,
   title: `No Country for Old Men`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/no-country-for-old-men.jpg`,
@@ -223,14 +247,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 12,
   title: `Snatch`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/snatch.jpg`,
@@ -240,14 +266,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 13,
   title: `Moonrise Kingdom`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/moonrise-kingdom.jpg`,
@@ -257,14 +285,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 14,
   title: `Seven Years in Tibet`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/seven-years-in-tibet.jpg`,
@@ -274,14 +304,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 15,
   title: `Midnight Special`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/midnight-special.jpg`,
@@ -291,14 +323,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 16,
   title: `War of the Worlds`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/war-of-the-worlds.jpg`,
@@ -308,14 +342,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 17,
   title: `Dardjeeling Limited`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/dardjeeling-limited.jpg`,
@@ -325,14 +361,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 18,
   title: `Orlando`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/orlando.jpg`,
@@ -342,14 +380,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 19,
   title: `Mindhunter`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/mindhunter.jpg`,
@@ -359,14 +399,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 20,
   title: `Midnight Special`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   imgSrc: `img/midnight-special.jpg`,
@@ -376,14 +418,16 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }, {
   id: 21,
   title: `The Grand Budapest Hotel`,
+  backgroundColor: `#CBAC79`,
+  description: `Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.`,
+  isFavorite: false,
+  previewSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   link: `/details`,
   src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   imgSrc: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -393,11 +437,9 @@ const movieCards = [{
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
-  rating: {
-    score: `8.9`,
-    level: `Very good`,
-    count: 240
-  }
+  rating: 8.9,
+  ratingCount: 240,
+  runTime: 99
 }];
 
 export {Genres, movieCards};

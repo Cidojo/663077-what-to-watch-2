@@ -5,6 +5,8 @@ import {Footer} from '../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
 import {movieCardPropTypes} from './../../global-custom-types';
 
+const MAX_CATALOG_CARDS = 20;
+
 const PageContent = (props) => {
   const {genres, movieCards, onCurrentVideoIDChange} = props;
 
@@ -14,6 +16,7 @@ const PageContent = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <GenreList genresDictionary={genres} />
         <Catalog
+          max={MAX_CATALOG_CARDS}
           movieCards={movieCards}
           onCurrentVideoIDChange={onCurrentVideoIDChange}
         />

@@ -34,12 +34,12 @@ class Catalog extends React.PureComponent {
   }
 
   render() {
-    const {movieCards, onCurrentVideoIDChange} = this.props;
+    const {movieCards, onCurrentVideoIDChange, max} = this.props;
 
     return (
       <div className="catalog__movies-list">
         {
-          movieCards.map((card) => {
+          movieCards.slice(0, max).map((card) => {
             return (
               <MovieCardThumbnail
                 key={`${card.id}`}
@@ -59,7 +59,8 @@ class Catalog extends React.PureComponent {
 
 Catalog.propTypes = {
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
-  onCurrentVideoIDChange: PropTypes.func
+  onCurrentVideoIDChange: PropTypes.func,
+  max: PropTypes.number.isRequired
 };
 
 export {Catalog};

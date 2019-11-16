@@ -11,6 +11,10 @@ const movieCardPropTypes = PropTypes.exact({
   imgDescription: PropTypes.string,
   link: PropTypes.string,
   title: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  description: PropTypes.string,
+  isFavorite: PropTypes.bool,
+  previewSrc: PropTypes.string,
   genre: PropTypes.string,
   year: PropTypes.oneOfType([
     PropTypes.number,
@@ -18,11 +22,9 @@ const movieCardPropTypes = PropTypes.exact({
   ]),
   director: PropTypes.string,
   starring: PropTypes.arrayOf(PropTypes.string),
-  rating: PropTypes.shape({
-    score: PropTypes.string,
-    level: PropTypes.string,
-    count: PropTypes.number
-  })
+  rating: PropTypes.number,
+  scoresCount: PropTypes.number,
+  runTime: PropTypes.number
 });
 
 export {
