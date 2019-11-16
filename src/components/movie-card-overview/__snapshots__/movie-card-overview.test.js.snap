@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component without errors 1`] = `
+<div
+  className="movie-card__text"
+>
+  <p>
+    
+  </p>
+  <p
+    className="movie-card__director"
+  >
+    <strong>
+      Director: 
+      
+    </strong>
+  </p>
+  <p
+    className="movie-card__starring"
+  >
+    <strong>
+      Starring: 
+      
+       and other
+    </strong>
+  </p>
+</div>
+`;

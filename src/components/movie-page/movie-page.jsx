@@ -4,97 +4,119 @@ import {Logotype} from './../logotype/logotype.jsx';
 import {MovieCardButtons} from '../movie-card-buttons/movie-card-buttons.jsx';
 import {Catalog} from '../catalog/catalog.jsx';
 import {Header} from '../header/header.jsx';
+import {CardNavigation} from '../card-navigation/card-navigation.jsx';
 import {movieCardPropTypes} from './../../global-custom-types';
+import {MovieRating} from './../movie-rating/movie-rating.jsx';
+import {MovieCardOverview} from './../movie-card-overview/movie-card-overview.jsx';
+import {MovieCardDetails} from './../movie-card-details/movie-card-details.jsx';
+import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
 
-const MoviePage = (props) => {
-  const {currentCard, moviesLikeThis, onCurrentVideoIDChange} = props;
+const MAX_CATALOG_CARDS = 4;
+const DEFAULT_TAB_INDEX = 0;
 
-  return (
-    <React.Fragment>
-      <Logotype />
-      <section className="movie-card movie-card--full">
-        <div className="movie-card__hero">
-          <div className="movie-card__bg">
-            <img src={currentCard.imgSrc} alt={currentCard.imgDescription} />
-          </div>
+class MoviePage extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-          <h1 className="visually-hidden">WTW</h1>
+    this.tabs = [{
+      title: `Overview`,
+      component: MovieCardOverview
+    }, {
+      title: `Details`,
+      component: MovieCardDetails
+    }, {
+      title: `Reviews`,
+      component: MovieCardReviews
+    }];
 
-          <Header avatar={``} />
+    this.state = {
+      activeTabIndex: DEFAULT_TAB_INDEX
+    };
 
-          <div className="movie-card__wrap">
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{currentCard.title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{currentCard.genre}</span>
-                <span className="movie-card__year">{currentCard.year}</span>
-              </p>
+    this._handleTabChange = this._handleTabChange.bind(this);
+  }
 
-              <MovieCardButtons />
+  _handleTabChange(clickedTabName) {
+    const nextTabIndex = this.tabs.findIndex((tab) => clickedTabName === tab.title);
+
+    if (nextTabIndex > -1) {
+      this.setState({
+        activeTabIndex: nextTabIndex
+      });
+    }
+  }
+
+  render() {
+    const {currentCard, moviesLikeThis, onCurrentVideoIDChange} = this.props;
+    const {activeTabIndex} = this.state;
+    const ActiveTabComponent = this.tabs[activeTabIndex].component;
+
+    return (
+      <React.Fragment>
+        <Logotype />
+        <section className="movie-card movie-card--full">
+          <div className="movie-card__hero">
+            <div className="movie-card__bg">
+              <img src={currentCard.imgSrc} alt={currentCard.imgDescription}/>
             </div>
-          </div>
-        </div>
 
-        <div className="movie-card__wrap movie-card__translate-top">
-          <div className="movie-card__info">
-            <div className="movie-card__poster movie-card__poster--big">
-              <img src={currentCard.posterSrc} alt={currentCard.imgDescription} width="218"
-                height="327"/>
-            </div>
+            <h1 className="visually-hidden">WTW</h1>
 
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+            <Header avatar={``} />
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{currentCard.rating.score}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{currentCard.rating.level}</span>
-                  <span className="movie-rating__count">{currentCard.rating.count} ratings</span>
+            <div className="movie-card__wrap">
+              <div className="movie-card__desc">
+                <h2 className="movie-card__title">{currentCard.title}</h2>
+                <p className="movie-card__meta">
+                  <span className="movie-card__genre">{currentCard.genre}</span>
+                  <span className="movie-card__year">{currentCard.year}</span>
                 </p>
-              </div>
 
-              <div className="movie-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                  Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.</p>
-
-                <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying
-                  the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies
-                  mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her
-                  murder.</p>
-
-                <p className="movie-card__director"><strong>Director: {currentCard.director}</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {currentCard.starring.join(`, `)} and other</strong></p>
+                <MovieCardButtons/>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-          <Catalog
-            movieCards={moviesLikeThis}
-            onCurrentVideoIDChange={onCurrentVideoIDChange}
-          />
+          <div className="movie-card__wrap movie-card__translate-top">
+            <div className="movie-card__info">
+              <div className="movie-card__poster movie-card__poster--big">
+                <img src={currentCard.posterSrc} alt={currentCard.imgDescription} width="218"
+                  height="327"/>
+              </div>
+
+              <div className="movie-card__desc">
+
+                <CardNavigation
+                  activeTab={this.tabs[activeTabIndex].title}
+                  tabs={this.tabs.map((tab) => tab.title)}
+                  onTabChange={this._handleTabChange}
+                />
+
+                <MovieRating
+                  rating={currentCard.rating}
+                  scores={currentCard.scoresCount}
+                />
+
+                <ActiveTabComponent card={currentCard} />
+              </div>
+            </div>
+          </div>
         </section>
-      </div>
-    </React.Fragment>
-  );
-};
+
+        <div className="page-content">
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+            <Catalog
+              max={MAX_CATALOG_CARDS}
+              movieCards={moviesLikeThis}
+              onCurrentVideoIDChange={onCurrentVideoIDChange}
+            />
+          </section>
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 MoviePage.propTypes = {
   moviesLikeThis: PropTypes.arrayOf(movieCardPropTypes),
@@ -102,7 +124,7 @@ MoviePage.propTypes = {
     avatar: PropTypes.string
   }),
   currentCard: movieCardPropTypes,
-  onCurrentVideoIDChange: PropTypes.func
+  onCurrentVideoIDChange: PropTypes.func,
 };
 
 export {MoviePage};

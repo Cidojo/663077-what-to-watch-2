@@ -26,11 +26,9 @@ it(`should render MainPage component without errors`, () => {
         year: 0,
         director: ``,
         starring: [],
-        rating: {
-          score: ``,
-          level: ``,
-          count: 0
-        },
+        rating: 0,
+        scoresCount: 0,
+        runTime: 0,
         src: ``
       }]}
       onCurrentVideoIDChange={() => {}}
