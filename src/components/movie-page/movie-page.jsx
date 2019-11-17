@@ -11,7 +11,6 @@ import {MovieCardOverview} from './../movie-card-overview/movie-card-overview.js
 import {MovieCardDetails} from './../movie-card-details/movie-card-details.jsx';
 import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
 
-const MAX_CATALOG_CARDS = 4;
 const DEFAULT_TAB_INDEX = 0;
 
 class MoviePage extends React.PureComponent {
@@ -47,9 +46,24 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
-    const {currentCard, moviesLikeThis, onCurrentVideoIDChange} = this.props;
+    const {
+      movieCards,
+      currentVideoID,
+      userData,
+      maxCatalogCards,
+      onCurrentVideoIDChange,
+    } = this.props;
+
     const {activeTabIndex} = this.state;
+
     const ActiveTabComponent = this.tabs[activeTabIndex].component;
+
+    const currentCard = movieCards.find((card) => card.id === currentVideoID);
+
+    const filteredCards = movieCards
+      .filter((card) => {
+        return card.genre === currentCard.genre;
+      });
 
     return (
       <React.Fragment>
@@ -62,7 +76,7 @@ class MoviePage extends React.PureComponent {
 
             <h1 className="visually-hidden">WTW</h1>
 
-            <Header avatar={``} />
+            <Header avatar={userData.avatar} />
 
             <div className="movie-card__wrap">
               <div className="movie-card__desc">
@@ -72,7 +86,7 @@ class MoviePage extends React.PureComponent {
                   <span className="movie-card__year">{currentCard.year}</span>
                 </p>
 
-                <MovieCardButtons/>
+                <MovieCardButtons />
               </div>
             </div>
           </div>
@@ -97,7 +111,9 @@ class MoviePage extends React.PureComponent {
                   scores={currentCard.ratingCount}
                 />
 
-                <ActiveTabComponent card={currentCard} />
+                <ActiveTabComponent
+                  card={currentCard}
+                />
               </div>
             </div>
           </div>
@@ -107,8 +123,8 @@ class MoviePage extends React.PureComponent {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
             <Catalog
-              max={MAX_CATALOG_CARDS}
-              movieCards={moviesLikeThis}
+              maxCatalogCards={maxCatalogCards}
+              movieCards={filteredCards}
               onCurrentVideoIDChange={onCurrentVideoIDChange}
             />
           </section>
@@ -119,11 +135,13 @@ class MoviePage extends React.PureComponent {
 }
 
 MoviePage.propTypes = {
-  moviesLikeThis: PropTypes.arrayOf(movieCardPropTypes),
+  currentVideoID: PropTypes.number,
+  maxCatalogCards: PropTypes.number,
+  movieCards: PropTypes.arrayOf(movieCardPropTypes),
   userData: PropTypes.shape({
+    name: PropTypes.string,
     avatar: PropTypes.string
   }),
-  currentCard: movieCardPropTypes,
   onCurrentVideoIDChange: PropTypes.func,
 };
 

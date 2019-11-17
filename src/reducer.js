@@ -1,30 +1,45 @@
 import {movieCards as mockMovieCards} from "./mocks/films";
 
 const initialState = {
-  allMovies: mockMovieCards,
-  genre: `All Genres`,
-  movieCards: mockMovieCards
+  genre: `All genres`,
+  movieCards: mockMovieCards,
+  currentVideoID: 21
 };
 
-const getMoviesByGenre = (genre, allMovies = initialState.allMovies, initialGenre = initialState.genre) => {
-  if (genre === initialGenre) {
-    return allMovies;
-  }
+const ActionType = {
+  CHANGE_GENRE: `CHANGE_GENRE`,
+  CHANGE_CURRENT_VIDEO_ID: `CHANGE_CURRENT_VIDEO_ID`,
+};
 
-  return allMovies.filter((card) => {
-    return card.genre.toLowerCase() === genre.toLowerCase();
-  });
+const ActionCreator = {
+  changeGenre: (genre) => {
+    return {
+      type: ActionType.CHANGE_GENRE,
+      payload: genre
+    };
+  },
+  changeCurrentVideoID: (id) => ({
+    type: ActionType.CHANGE_CURRENT_VIDEO_ID,
+    payload: id
+  })
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `FILTER_BY_GENRE`: return Object.assign({}, state, {
-      movieCards: getMoviesByGenre(action.payload, state.allMovies),
+    case ActionType.CHANGE_GENRE: return Object.assign({}, state, {
       genre: action.payload
+    });
+    case ActionType.CHANGE_CURRENT_VIDEO_ID: return Object.assign({}, state, {
+      currentVideoID: action.payload
     });
   }
 
   return state;
 };
 
-export {reducer, initialState};
+export {
+  initialState,
+  ActionType,
+  ActionCreator,
+  reducer
+};

@@ -1,22 +1,11 @@
 import * as React from 'react';
-import {Review} from './review.jsx';
+import {ShowMoreButton} from './show-more-button.jsx';
 import * as renderer from 'react-test-renderer';
 
 it(`should render component without errors`, () => {
-  const review = {
-    id: 0,
-    user: {
-      id: 0,
-      name: ``,
-    },
-    rating: 0,
-    comment: ``,
-    date: ``
-  };
-
   const tree = renderer
-    .create(<Review
-      review={review}
+    .create(<ShowMoreButton
+      onButtonClick={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

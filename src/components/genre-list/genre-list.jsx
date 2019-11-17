@@ -1,17 +1,31 @@
 import * as React from 'react';
-import * as PropTypes from "prop-types";
+import * as PropTypes from 'prop-types';
+import {GenreItem} from './../genre-item/genre-item.jsx';
 
 const GenreList = (props) => {
-  const {genresDictionary} = props;
+  const {
+    currentGenre,
+    genres,
+    maxGenresToDisplay,
+    onGenreTabClick
+  } = props;
 
   return (
     <ul className="catalog__genres-list">
+      <GenreItem
+        currentGenre={currentGenre}
+        genre={`All genres`}
+        onGenreTabClick={onGenreTabClick}
+      />
       {
-        Object.keys(genresDictionary).map((key, i) => {
+        genres.slice(maxGenresToDisplay).map((genre) => {
           return (
-            <li key={`${key}_${i}`} className="catalog__genres-item catalog__genres-item--active">
-              <a href={genresDictionary[key].href} className="catalog__genres-link">{genresDictionary[key].name}</a>
-            </li>
+            <GenreItem
+              key={genre}
+              currentGenre={currentGenre}
+              genre={genre}
+              onGenreTabClick={onGenreTabClick}
+            />
           );
         })
       }
@@ -20,12 +34,10 @@ const GenreList = (props) => {
 };
 
 GenreList.propTypes = {
-  genresDictionary: PropTypes.shape({
-    [PropTypes.string]: PropTypes.shape({
-      name: PropTypes.string,
-      link: PropTypes.string
-    })
-  })
+  currentGenre: PropTypes.string,
+  genres: PropTypes.arrayOf(PropTypes.string),
+  maxGenresToDisplay: PropTypes.number,
+  onGenreTabClick: PropTypes.func.isRequired,
 };
 
 export {GenreList};

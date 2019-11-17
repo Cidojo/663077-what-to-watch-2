@@ -1,10 +1,7 @@
 import * as PropTypes from 'prop-types';
 
 const movieCardPropTypes = PropTypes.exact({
-  id: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ]),
+  id: PropTypes.number,
   src: PropTypes.string,
   imgSrc: PropTypes.string,
   posterSrc: PropTypes.string,
@@ -16,10 +13,7 @@ const movieCardPropTypes = PropTypes.exact({
   isFavorite: PropTypes.bool,
   previewSrc: PropTypes.string,
   genre: PropTypes.string,
-  year: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ]),
+  year: PropTypes.number,
   director: PropTypes.string,
   starring: PropTypes.arrayOf(PropTypes.string),
   rating: PropTypes.number,

@@ -1,6 +1,6 @@
 const evalRatingLevel = (rating) => {
   if (rating === undefined) {
-    return;
+    return rating;
   }
 
   const breakPointToLevel = new Map([
