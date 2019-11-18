@@ -44,7 +44,7 @@ const settings = {
     name: `unknown`,
     avatar: `img/avatar.jpg`
   },
-  maxCatalogCardsOnMainPage: 20,
+  maxCatalogCardsOnMainPage: 8,
   maxCatalogCardsOnDetailsPage: 4
 };
 
