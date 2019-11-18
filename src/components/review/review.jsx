@@ -16,9 +16,9 @@ const Review = (props) => {
           <cite className="review__author">{review.user.name}</cite>
           <time
             className="review__date"
-            dateTime={formattedDate.dateTime ? formattedDate.dateTime : undefined}
+            dateTime={formattedDate.dateTime}
           >
-            {formattedDate.verbose ? formattedDate.verbose : undefined}
+            {formattedDate.verbose}
           </time>
         </footer>
       </blockquote>

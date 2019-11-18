@@ -1,15 +1,10 @@
 import * as React from 'react';
-import {GenreList} from './genre-list.jsx';
+import {MovieCardButtons} from './movie-card-buttons.jsx';
 import * as renderer from 'react-test-renderer';
 
 it(`should render component without errors`, () => {
   const tree = renderer
-    .create(<GenreList
-      genres={[``]}
-      maxGenresToDisplay={0}
-      onGenreTabClick={() => {}}
-      currentGenre={``}
-    />)
+    .create(<MovieCardButtons />)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });

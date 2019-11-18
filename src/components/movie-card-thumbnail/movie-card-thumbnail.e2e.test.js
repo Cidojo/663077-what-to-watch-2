@@ -7,22 +7,25 @@ configure({adapter: new Adapter()});
 
 it(`should run onThumbnailClick handler from props on thumbnail click`, () => {
   const onThumbnailClick = jest.fn();
-
   const card = {
     id: 0,
-    title: ``,
-    link: ``,
+    src: ``,
     imgSrc: ``,
     posterSrc: ``,
     imgDescription: ``,
+    link: ``,
+    title: ``,
+    backgroundColor: ``,
+    description: ``,
+    isFavorite: false,
+    previewSrc: ``,
     genre: ``,
     year: 0,
     director: ``,
-    starring: [],
+    starring: [``],
     rating: 0,
-    scoresCount: 0,
-    runTime: 0,
-    src: ``
+    ratingCount: 0,
+    runTime: 0
   };
 
   const movieCardThumbnail = shallow(<MovieCardThumbnail
@@ -42,19 +45,23 @@ it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () 
 
   const card = {
     id: 0,
-    title: ``,
-    link: ``,
+    src: ``,
     imgSrc: ``,
     posterSrc: ``,
     imgDescription: ``,
+    link: ``,
+    title: ``,
+    backgroundColor: ``,
+    description: ``,
+    isFavorite: false,
+    previewSrc: ``,
     genre: ``,
     year: 0,
     director: ``,
-    starring: [],
+    starring: [``],
     rating: 0,
-    scoresCount: 0,
-    runTime: 0,
-    src: ``
+    ratingCount: 0,
+    runTime: 0
   };
 
   const movieCardThumbnail = shallow(<MovieCardThumbnail
@@ -74,19 +81,23 @@ it(`should run onThumbnailMouseLeave handler from props on thumbnail click`, () 
 
   const card = {
     id: 0,
-    title: ``,
-    link: ``,
+    src: ``,
     imgSrc: ``,
     posterSrc: ``,
     imgDescription: ``,
+    link: ``,
+    title: ``,
+    backgroundColor: ``,
+    description: ``,
+    isFavorite: false,
+    previewSrc: ``,
     genre: ``,
     year: 0,
     director: ``,
-    starring: [],
+    starring: [``],
     rating: 0,
-    scoresCount: 0,
-    runTime: 0,
-    src: ``
+    ratingCount: 0,
+    runTime: 0
   };
 
   const movieCardThumbnail = shallow(<MovieCardThumbnail

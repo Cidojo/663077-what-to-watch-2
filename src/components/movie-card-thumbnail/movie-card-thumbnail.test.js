@@ -7,20 +7,25 @@ it(`should render component without errors`, () => {
     .create(<MovieCardThumbnail
       card={{
         id: 0,
-        title: ``,
-        link: ``,
+        src: ``,
         imgSrc: ``,
         posterSrc: ``,
         imgDescription: ``,
+        link: ``,
+        title: ``,
+        backgroundColor: ``,
+        description: ``,
+        isFavorite: false,
+        previewSrc: ``,
         genre: ``,
         year: 0,
         director: ``,
-        starring: [],
+        starring: [``],
         rating: 0,
-        scoresCount: 0,
-        runTime: 0,
-        src: ``
+        ratingCount: 0,
+        runTime: 0
       }}
+
       onThumbnailClick={() => {}}
       onThumbnailMouseEnter={() => {}}
     />)

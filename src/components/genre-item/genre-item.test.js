@@ -1,22 +1,13 @@
 import * as React from 'react';
-import {Review} from './review.jsx';
+import {GenreItem} from './genre-item.jsx';
 import * as renderer from 'react-test-renderer';
 
 it(`should render component without errors`, () => {
-  const review = {
-    id: 0,
-    user: {
-      id: 0,
-      name: ``,
-    },
-    rating: 0,
-    comment: ``,
-    date: ``
-  };
-
   const tree = renderer
-    .create(<Review
-      review={review}
+    .create(<GenreItem
+      currentGenre={``}
+      genre={``}
+      onGenreTabClick={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

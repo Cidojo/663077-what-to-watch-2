@@ -1,45 +1,15 @@
-const Genres = {
-  ALL: {
-    name: `All genres`,
-    link: `#`
-  },
-  COMEDIES: {
-    name: `Comedies`,
-    link: `#`
-  },
-  CRIME: {
-    name: `Crime`,
-    link: `#`
-  },
-  DOCUMENTARY: {
-    name: `Documentary`,
-    link: `#`
-  },
-  DRAMAS: {
-    name: `Dramas`,
-    link: `#`
-  },
-  HORROR: {
-    name: `Horror`,
-    link: `#`
-  },
-  KIDS_AND_FAMILY: {
-    name: `Kids & Family`,
-    link: `#`
-  },
-  ROMANCE: {
-    name: `Romance`,
-    link: `#`
-  },
-  SCI_FI: {
-    name: `Sci-Fi`,
-    link: `#`
-  },
-  THRILLERS: {
-    name: `Thrillers`,
-    link: `#`
-  }
-};
+const Genres = [
+  `All genres`,
+  `Comedies`,
+  `Crime`,
+  `Documentary`,
+  `Dramas`,
+  `Horror`,
+  `Kids & Family`,
+  `Romance`,
+  `Sci-Fi`,
+  `Thrillers`
+];
 
 const movieCards = [{
   id: 1,
@@ -53,7 +23,7 @@ const movieCards = [{
   imgSrc: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   posterSrc: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   imgDescription: `Fantastic Beasts: The Crimes of Grindelwald`,
-  genre: `Drama`,
+  genre: `Horror`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -72,7 +42,7 @@ const movieCards = [{
   imgSrc: `img/bohemian-rhapsody.jpg`,
   posterSrc: `img/bohemian-rhapsody.jpg`,
   imgDescription: `Bohemian Rhapsody`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -91,7 +61,7 @@ const movieCards = [{
   imgSrc: `img/macbeth.jpg`,
   posterSrc: `img/macbeth.jpg`,
   imgDescription: `Macbeth`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -110,7 +80,7 @@ const movieCards = [{
   imgSrc: `img/aviator.jpg`,
   posterSrc: `img/aviator.jpg`,
   imgDescription: `Aviator`,
-  genre: `Drama`,
+  genre: `Sci-Fi`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -129,7 +99,7 @@ const movieCards = [{
   imgSrc: `img/we-need-to-talk-about-kevin.jpg`,
   posterSrc: `img/we-need-to-talk-about-kevin.jpg`,
   imgDescription: `We need to talk about Kevin`,
-  genre: `Drama`,
+  genre: `Comedies`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -148,7 +118,7 @@ const movieCards = [{
   imgSrc: `img/what-we-do-in-the-shadows.jpg`,
   posterSrc: `img/what-we-do-in-the-shadows.jpg`,
   imgDescription: `What We Do in the Shadows`,
-  genre: `Drama`,
+  genre: `Comedies`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -167,7 +137,7 @@ const movieCards = [{
   imgSrc: `img/revenant.jpg`,
   posterSrc: `img/revenant.jpg`,
   imgDescription: `Revenant`,
-  genre: `Drama`,
+  genre: `Crime`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -186,7 +156,7 @@ const movieCards = [{
   imgSrc: `img/johnny-english.jpg`,
   posterSrc: `img/johnny-english.jpg`,
   imgDescription: `Johnny English`,
-  genre: `Drama`,
+  genre: `Crime`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -205,7 +175,7 @@ const movieCards = [{
   imgSrc: `img/shutter-island.jpg`,
   posterSrc: `img/shutter-island.jpg`,
   imgDescription: `Shutter Island`,
-  genre: `Drama`,
+  genre: `Romance`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -224,7 +194,7 @@ const movieCards = [{
   imgSrc: `img/pulp-fiction.jpg`,
   posterSrc: `img/pulp-fiction.jpg`,
   imgDescription: `Pulp Fiction`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -243,7 +213,7 @@ const movieCards = [{
   imgSrc: `img/no-country-for-old-men.jpg`,
   posterSrc: `img/no-country-for-old-men.jpg`,
   imgDescription: `No Country for Old Men`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -262,7 +232,7 @@ const movieCards = [{
   imgSrc: `img/snatch.jpg`,
   posterSrc: `img/snatch.jpg`,
   imgDescription: `Snatch`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -281,7 +251,7 @@ const movieCards = [{
   imgSrc: `img/moonrise-kingdom.jpg`,
   posterSrc: `img/moonrise-kingdom.jpg`,
   imgDescription: `Moonrise Kingdom`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -300,7 +270,7 @@ const movieCards = [{
   imgSrc: `img/seven-years-in-tibet.jpg`,
   posterSrc: `img/seven-years-in-tibet.jpg`,
   imgDescription: `Seven Years in Tibet`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -319,7 +289,7 @@ const movieCards = [{
   imgSrc: `img/midnight-special.jpg`,
   posterSrc: `img/midnight-special.jpg`,
   imgDescription: `Midnight Special`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -338,7 +308,7 @@ const movieCards = [{
   imgSrc: `img/war-of-the-worlds.jpg`,
   posterSrc: `img/war-of-the-worlds.jpg`,
   imgDescription: `War of the Worlds`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -357,7 +327,7 @@ const movieCards = [{
   imgSrc: `img/dardjeeling-limited.jpg`,
   posterSrc: `img/dardjeeling-limited.jpg`,
   imgDescription: `Dardjeeling Limited`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -376,7 +346,7 @@ const movieCards = [{
   imgSrc: `img/orlando.jpg`,
   posterSrc: `img/orlando.jpg`,
   imgDescription: `Orlando`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -395,7 +365,7 @@ const movieCards = [{
   imgSrc: `img/mindhunter.jpg`,
   posterSrc: `img/mindhunter.jpg`,
   imgDescription: `Mindhunter`,
-  genre: `Drama`,
+  genre: `Kids & Family`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -414,7 +384,7 @@ const movieCards = [{
   imgSrc: `img/midnight-special.jpg`,
   posterSrc: `img/midnight-special.jpg`,
   imgDescription: `Midnight Special`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,
@@ -433,7 +403,7 @@ const movieCards = [{
   imgSrc: `img/bg-the-grand-budapest-hotel.jpg`,
   posterSrc: `img/the-grand-budapest-hotel-poster.jpg`,
   imgDescription: `The Grand Budapest Hotel`,
-  genre: `Drama`,
+  genre: `Dramas`,
   year: 2014,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
   director: `Wes Andreson`,

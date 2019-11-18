@@ -1,43 +1,89 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {GenreList} from '../genre-list/genre-list.jsx';
-import {Footer} from '../footer/footer.jsx';
+import {GenreList} from './../genre-list/genre-list.jsx';
+import {Footer} from './../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
-import {movieCardPropTypes} from './../../global-custom-types';
+import {ShowMoreButton} from './../show-more-button/show-more-button.jsx';
+import {movieCardPropTypes} from './../../global-custom-types.js';
 
-const MAX_CATALOG_CARDS = 20;
+class PageContent extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-const PageContent = (props) => {
-  const {genres, movieCards, onCurrentVideoIDChange} = props;
+    this.state = {
+      maxCatalogCards: props.maxCatalogCards
+    };
 
-  return (
-    <div className="page-content">
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <GenreList genresDictionary={genres} />
-        <Catalog
-          max={MAX_CATALOG_CARDS}
-          movieCards={movieCards}
-          onCurrentVideoIDChange={onCurrentVideoIDChange}
-        />
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
-      </section>
-      <Footer />
-    </div>
-  );
-};
+    this.onGenreTabClick = this.props.onGenreTabClick;
+    this._handleShowMoreButtonClick = this._handleShowMoreButtonClick.bind(this);
+    this._handleGenreTabChange = this._handleGenreTabChange.bind(this);
+  }
+
+  _handleShowMoreButtonClick() {
+    this.setState((prevState) => ({
+      maxCatalogCards: prevState.maxCatalogCards * 2
+    }));
+  }
+
+  _handleGenreTabChange(genre) {
+    this.setState({
+      maxCatalogCards: this.props.maxCatalogCards
+    });
+
+    this.onGenreTabClick(genre);
+  }
+
+  render() {
+    const {
+      genres,
+      genre,
+      movieCards,
+      onCurrentVideoIDChange,
+      maxGenresToDisplay
+    } = this.props;
+
+    const filteredCards = movieCards
+      .filter((card) => {
+        return card.genre === genre || genre === `All genres`;
+      });
+
+    return (
+      <div className="page-content">
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
+          <GenreList
+            currentGenre={genre}
+            genres={genres}
+            maxGenresToDisplay={maxGenresToDisplay}
+            onGenreTabClick={this._handleGenreTabChange}
+          />
+          <Catalog
+            genre={genre}
+            maxCatalogCards={this.state.maxCatalogCards}
+            movieCards={filteredCards}
+            onCurrentVideoIDChange={onCurrentVideoIDChange}
+          />
+          {filteredCards.length > this.state.maxCatalogCards ?
+            <ShowMoreButton
+              onButtonClick={this._handleShowMoreButtonClick}
+            />
+            : undefined
+          }
+        </section>
+        <Footer/>
+      </div>
+    );
+  }
+}
 
 PageContent.propTypes = {
+  genre: PropTypes.string,
+  genres: PropTypes.arrayOf(PropTypes.string),
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
-  genres: PropTypes.shape({
-    [PropTypes.string]: PropTypes.shape({
-      name: PropTypes.string,
-      link: PropTypes.string
-    })
-  }),
-  onCurrentVideoIDChange: PropTypes.func
+  onGenreTabClick: PropTypes.func.isRequired,
+  maxGenresToDisplay: PropTypes.number,
+  maxCatalogCards: PropTypes.number,
+  onCurrentVideoIDChange: PropTypes.func.isRequired,
 };
 
 export {PageContent};

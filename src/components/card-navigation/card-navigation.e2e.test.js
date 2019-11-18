@@ -2,9 +2,9 @@ import * as React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {CardNavigation} from './card-navigation.jsx';
-import {MovieCardOverview} from "./../movie-card-overview/movie-card-overview";
-import {MovieCardDetails} from "./../movie-card-details/movie-card-details";
-import {MovieCardReviews} from "./../movie-card-reviews/movie-card-reviews";
+import {MovieCardOverview} from './../movie-card-overview/movie-card-overview.jsx';
+import {MovieCardDetails} from './../movie-card-details/movie-card-details.jsx';
+import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
 
 configure({adapter: new Adapter()});
 

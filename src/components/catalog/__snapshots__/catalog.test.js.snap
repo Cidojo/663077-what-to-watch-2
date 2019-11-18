@@ -3,32 +3,5 @@
 exports[`should render component without errors 1`] = `
 <div
   className="catalog__movies-list"
->
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <video
-        className="player__video"
-        poster=""
-        src=""
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href=""
-        onClick={[Function]}
-      >
-        
-      </a>
-    </h3>
-  </article>
-</div>
+/>
 `;

@@ -18,30 +18,36 @@ it(`should call thumbnail title click handler on click`, () => {
     .spyOn(window.HTMLMediaElement.prototype, `pause`)
     .mockImplementation(() => {});
 
+  const movieCards = [{
+    id: 0,
+    src: ``,
+    imgSrc: ``,
+    posterSrc: ``,
+    imgDescription: ``,
+    link: ``,
+    title: ``,
+    backgroundColor: ``,
+    description: ``,
+    isFavorite: false,
+    previewSrc: ``,
+    genre: ``,
+    year: 0,
+    director: ``,
+    starring: [``],
+    rating: 0,
+    ratingCount: 0,
+    runTime: 0
+  }];
+
   const catalog = mount(<Catalog
-    movieCards={[{
-      id: `string`,
-      title: ``,
-      link: ``,
-      imgSrc: ``,
-      posterSrc: ``,
-      imgDescription: ``,
-      genre: ``,
-      year: 0,
-      director: ``,
-      starring: [],
-      rating: 0,
-      scoresCount: 0,
-      runTime: 0,
-      src: ``
-    }]}
-    max={1}
+    movieCards={movieCards}
+    maxCatalogCards={1}
     onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);
 
   const thumbNailTitle = catalog.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onCurrentVideoIDChange).toHaveBeenCalledWith(`string`);
+  expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
   loadStub.mockRestore();
   playStub.mockRestore();
   pauseStub.mockRestore();

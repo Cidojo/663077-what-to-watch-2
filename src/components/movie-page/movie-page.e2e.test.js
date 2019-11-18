@@ -18,48 +18,41 @@ it(`handles thumbnail click`, () => {
     .spyOn(window.HTMLMediaElement.prototype, `pause`)
     .mockImplementation(() => {});
 
-  const mainPage = mount(<MoviePage
+  const movieCards = [{
+    id: 0,
+    src: ``,
+    imgSrc: ``,
+    posterSrc: ``,
+    imgDescription: ``,
+    link: ``,
+    title: ``,
+    backgroundColor: ``,
+    description: ``,
+    isFavorite: false,
+    previewSrc: ``,
+    genre: ``,
+    year: 0,
+    director: ``,
+    starring: [``],
+    rating: 0,
+    ratingCount: 0,
+    runTime: 0
+  }];
+
+  const moviePage = mount(<MoviePage
+    movieCards={movieCards}
+    maxCatalogCards={1}
+    currentVideoID={0}
     userData={{
-      avatar: ``
+      avatar: ``,
+      username: ``
     }}
-    currentCard={{
-      id: 0,
-      title: ``,
-      link: ``,
-      imgSrc: ``,
-      posterSrc: ``,
-      imgDescription: ``,
-      genre: ``,
-      year: 0,
-      director: ``,
-      starring: [],
-      rating: 0,
-      scoresCount: 0,
-      runTime: 0,
-      src: ``
-    }}
-    moviesLikeThis={[{
-      id: 0,
-      title: ``,
-      link: ``,
-      imgSrc: ``,
-      posterSrc: ``,
-      imgDescription: ``,
-      genre: ``,
-      year: 0,
-      director: ``,
-      starring: [],
-      rating: 0,
-      scoresCount: 0,
-      runTime: 0,
-      src: ``
-    }]}
     onCurrentVideoIDChange={onCurrentVideoIDChange}
   />);
 
-  const thumbNailTitle = mainPage.find(`.small-movie-card__link`);
+  const thumbNailTitle = moviePage.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  expect(onCurrentVideoIDChange).toHaveBeenCalledWith(0);
   loadStub.mockRestore();
   playStub.mockRestore();
   pauseStub.mockRestore();

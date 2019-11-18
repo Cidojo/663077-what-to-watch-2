@@ -16,50 +16,26 @@ exports[`should render component without errors 1`] = `
       className="catalog__genres-list"
     >
       <li
-        className="catalog__genres-item catalog__genres-item--active"
+        className="catalog__genres-item"
       >
         <a
           className="catalog__genres-link"
+          href="#"
+          onClick={[Function]}
         >
-          
+          All genres
         </a>
       </li>
     </ul>
     <div
       className="catalog__movies-list"
-    >
-      <article
-        className="small-movie-card catalog__movies-card"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="small-movie-card__image"
-        >
-          <video
-            className="player__video"
-            poster=""
-            src=""
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href=""
-            onClick={[Function]}
-          >
-            
-          </a>
-        </h3>
-      </article>
-    </div>
+    />
     <div
       className="catalog__more"
     >
       <button
         className="catalog__button"
+        onClick={[Function]}
         type="button"
       >
         Show more

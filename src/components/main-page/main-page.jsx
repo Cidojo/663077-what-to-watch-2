@@ -6,19 +6,32 @@ import {Logotype} from './../logotype/logotype.jsx';
 import {movieCardPropTypes} from './../../global-custom-types';
 
 const MainPage = (props) => {
-  const {currentVideoID, movieCards, genres, userData, onCurrentVideoIDChange} = props;
+  const {
+    genre,
+    genres,
+    movieCards,
+    currentVideoID,
+    userData,
+    maxCatalogCards,
+    onCurrentVideoIDChange,
+    onGenreTabClick
+  } = props;
+
   const currentVideoCard = movieCards.find((card) => card.id === currentVideoID);
 
   return (
     <React.Fragment>
       <Logotype />
       <MovieCard
-        card={currentVideoCard || movieCards[0]}
+        card={currentVideoCard}
         userAvatar={userData.avatar}
       />
       <PageContent
+        genre={genre}
         genres={genres}
         movieCards={movieCards}
+        maxCatalogCards={maxCatalogCards}
+        onGenreTabClick={onGenreTabClick}
         onCurrentVideoIDChange={onCurrentVideoIDChange}
       />
     </React.Fragment>
@@ -26,22 +39,17 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  genres: PropTypes.shape({
-    [PropTypes.string]: PropTypes.shape({
-      name: PropTypes.string,
-      link: PropTypes.string
-    })
-  }),
+  genre: PropTypes.string,
+  genres: PropTypes.arrayOf(PropTypes.string),
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
   userData: PropTypes.shape({
-    avatar: PropTypes.string
+    avatar: PropTypes.string,
+    username: PropTypes.string
   }),
-  currentVideoID: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ]),
-  cardsPerPage: PropTypes.number,
-  onCurrentVideoIDChange: PropTypes.func
+  currentVideoID: PropTypes.number,
+  maxCatalogCards: PropTypes.number,
+  onGenreTabClick: PropTypes.func.isRequired,
+  onCurrentVideoIDChange: PropTypes.func,
 };
 
 export {MainPage};

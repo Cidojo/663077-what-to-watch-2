@@ -34,23 +34,28 @@ class Catalog extends React.PureComponent {
   }
 
   render() {
-    const {movieCards, onCurrentVideoIDChange, max} = this.props;
+    const {
+      movieCards,
+      onCurrentVideoIDChange,
+      maxCatalogCards
+    } = this.props;
 
     return (
       <div className="catalog__movies-list">
         {
-          movieCards.slice(0, max).map((card) => {
-            return (
-              <MovieCardThumbnail
-                key={`${card.id}`}
-                card={card}
-                isPlaying={this.state.activeCard === card}
-                onThumbnailMouseEnter={this._handleCardMouseEnter}
-                onThumbnailMouseLeave={this._handleCardMouseLeave}
-                onThumbnailClick={onCurrentVideoIDChange}
-              />
-            );
-          })
+          movieCards
+            .slice(0, maxCatalogCards).map((card) => {
+              return (
+                <MovieCardThumbnail
+                  key={`${card.id}`}
+                  card={card}
+                  isPlaying={this.state.activeCard === card}
+                  onThumbnailMouseEnter={this._handleCardMouseEnter}
+                  onThumbnailMouseLeave={this._handleCardMouseLeave}
+                  onThumbnailClick={onCurrentVideoIDChange}
+                />
+              );
+            })
         }
       </div>
     );
@@ -59,8 +64,8 @@ class Catalog extends React.PureComponent {
 
 Catalog.propTypes = {
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
-  onCurrentVideoIDChange: PropTypes.func,
-  max: PropTypes.number.isRequired
+  maxCatalogCards: PropTypes.number.isRequired,
+  onCurrentVideoIDChange: PropTypes.func
 };
 
 export {Catalog};
