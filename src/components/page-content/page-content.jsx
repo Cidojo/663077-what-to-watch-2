@@ -6,6 +6,8 @@ import {Catalog} from './../catalog/catalog.jsx';
 import {ShowMoreButton} from './../show-more-button/show-more-button.jsx';
 import {movieCardPropTypes} from './../../global-custom-types.js';
 
+const SHOW_MORE_CARDS_STEP = 20;
+
 class PageContent extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -21,7 +23,7 @@ class PageContent extends React.PureComponent {
 
   _handleShowMoreButtonClick() {
     this.setState((prevState) => ({
-      maxCatalogCards: prevState.maxCatalogCards * 2
+      maxCatalogCards: prevState.maxCatalogCards + SHOW_MORE_CARDS_STEP
     }));
   }
 
