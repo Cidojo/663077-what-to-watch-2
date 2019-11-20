@@ -3,22 +3,26 @@ import * as ReactDom from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {reducer} from './reducer';
+import {compose} from 'recompose';
 import App from './components/app/app.jsx';
 
 const settings = {
   currentVideoID: 1,
-  genre: `All genres`,
-  genres: [
-    `Comedies`,
-    `Crime`,
-    `Documentary`,
-    `Dramas`,
-    `Horror`,
-    `Kids & Family`,
-    `Romance`,
-    `Sci-Fi`,
-    `Thrillers`
-  ],
+  genre: ``,
+  genres: {
+    all: `All genres`,
+    rest: [
+      `Comedies`,
+      `Crime`,
+      `Documentary`,
+      `Dramas`,
+      `Horror`,
+      `Kids & Family`,
+      `Romance`,
+      `Sci-Fi`,
+      `Thrillers`
+    ]
+  },
   maxGenresToDisplay: 9,
   movieCards: [{
     id: 1,
@@ -49,7 +53,12 @@ const settings = {
 };
 
 const init = () => {
-  const store = createStore(reducer);
+  const composeEnhancers = (typeof window !== `undefined` && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
+  const store = createStore(
+      reducer,
+      composeEnhancers && composeEnhancers()
+  );
 
   ReactDom.render(
       <Provider store={store}>

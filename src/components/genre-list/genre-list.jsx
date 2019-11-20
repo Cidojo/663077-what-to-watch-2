@@ -4,27 +4,31 @@ import {GenreItem} from './../genre-item/genre-item.jsx';
 
 const GenreList = (props) => {
   const {
-    currentGenre,
+    active,
     genres,
     maxGenresToDisplay,
-    onGenreTabClick
+    onActiveChange
   } = props;
+
+  const _handleActiveChange = (genre) => {
+    onActiveChange(genre === genres.all ? null : genre);
+  };
 
   return (
     <ul className="catalog__genres-list">
       <GenreItem
-        currentGenre={currentGenre}
-        genre={`All genres`}
-        onGenreTabClick={onGenreTabClick}
+        isActive={!active}
+        genre={genres.all}
+        onGenreTabClick={_handleActiveChange}
       />
       {
-        genres.slice(maxGenresToDisplay).map((genre) => {
+        genres.rest.slice(0, maxGenresToDisplay).map((genre) => {
           return (
             <GenreItem
               key={genre}
-              currentGenre={currentGenre}
+              isActive={active === genre}
               genre={genre}
-              onGenreTabClick={onGenreTabClick}
+              onGenreTabClick={_handleActiveChange}
             />
           );
         })
@@ -34,10 +38,23 @@ const GenreList = (props) => {
 };
 
 GenreList.propTypes = {
-  currentGenre: PropTypes.string,
-  genres: PropTypes.arrayOf(PropTypes.string),
+  active: PropTypes.string,
+  genres: PropTypes.shape({
+    all: PropTypes.string,
+    rest: PropTypes.arrayOf(PropTypes.string)
+  }),
   maxGenresToDisplay: PropTypes.number,
-  onGenreTabClick: PropTypes.func.isRequired,
+  onActiveChange: PropTypes.func.isRequired,
+};
+
+GenreList.defaultProps = {
+  active: null,
+  genres: {
+    all: ``,
+    rest: []
+  },
+  maxGenresToDisplay: 0,
+  onActiveChange: () => {}
 };
 
 export {GenreList};

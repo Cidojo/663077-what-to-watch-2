@@ -5,7 +5,10 @@ import * as renderer from 'react-test-renderer';
 it(`should render component without errors`, () => {
   const tree = renderer
     .create(<GenreList
-      genres={[``]}
+      genres={{
+        all: `All`,
+        rest: [`some`]
+      }}
       maxGenresToDisplay={0}
       onGenreTabClick={() => {}}
       currentGenre={``}

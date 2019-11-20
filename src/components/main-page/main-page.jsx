@@ -13,7 +13,7 @@ const MainPage = (props) => {
     currentVideoID,
     userData,
     maxCatalogCards,
-    onCurrentVideoIDChange,
+    maxGenresToDisplay,
     onGenreTabClick
   } = props;
 
@@ -31,8 +31,8 @@ const MainPage = (props) => {
         genres={genres}
         movieCards={movieCards}
         maxCatalogCards={maxCatalogCards}
+        maxGenresToDisplay={maxGenresToDisplay}
         onGenreTabClick={onGenreTabClick}
-        onCurrentVideoIDChange={onCurrentVideoIDChange}
       />
     </React.Fragment>
   );
@@ -40,7 +40,10 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   genre: PropTypes.string,
-  genres: PropTypes.arrayOf(PropTypes.string),
+  genres: PropTypes.shape({
+    all: PropTypes.string,
+    rest: PropTypes.arrayOf(PropTypes.string)
+  }),
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
   userData: PropTypes.shape({
     avatar: PropTypes.string,
@@ -48,8 +51,8 @@ MainPage.propTypes = {
   }),
   currentVideoID: PropTypes.number,
   maxCatalogCards: PropTypes.number,
+  maxGenresToDisplay: PropTypes.number,
   onGenreTabClick: PropTypes.func.isRequired,
-  onCurrentVideoIDChange: PropTypes.func,
 };
 
 export {MainPage};
