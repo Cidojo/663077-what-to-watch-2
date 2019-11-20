@@ -3,7 +3,6 @@ import {movieCards as mockMovieCards} from "./mocks/films";
 const initialState = {
   genre: `All genres`,
   movieCards: mockMovieCards,
-  currentVideoID: 21
 };
 
 const ActionType = {

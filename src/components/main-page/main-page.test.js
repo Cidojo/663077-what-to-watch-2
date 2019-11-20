@@ -32,7 +32,10 @@ it(`should render MainPage component without errors`, () => {
       }}
       currentVideoID={0}
       genre={``}
-      genres={[``]}
+      genres={{
+        all: `All`,
+        rest: [`some`]
+      }}
       movieCards={movieCards}
       maxCatalogCards={1}
       onGenreTabClick={() => {}}

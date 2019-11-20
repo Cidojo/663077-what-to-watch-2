@@ -15,8 +15,8 @@ const App = (props) => {
     currentVideoID,
     maxCatalogCardsOnMainPage,
     maxCatalogCardsOnDetailsPage,
+    maxGenresToDisplay,
     onGenreFilterClick,
-    onCurrentVideoIDChange
   } = props;
 
   switch (location.pathname) {
@@ -29,8 +29,8 @@ const App = (props) => {
           userData={userData}
           currentVideoID={currentVideoID}
           maxCatalogCards={maxCatalogCardsOnMainPage}
+          maxGenresToDisplay={maxGenresToDisplay}
           onGenreTabClick={onGenreFilterClick}
-          onCurrentVideoIDChange={onCurrentVideoIDChange}
         />
       );
     case `/details`:
@@ -49,7 +49,10 @@ const App = (props) => {
 
 App.propTypes = {
   genre: PropTypes.string,
-  genres: PropTypes.arrayOf(PropTypes.string),
+  genres: PropTypes.shape({
+    all: PropTypes.string,
+    rest: PropTypes.arrayOf(PropTypes.string)
+  }),
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
   userData: PropTypes.shape({
     name: PropTypes.string,
@@ -60,21 +63,16 @@ App.propTypes = {
   maxCatalogCardsOnDetailsPage: PropTypes.number,
   maxGenresToDisplay: PropTypes.number,
   onGenreFilterClick: PropTypes.func.isRequired,
-  onCurrentVideoIDChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genre: state.genre,
-  movieCards: state.movieCards,
-  currentVideoID: state.currentVideoID
+  movieCards: state.movieCards
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreFilterClick: (genre) => {
     dispatch(ActionCreator.changeGenre(genre));
-  },
-  onCurrentVideoIDChange: (id) => {
-    dispatch(ActionCreator.changeCurrentVideoID(id));
   }
 });
 

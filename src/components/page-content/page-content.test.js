@@ -26,7 +26,10 @@ it(`should render component without errors`, () => {
 
   const tree = renderer
     .create(<PageContent
-      genres={[``]}
+      genres={{
+        all: ``,
+        rest: [``]
+      }}
       genre={``}
       movieCards={movieCards}
       maxGenresToDisplay={9}

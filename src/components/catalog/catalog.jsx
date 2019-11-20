@@ -5,67 +5,59 @@ import {movieCardPropTypes} from './../../global-custom-types';
 
 const ON_THUMBNAIL_MOUSE_ENTER_DELAY = 1000;
 
-class Catalog extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const Catalog = (props) => {
+  let timerId = null;
 
-    this.state = {
-      activeCard: null
-    };
+  const {
+    active,
+    movieCards,
+    onActiveChange,
+    maxCatalogCards
+  } = props;
 
-    this.timerId = null;
+  const _handleCardMouseEnter = (id) => {
+    timerId = setTimeout(() => onActiveChange(id), ON_THUMBNAIL_MOUSE_ENTER_DELAY);
+  };
 
-    this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
-    this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
-  }
+  const _handleCardMouseLeave = () => {
+    clearTimeout(timerId);
 
-  _handleCardMouseEnter(activeCard) {
-    this.timerId = setTimeout(() => this.setState({
-      activeCard
-    }), ON_THUMBNAIL_MOUSE_ENTER_DELAY);
-  }
+    onActiveChange(null);
+  };
 
-  _handleCardMouseLeave() {
-    clearTimeout(this.timerId);
-
-    this.setState({
-      activeCard: null
-    });
-  }
-
-  render() {
-    const {
-      movieCards,
-      onCurrentVideoIDChange,
-      maxCatalogCards
-    } = this.props;
-
-    return (
-      <div className="catalog__movies-list">
-        {
-          movieCards
-            .slice(0, maxCatalogCards).map((card) => {
-              return (
-                <MovieCardThumbnail
-                  key={`${card.id}`}
-                  card={card}
-                  isPlaying={this.state.activeCard === card}
-                  onThumbnailMouseEnter={this._handleCardMouseEnter}
-                  onThumbnailMouseLeave={this._handleCardMouseLeave}
-                  onThumbnailClick={onCurrentVideoIDChange}
-                />
-              );
-            })
-        }
-      </div>
-    );
-  }
-}
+  return (
+    <div className="catalog__movies-list">
+      {
+        movieCards
+          .slice(0, maxCatalogCards).map((card) => {
+            return (
+              <MovieCardThumbnail
+                key={`${card.id}`}
+                card={card}
+                isPlaying={active === card.id}
+                onThumbnailMouseEnter={_handleCardMouseEnter}
+                onThumbnailMouseLeave={_handleCardMouseLeave}
+                onThumbnailClick={onActiveChange}
+              />
+            );
+          })
+      }
+    </div>
+  );
+};
 
 Catalog.propTypes = {
+  active: PropTypes.number,
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
   maxCatalogCards: PropTypes.number.isRequired,
-  onCurrentVideoIDChange: PropTypes.func
+  onActiveChange: PropTypes.func
+};
+
+Catalog.defaultProps = {
+  active: 0,
+  movieCards: [],
+  maxCatalogCards: 0,
+  onActiveChange: () => {}
 };
 
 export {Catalog};

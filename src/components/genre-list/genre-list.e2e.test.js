@@ -6,17 +6,20 @@ import {GenreList} from "./genre-list";
 configure({adapter: new Adapter()});
 
 it(`should call genre handler on genre tab click`, () => {
-  const onGenreTabClick = jest.fn();
+  const onActiveChange = jest.fn();
   const preventDefault = jest.fn();
 
   const genreList = mount(<GenreList
-    currentGenre={``}
-    genres={[``]}
+    active={`All`}
+    genres={{
+      all: `All`,
+      rest: [`some`]
+    }}
     maxGenresToDisplay={1}
-    onGenreTabClick={onGenreTabClick}
+    onActiveChange={onActiveChange}
   />);
 
-  const tab = genreList.find(`.catalog__genres-link`);
+  const tab = genreList.find(`.catalog__genres-link`).first();
   tab.simulate(`click`, {preventDefault});
-  expect(onGenreTabClick).toHaveBeenCalledTimes(1);
+  expect(onActiveChange).toHaveBeenCalledTimes(1);
 });
