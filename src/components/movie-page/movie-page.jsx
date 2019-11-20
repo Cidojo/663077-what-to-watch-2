@@ -10,6 +10,8 @@ import {MovieRating} from './../movie-rating/movie-rating.jsx';
 import {MovieCardOverview} from './../movie-card-overview/movie-card-overview.jsx';
 import {MovieCardDetails} from './../movie-card-details/movie-card-details.jsx';
 import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
+import withActiveItem from './../../hocs/with-active-item.jsx';
+const CatalogWrapped = withActiveItem(Catalog);
 
 const DEFAULT_TAB_INDEX = 0;
 
@@ -50,8 +52,7 @@ class MoviePage extends React.PureComponent {
       movieCards,
       currentVideoID,
       userData,
-      maxCatalogCards,
-      onCurrentVideoIDChange,
+      maxCatalogCards
     } = this.props;
 
     const {activeTabIndex} = this.state;
@@ -122,10 +123,9 @@ class MoviePage extends React.PureComponent {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <Catalog
+            <CatalogWrapped
               maxCatalogCards={maxCatalogCards}
               movieCards={filteredCards}
-              onCurrentVideoIDChange={onCurrentVideoIDChange}
             />
           </section>
         </div>
@@ -141,8 +141,7 @@ MoviePage.propTypes = {
   userData: PropTypes.shape({
     name: PropTypes.string,
     avatar: PropTypes.string
-  }),
-  onCurrentVideoIDChange: PropTypes.func,
+  })
 };
 
 export {MoviePage};

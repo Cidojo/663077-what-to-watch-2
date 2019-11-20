@@ -7,7 +7,7 @@ const MovieCardThumbnail = (props) => {
   const {card, isPlaying, onThumbnailMouseEnter, onThumbnailMouseLeave, onThumbnailClick} = props;
 
   const _handleThumbnailMouseEnter = () => {
-    onThumbnailMouseEnter(card);
+    onThumbnailMouseEnter(card.id);
   };
 
   const _handleThumbnailMouseLeave = () => {

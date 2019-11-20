@@ -26,7 +26,10 @@ it(`should render component without errors`, () => {
 
   const props = {
     genre: ``,
-    genres: [``],
+    genres: {
+      all: ``,
+      rest: [``]
+    },
     movieCards,
     userData: {
       name: ``,
@@ -37,7 +40,6 @@ it(`should render component without errors`, () => {
     maxCatalogCardsOnDetailsPage: 0,
     maxGenresToDisplay: 0,
     onGenreFilterClick: () => {},
-    onCurrentVideoIDChange: () => {}
   };
 
   const tree = renderer

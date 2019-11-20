@@ -6,7 +6,7 @@ import {Catalog} from './catalog.jsx';
 configure({adapter: new Adapter()});
 
 it(`should call thumbnail title click handler on click`, () => {
-  const onCurrentVideoIDChange = jest.fn();
+  const onActiveChange = jest.fn();
 
   const loadStub = jest
     .spyOn(window.HTMLMediaElement.prototype, `load`)
@@ -42,12 +42,12 @@ it(`should call thumbnail title click handler on click`, () => {
   const catalog = mount(<Catalog
     movieCards={movieCards}
     maxCatalogCards={1}
-    onCurrentVideoIDChange={onCurrentVideoIDChange}
+    onActiveChange={onActiveChange}
   />);
 
   const thumbNailTitle = catalog.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onCurrentVideoIDChange).toHaveBeenCalledTimes(1);
+  expect(onActiveChange).toHaveBeenCalledWith(0);
   loadStub.mockRestore();
   playStub.mockRestore();
   pauseStub.mockRestore();

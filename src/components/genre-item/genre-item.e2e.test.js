@@ -10,12 +10,25 @@ it(`Tab handler should be called with tab text content`, () => {
   const preventDefault = jest.fn();
 
   const genreItem = mount(<GenreItem
-    currentGenre={`comedy`}
+    isActive={false}
     genre={`drama`}
     onGenreTabClick={onGenreTabClick}
   />);
 
-  const tab = genreItem.find(`.catalog__genres-link`);
-  tab.simulate(`click`, {preventDefault});
+  const tabLink = genreItem.find(`.catalog__genres-link`);
+  tabLink.simulate(`click`, {preventDefault});
   expect(onGenreTabClick).toHaveBeenCalledWith(`drama`);
+});
+
+it(`Should have active class modifier when isActive is true`, () => {
+  const onGenreTabClick = jest.fn();
+
+  const genreItem = mount(<GenreItem
+    isActive={true}
+    genre={`drama`}
+    onGenreTabClick={onGenreTabClick}
+  />);
+
+  const tab = genreItem.find(`.catalog__genres-item`);
+  expect(tab.hasClass(/active/g)).toEqual(true);
 });

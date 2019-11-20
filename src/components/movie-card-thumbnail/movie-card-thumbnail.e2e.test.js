@@ -73,7 +73,7 @@ it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () 
 
   const movieCardElement = movieCardThumbnail.find(`.small-movie-card`);
   movieCardElement.simulate(`mouseEnter`);
-  expect(onThumbnailMouseEnter).toHaveBeenCalledWith(card);
+  expect(onThumbnailMouseEnter).toHaveBeenCalledWith(0);
 });
 
 it(`should run onThumbnailMouseLeave handler from props on thumbnail click`, () => {

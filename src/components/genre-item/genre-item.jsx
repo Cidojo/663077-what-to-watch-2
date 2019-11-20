@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 
 const GenreItem = (props) => {
   const {
-    currentGenre,
+    isActive,
     genre,
     onGenreTabClick
   } = props;
@@ -16,7 +16,7 @@ const GenreItem = (props) => {
 
   return (
     <li
-      className={`catalog__genres-item${currentGenre === genre ? ` catalog__genres-item--active` : ``}`}
+      className={`catalog__genres-item${isActive ? ` catalog__genres-item--active` : ``}`}
     >
       <a
         href="#"
@@ -30,7 +30,7 @@ const GenreItem = (props) => {
 };
 
 GenreItem.propTypes = {
-  currentGenre: PropTypes.string,
+  isActive: PropTypes.bool,
   genre: PropTypes.string,
   onGenreTabClick: PropTypes.func.isRequired,
 };
