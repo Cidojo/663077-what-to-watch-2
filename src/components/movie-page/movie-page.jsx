@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {Logotype} from './../logotype/logotype.jsx';
+import {Sprite} from '../sprite/sprite.jsx';
 import {MovieCardButtons} from '../movie-card-buttons/movie-card-buttons.jsx';
 import {Catalog} from '../catalog/catalog.jsx';
 import {Header} from '../header/header.jsx';
@@ -10,9 +10,12 @@ import {MovieRating} from './../movie-rating/movie-rating.jsx';
 import {MovieCardOverview} from './../movie-card-overview/movie-card-overview.jsx';
 import {MovieCardDetails} from './../movie-card-details/movie-card-details.jsx';
 import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
-import withActiveItem from './../../hocs/with-active-item.jsx';
-const CatalogWrapped = withActiveItem(Catalog);
+import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
+import withPlayer from './../../hocs/with-player/with-player.jsx';
+import withPlayingState from './../../hocs/with-playing-state/with-playing-state.jsx';
+import withControls from './../../hocs/with-controls/with-controls.jsx';
 
+const CatalogWrapped = withActiveItem(Catalog);
 const DEFAULT_TAB_INDEX = 0;
 
 class MoviePage extends React.PureComponent {
@@ -31,10 +34,23 @@ class MoviePage extends React.PureComponent {
     }];
 
     this.state = {
+      isPlayerShown: false,
       activeTabIndex: DEFAULT_TAB_INDEX
     };
 
     this._handleTabChange = this._handleTabChange.bind(this);
+    this._handleShowPlayer = this._handleShowPlayer.bind(this);
+    this._handleHidePlayer = this._handleHidePlayer.bind(this);
+  }
+
+  _handleShowPlayer() {
+    this.setState({isPlayerShown: true});
+    this.props.onPlay();
+  }
+
+  _handleHidePlayer() {
+    this.setState({isPlayerShown: false});
+    this.props.onStop();
   }
 
   _handleTabChange(clickedTabName) {
@@ -52,10 +68,18 @@ class MoviePage extends React.PureComponent {
       movieCards,
       currentVideoID,
       userData,
-      maxCatalogCards
+      maxCatalogCards,
+      renderPlayer,
+      Player,
+      isPlaying,
+      onPlay,
+      onFullscreenButtonClick,
+      renderControls,
+      currentTime,
+      totalTime
     } = this.props;
 
-    const {activeTabIndex} = this.state;
+    const {activeTabIndex, isPlayerShown} = this.state;
 
     const ActiveTabComponent = this.tabs[activeTabIndex].component;
 
@@ -65,10 +89,30 @@ class MoviePage extends React.PureComponent {
       .filter((card) => {
         return card.genre === currentCard.genre;
       });
+    // renderPlayer({
+    //   ...this.props,
+    //   src: currentCard.src,
+    //   posterSrc: currentCard.posterSrc,
+    // })
+    if (isPlayerShown) {
+      return (
+        <div className="player">
+          {Player}
+          {renderControls({
+            isPlaying,
+            onFullscreenButtonClick,
+            onPlayButtonClick: onPlay,
+            onCloseButtonClick: this._handleHidePlayer,
+            currentTime,
+            totalTime
+          })}
+        </div>
+      );
+    }
 
     return (
       <React.Fragment>
-        <Logotype />
+        <Sprite />
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
             <div className="movie-card__bg">
@@ -87,7 +131,9 @@ class MoviePage extends React.PureComponent {
                   <span className="movie-card__year">{currentCard.year}</span>
                 </p>
 
-                <MovieCardButtons />
+                <MovieCardButtons
+                  onPlayButtonClick={this._handleShowPlayer}
+                />
               </div>
             </div>
           </div>
@@ -144,4 +190,7 @@ MoviePage.propTypes = {
   })
 };
 
-export {MoviePage};
+// const MoviePageWrapped = withPlayer(withControls(MoviePage));
+const MoviePageWrapped = withPlayingState(withControls(withPlayer(MoviePage)));
+
+export {MoviePageWrapped as MoviePage};

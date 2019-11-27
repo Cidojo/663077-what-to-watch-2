@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {MovieCard} from './../movie-card/movie-card.jsx';
 import {PageContent} from './../page-content/page-content.jsx';
-import {Logotype} from './../logotype/logotype.jsx';
+import {Sprite} from '../sprite/sprite.jsx';
 import {movieCardPropTypes} from './../../global-custom-types';
 
 const MainPage = (props) => {
@@ -21,7 +21,7 @@ const MainPage = (props) => {
 
   return (
     <React.Fragment>
-      <Logotype />
+      <Sprite />
       <MovieCard
         card={currentVideoCard}
         userAvatar={userData.avatar}

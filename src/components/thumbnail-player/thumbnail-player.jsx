@@ -2,23 +2,22 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 const ThumbnailPlayer = (props) => {
-  const {src, posterSrc, isPlaying} = props;
+  const {src, posterSrc, isPlaying, isStopped, isMuted} = props;
 
   const playVideo = (video) => {
     if (!video) {
       return;
     }
 
-    video.muted = true;
-
     if (isPlaying) {
       video.play();
     } else {
       video.pause();
+    }
 
-      if (video.currentTime) {
-        video.load();
-      }
+    if (isStopped) {
+      video.currentTieme = 0;
+      video.load();
     }
   };
 
@@ -30,6 +29,7 @@ const ThumbnailPlayer = (props) => {
       src={src}
       className="player__video"
       poster={posterSrc}
+      muted={isMuted ? true : void (0)}
     >
     </video>
   );
@@ -38,7 +38,9 @@ const ThumbnailPlayer = (props) => {
 ThumbnailPlayer.propTypes = {
   src: PropTypes.string,
   posterSrc: PropTypes.string,
-  isPlaying: PropTypes.bool
+  isPlaying: PropTypes.bool,
+  isStopped: PropTypes.bool,
+  isMuted: PropTypes.bool
 };
 
 export {ThumbnailPlayer};

@@ -1,20 +1,35 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+import {SvgIcon} from './../svg-icon/svg-icon.jsx';
+import {Icons} from './../../constants.js';
 
-const MovieCardButtons = () => (
-  <div className="movie-card__buttons">
-    <button className="btn btn--play movie-card__button" type="button">
-      <svg viewBox="0 0 19 19" width="19" height="19">
-        <use xlinkHref="#play-s"></use>
-      </svg>
-      <span>Play</span>
-    </button>
-    <button className="btn btn--list movie-card__button" type="button">
-      <svg viewBox="0 0 19 20" width="19" height="20">
-        <use xlinkHref="#add"></use>
-      </svg>
-      <span>My list</span>
-    </button>
-  </div>
-);
+const MovieCardButtons = (props) => {
+  const {onPlayButtonClick} = props;
+
+  return (
+    <div className="movie-card__buttons">
+      <button
+        onClick={onPlayButtonClick}
+        className="btn btn--play movie-card__button"
+        type="button"
+      >
+        <SvgIcon {...Icons.PLAY} />
+        <span>Play</span>
+      </button>
+      <button className="btn btn--list movie-card__button" type="button">
+        <SvgIcon {...Icons.ADD} />
+        <span>My list</span>
+      </button>
+    </div>
+  );
+};
+
+MovieCardButtons.propTypes = {
+  onPlayButtonClick: PropTypes.func.isRequired,
+};
+
+MovieCardButtons.defaultProps = {
+  onPlayButtonClick: () => {}
+};
 
 export {MovieCardButtons};

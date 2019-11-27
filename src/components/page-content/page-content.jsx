@@ -5,7 +5,7 @@ import {Footer} from './../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
 import {ShowMoreButton} from './../show-more-button/show-more-button.jsx';
 import {movieCardPropTypes} from './../../global-custom-types.js';
-import withActiveItem from './../../hocs/with-active-item.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
 const SHOW_MORE_CARDS_STEP = 20;
 const GenreListWrapped = withActiveItem(GenreList);

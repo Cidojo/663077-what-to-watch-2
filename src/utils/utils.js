@@ -47,8 +47,20 @@ const formatDate = (date) => {
   };
 };
 
+const formatCurrentTime = (seconds) => {
+  const date = new Date(null);
+  date.setSeconds(seconds);
+  return date.toISOString().match(/[0-9:]{8}/)[0];
+};
+
+const evalProgress = (seconds, duration) => {
+  return duration ? Math.floor((seconds / duration) * 100) : 0;
+};
+
 export {
   evalRatingLevel,
   formatDate,
-  formatRunTime
+  formatRunTime,
+  formatCurrentTime,
+  evalProgress
 };
