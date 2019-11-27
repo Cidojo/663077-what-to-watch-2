@@ -1,34 +1,54 @@
 import * as React from 'react';
 import {VideoPlayer} from './../../components/video-player/video-player.jsx';
+import {PlayerControls} from '../../components/player-controls/player-controls.jsx';
 
 const withPlayer = (Component) => {
-  const renderPlayer = (props) => {
+  const WrappedComponent = (props) => {
     const {
       isPlaying,
       isStopped,
       isFullscreen,
       onTimeUpdate,
       onExitFullscreen,
-      onPlay
+      onPlay,
+      currentTime,
+      totalTime,
+      onEnterFullscreen
     } = props;
 
-    return (
-      <VideoPlayer
-        isPlaying={isPlaying}
-        isStopped={isStopped}
-        isFullscreen={isFullscreen}
-        onTimeUpdate={onTimeUpdate}
-        onExitFullscreen={onExitFullscreen}
-        onPlay={onPlay}
-      />
-    );
-  };
+    const renderPlayer = (src, posterSrc) => {
+      return (
+        <VideoPlayer
+          src={src}
+          posterSrc={posterSrc}
+          isPlaying={isPlaying}
+          isStopped={isStopped}
+          isFullscreen={isFullscreen}
+          onTimeUpdate={onTimeUpdate}
+          onExitFullscreen={onExitFullscreen}
+          onPlay={onPlay}
+        />
+      );
+    };
 
-  const WrappedComponent = (props) => {
+    const renderControls = (onClose) => {
+      return (
+        <PlayerControls
+          isPlaying={isPlaying}
+          currentTime={currentTime}
+          totalTime={totalTime}
+          onPlayButtonClick={onPlay}
+          onCloseButtonClick={onClose}
+          onFullscreenButtonClick={onEnterFullscreen}
+        />
+      );
+    };
+
     return (
       <Component
         {...props}
-        Player={renderPlayer({...props, src: props.movieCards[0].src, posterSrc: ''})}
+        renderPlayer={renderPlayer}
+        renderControls={renderControls}
       />
     );
   };

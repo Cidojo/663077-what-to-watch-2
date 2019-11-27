@@ -13,7 +13,6 @@ import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 import withPlayer from './../../hocs/with-player/with-player.jsx';
 import withPlayingState from './../../hocs/with-playing-state/with-playing-state.jsx';
-import withControls from './../../hocs/with-controls/with-controls.jsx';
 
 const CatalogWrapped = withActiveItem(Catalog);
 const DEFAULT_TAB_INDEX = 0;
@@ -70,13 +69,7 @@ class MoviePage extends React.PureComponent {
       userData,
       maxCatalogCards,
       renderPlayer,
-      Player,
-      isPlaying,
-      onPlay,
-      onFullscreenButtonClick,
-      renderControls,
-      currentTime,
-      totalTime
+      renderControls
     } = this.props;
 
     const {activeTabIndex, isPlayerShown} = this.state;
@@ -89,23 +82,12 @@ class MoviePage extends React.PureComponent {
       .filter((card) => {
         return card.genre === currentCard.genre;
       });
-    // renderPlayer({
-    //   ...this.props,
-    //   src: currentCard.src,
-    //   posterSrc: currentCard.posterSrc,
-    // })
+
     if (isPlayerShown) {
       return (
         <div className="player">
-          {Player}
-          {renderControls({
-            isPlaying,
-            onFullscreenButtonClick,
-            onPlayButtonClick: onPlay,
-            onCloseButtonClick: this._handleHidePlayer,
-            currentTime,
-            totalTime
-          })}
+          {renderPlayer(currentCard.src, currentCard.posterSrc)}
+          {renderControls(this._handleHidePlayer)}
         </div>
       );
     }
@@ -190,7 +172,6 @@ MoviePage.propTypes = {
   })
 };
 
-// const MoviePageWrapped = withPlayer(withControls(MoviePage));
-const MoviePageWrapped = withPlayingState(withControls(withPlayer(MoviePage)));
+const MoviePageWrapped = withPlayingState(withPlayer(MoviePage));
 
 export {MoviePageWrapped as MoviePage};

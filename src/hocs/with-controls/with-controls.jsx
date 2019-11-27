@@ -1,15 +1,17 @@
 import * as React from 'react';
 import {PlayerControls} from './../../components/player-controls/player-controls.jsx';
 
+const INITIAL_STATE = {
+  isPlaying: false,
+  currentTime: 0,
+  totalTime: 0,
+  onPlayButtonClick: () => {},
+  onCloseButtonClick: () => {},
+  onFullscreenButtonClick: () => {}
+};
+
 const withControls = (Component) => {
-  const renderControls = (props = {
-    isPlaying: false,
-    currentTime: 0,
-    totalTime: 0,
-    onPlayButtonClick: () => {},
-    onCloseButtonClick: () => {},
-    onFullscreenButtonClick: () => {}
-  }) => {
+  const renderControls = (props) => {
     return <PlayerControls {...props} />;
   };
 

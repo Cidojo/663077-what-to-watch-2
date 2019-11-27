@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {VideoPlayer} from '../../components/video-player/video-player.jsx';
 
 const INITIAL_STATE = {
   isPlaying: false,
@@ -23,15 +22,6 @@ const withPlayingState = (Component) => {
       this._handleEnterFullscreen = this._handleEnterFullscreen.bind(this);
       this._handleExitFullscreen = this._handleExitFullscreen.bind(this);
       this._handleTimeUpdate = this._handleTimeUpdate.bind(this);
-      this.renderPlayer = this.renderPlayer.bind(this);
-    }
-
-    renderPlayer(props) {
-      return (
-        <VideoPlayer
-          {...props}
-        />
-      );
     }
 
     _handleTimeUpdate(e) {
