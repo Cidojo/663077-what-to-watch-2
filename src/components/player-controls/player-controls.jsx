@@ -9,13 +9,12 @@ const PlayerControls = (props) => {
     isPlaying,
     onFullscreenButtonClick,
     onPlayButtonClick,
-    onCloseButtonClick,
     currentTime,
-    totalTime,
+    duration
   } = props;
   const iconOptions = isPlaying ? Icons.PAUSE : Icons.PLAY;
 
-  const progress = evalProgress(currentTime, totalTime);
+  const progress = evalProgress(currentTime, duration);
 
   return (
     <React.Fragment>
@@ -55,31 +54,22 @@ const PlayerControls = (props) => {
           </button>
         </div>
       </div>
-      <button
-        type="button"
-        className="player__exit"
-        onClick={onCloseButtonClick}
-      >
-        Exit
-      </button>
     </React.Fragment>
   );
 };
 
 PlayerControls.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  onCloseButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onFullscreenButtonClick: PropTypes.func.isRequired,
   currentTime: PropTypes.number.isRequired,
-  totalTime: PropTypes.number.isRequired
+  duration: PropTypes.number.isRequired
 };
 
 PlayerControls.defaultProps = {
   isPlaying: false,
   currentTime: 0,
-  totalTime: 0,
-  onCloseButtonClick: () => {},
+  duration: 0,
   onPlayButtonClick: () => {},
   onFullscreenButtonClick: () => {}
 };

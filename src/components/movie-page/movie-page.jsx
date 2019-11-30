@@ -13,8 +13,15 @@ import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 import withPlayer from './../../hocs/with-player/with-player.jsx';
 import withPlayingState from './../../hocs/with-playing-state/with-playing-state.jsx';
+import {VideoPlayer} from './../../components/video-player/video-player.jsx';
+import withVideo from './../../hocs/with-playing-state/with-video.jsx';
+import withControls from './../../hocs/with-controls/with-controls.jsx';
 
 const CatalogWrapped = withActiveItem(Catalog);
+
+const WithVideo = withVideo(VideoPlayer);
+const WithControls = withControls(WithVideo);
+
 const DEFAULT_TAB_INDEX = 0;
 
 class MoviePage extends React.PureComponent {
@@ -44,12 +51,10 @@ class MoviePage extends React.PureComponent {
 
   _handleShowPlayer() {
     this.setState({isPlayerShown: true});
-    this.props.onPlay();
   }
 
   _handleHidePlayer() {
     this.setState({isPlayerShown: false});
-    this.props.onStop();
   }
 
   _handleTabChange(clickedTabName) {
@@ -86,8 +91,18 @@ class MoviePage extends React.PureComponent {
     if (isPlayerShown) {
       return (
         <div className="player">
-          {renderPlayer(currentCard.src, currentCard.posterSrc)}
-          {renderControls(this._handleHidePlayer)}
+          <WithControls
+            src={currentCard.src}
+            posterSrc={currentCard.posterSrc}
+            isPlaying={true}
+          />
+          <button
+            type="button"
+            className="player__exit"
+            onClick={this._handleHidePlayer}
+          >
+            Exit
+          </button>
         </div>
       );
     }
@@ -151,16 +166,17 @@ class MoviePage extends React.PureComponent {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <CatalogWrapped
-              maxCatalogCards={maxCatalogCards}
-              movieCards={filteredCards}
-            />
           </section>
         </div>
       </React.Fragment>
     );
   }
 }
+
+// (<CatalogWrapped
+//   maxCatalogCards={maxCatalogCards}
+//   movieCards={filteredCards}
+// />)
 
 MoviePage.propTypes = {
   currentVideoID: PropTypes.number,
