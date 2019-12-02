@@ -34,7 +34,7 @@ const Catalog = (props) => {
               <MovieCardThumbnail
                 key={`${card.id}`}
                 card={card}
-                isPlaying={active === card.id}
+                isPlaying={active === card.id || null}
                 isStopped={!(active === card.id)}
                 onThumbnailMouseEnter={_handleCardMouseEnter}
                 onThumbnailMouseLeave={_handleCardMouseLeave}

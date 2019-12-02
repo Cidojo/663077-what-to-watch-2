@@ -14,7 +14,7 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 import withPlayer from './../../hocs/with-player/with-player.jsx';
 import withPlayingState from './../../hocs/with-playing-state/with-playing-state.jsx';
 import {VideoPlayer} from './../../components/video-player/video-player.jsx';
-import withVideo from './../../hocs/with-playing-state/with-video.jsx';
+import withVideo from '../../hocs/with-video/with-video.jsx';
 import withControls from './../../hocs/with-controls/with-controls.jsx';
 
 const CatalogWrapped = withActiveItem(Catalog);
@@ -72,9 +72,7 @@ class MoviePage extends React.PureComponent {
       movieCards,
       currentVideoID,
       userData,
-      maxCatalogCards,
-      renderPlayer,
-      renderControls
+      maxCatalogCards
     } = this.props;
 
     const {activeTabIndex, isPlayerShown} = this.state;
@@ -90,20 +88,13 @@ class MoviePage extends React.PureComponent {
 
     if (isPlayerShown) {
       return (
-        <div className="player">
-          <WithControls
-            src={currentCard.src}
-            posterSrc={currentCard.posterSrc}
-            isPlaying={true}
-          />
-          <button
-            type="button"
-            className="player__exit"
-            onClick={this._handleHidePlayer}
-          >
-            Exit
-          </button>
-        </div>
+        <WithControls
+          src={currentCard.src}
+          poster={currentCard.posterSrc}
+          isPlaying={true}
+          movieTitle={currentCard.title}
+          onExitButtonClick={this._handleHidePlayer}
+        />
       );
     }
 
@@ -166,17 +157,16 @@ class MoviePage extends React.PureComponent {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
+            <CatalogWrapped
+              maxCatalogCards={maxCatalogCards}
+              movieCards={filteredCards}
+            />
           </section>
         </div>
       </React.Fragment>
     );
   }
 }
-
-// (<CatalogWrapped
-//   maxCatalogCards={maxCatalogCards}
-//   movieCards={filteredCards}
-// />)
 
 MoviePage.propTypes = {
   currentVideoID: PropTypes.number,

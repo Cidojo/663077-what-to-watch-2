@@ -1,13 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {VideoPlayer} from '../video-player/video-player.jsx';
+import {MovieCardImage} from '../movie-card-image/movie-card-image.jsx';
 import {movieCardPropTypes} from './../../global-custom-types';
+import withVideo from './../../hocs/with-video/with-video.jsx';
+
+const MovieCardImageWrapped = withVideo(MovieCardImage);
 
 const MovieCardThumbnail = (props) => {
   const {
     card,
     isPlaying,
-    isStopped,
     onThumbnailMouseEnter,
     onThumbnailMouseLeave,
     onThumbnailClick
@@ -31,14 +33,11 @@ const MovieCardThumbnail = (props) => {
       onMouseEnter={_handleThumbnailMouseEnter}
       onMouseLeave={_handleThumbnailMouseLeave}
     >
-      <div className="small-movie-card__image">
-        <VideoPlayer
-          src={card.src}
-          posterSrc={card.posterSrc}
-          isPlaying={isPlaying}
-          isStopped={isStopped}
-        />
-      </div>
+      <MovieCardImageWrapped
+        isPlaying={isPlaying}
+        src={card.src}
+        poster={card.posterSrc}
+      />
       <h3 className="small-movie-card__title">
         <a
           className="small-movie-card__link"
@@ -57,7 +56,7 @@ MovieCardThumbnail.propTypes = {
   onThumbnailClick: PropTypes.func.isRequired,
   onThumbnailMouseEnter: PropTypes.func.isRequired,
   onThumbnailMouseLeave: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.oneOf([true, false, null]),
   isStopped: PropTypes.bool,
 };
 

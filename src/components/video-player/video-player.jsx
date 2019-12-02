@@ -8,10 +8,10 @@ const VideoPlayer = (props) => {
   } = props;
 
   return (
-    <>
+    <div className="player">
       {renderVideo()}
       {controls}
-    </>
+    </div>
   );
 };
 
@@ -21,8 +21,7 @@ VideoPlayer.propTypes = {
 };
 
 VideoPlayer.defaultProps = {
-  renderVideo: () => {},
-  controls: undefined
+  renderVideo: () => {}
 };
 
 export {VideoPlayer};
