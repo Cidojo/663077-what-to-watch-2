@@ -51,9 +51,9 @@ const withControls = (Component) => {
         });
       };
 
-      // video.ontimeupdate = (e) => {
-      //   this._handleTimeUpdate(e);
-      // };
+      video.ontimeupdate = (e) => {
+        this._handleTimeUpdate(e);
+      };
     }
 
     componentWillUnmount() {
@@ -82,9 +82,11 @@ const withControls = (Component) => {
     }
 
     _handleTimeUpdate(e) {
-      this.setState({
-        currentTime: e.currentTarget.currentTime
-      });
+      if (document.fullscreenElement !== e.currentTarget) {
+        this.setState({
+          currentTime: e.currentTarget.currentTime
+        });
+      }
     }
 
     _handleEnterFullscreen() {

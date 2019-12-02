@@ -14,7 +14,7 @@ const withVideo = (Component) => {
       };
 
       this._handlePlay = this._handlePlay.bind(this);
-      this._renderVideo = this._renderVideo.bind(this);
+      this.renderVideo = this.renderVideo.bind(this);
     }
 
     render() {
@@ -28,7 +28,7 @@ const withVideo = (Component) => {
           {...this.props}
           isPlaying={isPlaying}
           isLoading={isLoading}
-          renderVideo={this._renderVideo}
+          renderVideo={this.renderVideo}
         />
       );
     }
@@ -38,7 +38,7 @@ const withVideo = (Component) => {
         src,
         poster,
         onRefReady,
-        onTimeUpdate,
+        // onTimeUpdate,
         onCanPlay
       } = this.props;
 
@@ -102,7 +102,7 @@ const withVideo = (Component) => {
       }));
     }
 
-    _renderVideo() {
+    renderVideo() {
       return (
         <video
           className="player__video"

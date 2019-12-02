@@ -11,8 +11,6 @@ import {MovieCardOverview} from './../movie-card-overview/movie-card-overview.js
 import {MovieCardDetails} from './../movie-card-details/movie-card-details.jsx';
 import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
-import withPlayer from './../../hocs/with-player/with-player.jsx';
-import withPlayingState from './../../hocs/with-playing-state/with-playing-state.jsx';
 import {VideoPlayer} from './../../components/video-player/video-player.jsx';
 import withVideo from '../../hocs/with-video/with-video.jsx';
 import withControls from './../../hocs/with-controls/with-controls.jsx';
@@ -178,6 +176,4 @@ MoviePage.propTypes = {
   })
 };
 
-const MoviePageWrapped = withPlayingState(withPlayer(MoviePage));
-
-export {MoviePageWrapped as MoviePage};
+export {MoviePage};
