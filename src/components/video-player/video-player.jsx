@@ -1,27 +1,56 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const VideoPlayer = (props) => {
-  const {
-    renderVideo,
-    controls
-  } = props;
+class VideoPlayer extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className="player">
-      {renderVideo()}
-      {controls}
-    </div>
-  );
-};
+    this._videoRef = React.createRef();
+  }
+
+  componentDidUpdate() {
+    const video = this._videoRef.current;
+
+    if (this.props.isPlaying) {
+      video.play();
+    } else {
+      video.load();
+    }
+
+    if (this.props.fullscreen) {
+      video.requestFullscreen();
+    }
+  }
+
+  render() {
+    const {src, poster, muted} = this.props;
+
+    return (
+      <video
+        className="player__video"
+        ref={this._videoRef}
+        src={src}
+        poster={poster}
+        muted={muted}
+      />
+    );
+  }
+}
 
 VideoPlayer.propTypes = {
-  renderVideo: PropTypes.func.isRequired,
-  controls: PropTypes.element
+  isPlaying: PropTypes.bool,
+  src: PropTypes.string,
+  poster: PropTypes.string,
+  muted: PropTypes.bool,
+  fullscreen: PropTypes.bool
 };
 
 VideoPlayer.defaultProps = {
-  renderVideo: () => {}
+  isPlaying: false,
+  poster: ``,
+  src: ``,
+  muted: false,
+  fullscreen: false
 };
 
 export {VideoPlayer};

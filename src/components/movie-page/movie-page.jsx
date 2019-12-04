@@ -12,13 +12,19 @@ import {MovieCardDetails} from './../movie-card-details/movie-card-details.jsx';
 import {MovieCardReviews} from './../movie-card-reviews/movie-card-reviews.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 import {VideoPlayer} from './../../components/video-player/video-player.jsx';
-import withVideo from '../../hocs/with-video/with-video.jsx';
 import withControls from './../../hocs/with-controls/with-controls.jsx';
+import withPlayer from './../../hocs/with-player/with-player.jsx';
 
 const CatalogWrapped = withActiveItem(Catalog);
+const PlayerWrapper = (props) => {
+  return (
+    <div className="player">
+      {props.player}
+    </div>
+  );
+};
 
-const WithVideo = withVideo(VideoPlayer);
-const WithControls = withControls(WithVideo);
+const Player = withPlayer(PlayerWrapper, withControls(VideoPlayer));
 
 const DEFAULT_TAB_INDEX = 0;
 
@@ -86,7 +92,7 @@ class MoviePage extends React.PureComponent {
 
     if (isPlayerShown) {
       return (
-        <WithControls
+        <Player
           src={currentCard.src}
           poster={currentCard.posterSrc}
           isPlaying={true}

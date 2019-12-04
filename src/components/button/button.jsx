@@ -10,7 +10,7 @@ const Button = (props) => {
     );
   };
 
-  const {type, className, onClick, icon, buttonText} = props;
+  const {type, className, onClick, icon, children} = props;
 
   return (
     <button
@@ -19,7 +19,7 @@ const Button = (props) => {
       onClick={onClick}
     >
       {icon && renderIcon(icon)}
-      <span>{buttonText}</span>
+      <span>{children}</span>
     </button>
   );
 };
@@ -27,7 +27,7 @@ const Button = (props) => {
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
-  buttonText: PropTypes.string.isRequired,
+  children: PropTypes.string,
   icon: PropTypes.string,
   onClick: PropTypes.func.isRequired
 };
@@ -35,7 +35,6 @@ Button.propTypes = {
 Button.defaultProps = {
   type: `button`,
   className: ``,
-  buttonText: ``,
   onClick: () => {}
 };
 

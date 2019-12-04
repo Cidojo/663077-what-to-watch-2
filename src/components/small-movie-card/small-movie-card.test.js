@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {MovieCardThumbnail} from './movie-card-thumbnail.jsx';
+import {SmallMovieCard} from './small-movie-card.jsx';
 import * as renderer from 'react-test-renderer';
 
 it(`should render component without errors`, () => {
   const tree = renderer
-    .create(<MovieCardThumbnail
+    .create(<SmallMovieCard
       card={{
         id: 0,
         src: ``,
@@ -26,8 +26,8 @@ it(`should render component without errors`, () => {
         runTime: 0
       }}
 
-      onThumbnailClick={() => {}}
-      onThumbnailMouseEnter={() => {}}
+      onMovieCardClick={() => {}}
+      onMovieCardMouseEnter={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

@@ -28,17 +28,19 @@ const PlayerControls = (props) => {
           className="player__play"
           icon={isPlaying ? `PAUSE` : `PLAY`}
           onClick={onPlayButtonClick}
-          buttonText={isPlaying ? `Pause` : `Play`}
-        />
+        >
+          {isPlaying ? `Pause` : `Play`}
+        </Button>
 
         <div className="player__name">{duration ? movieTitle : `Transpotting`}</div>
 
         <Button
           className="player__full-screen"
-          buttonText="Full screen"
           icon="FULL_SCREEN"
           onClick={onFullscreenButtonClick}
-        />
+        >
+          Full screen
+        </Button>
       </div>
     </div>
   );

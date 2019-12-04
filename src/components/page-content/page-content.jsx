@@ -9,7 +9,6 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
 const SHOW_MORE_CARDS_STEP = 20;
 const GenreListWrapped = withActiveItem(GenreList);
-const CatalogWrapped = withActiveItem(Catalog);
 
 class PageContent extends React.PureComponent {
   constructor(props) {
@@ -60,7 +59,7 @@ class PageContent extends React.PureComponent {
             maxGenresToDisplay={maxGenresToDisplay}
             onActiveChange={this._handleGenreTabChange}
           />
-          <CatalogWrapped
+          <Catalog
             maxCatalogCards={this.state.maxCatalogCards}
             movieCards={filteredCards}
           />
