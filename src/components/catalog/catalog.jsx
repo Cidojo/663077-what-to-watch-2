@@ -7,13 +7,14 @@ const Catalog = (props) => {
 
   const {
     movieCards,
-    maxCatalogCards
+    maxCatalogCards,
+    active
   } = props;
 
   return (
     <div className="catalog__movies-list">
       {movieCards.slice(0, maxCatalogCards).map((card) => {
-        return <SmallMovieCard key={card.id} card={card} />;
+        return <SmallMovieCard key={card.id} card={card} isActive={active === card} />;
       })}
     </div>
   );
@@ -26,7 +27,7 @@ Catalog.propTypes = {
 };
 
 Catalog.defaultProps = {
-  active: 0,
+  active: null,
   movieCards: [],
   maxCatalogCards: 0
 };

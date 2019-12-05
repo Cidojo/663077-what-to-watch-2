@@ -6,27 +6,21 @@ const GenreList = (props) => {
   const {
     active,
     genres,
-    maxGenresToDisplay,
     onActiveChange
   } = props;
 
   const _handleActiveChange = (genre) => {
-    onActiveChange(genre === genres.all ? null : genre);
+    onActiveChange(genre === (genres[0] || null) ? `All genres` : genre);
   };
 
   return (
     <ul className="catalog__genres-list">
-      <GenreItem
-        isActive={!active}
-        genre={genres.all}
-        onGenreTabClick={_handleActiveChange}
-      />
       {
-        genres.rest.slice(0, maxGenresToDisplay).map((genre) => {
+        genres.map((genre) => {
           return (
             <GenreItem
               key={genre}
-              isActive={active === genre}
+              isActive={active === genre || (active === null && genre === `All genres`)}
               genre={genre}
               onGenreTabClick={_handleActiveChange}
             />
@@ -39,21 +33,13 @@ const GenreList = (props) => {
 
 GenreList.propTypes = {
   active: PropTypes.string,
-  genres: PropTypes.shape({
-    all: PropTypes.string,
-    rest: PropTypes.arrayOf(PropTypes.string)
-  }),
-  maxGenresToDisplay: PropTypes.number,
+  genres: PropTypes.arrayOf(PropTypes.string),
   onActiveChange: PropTypes.func.isRequired,
 };
 
 GenreList.defaultProps = {
   active: null,
-  genres: {
-    all: ``,
-    rest: []
-  },
-  maxGenresToDisplay: 0,
+  genres: [],
   onActiveChange: () => {}
 };
 

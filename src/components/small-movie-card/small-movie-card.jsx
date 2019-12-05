@@ -14,23 +14,23 @@ const SmallMovieCard = (props) => {
   } = props;
 
   const _handleMovieCardTitleClick = () => {
-    onMovieCardTitleClick(card.id);
+    onMovieCardTitleClick(card);
   };
 
   return (
     <article className="small-movie-card catalog__movies-card">
       <MovieCardImageWithPlayer
-        src={card.src}
+        src={card.previewVideoLink}
         muted={true}
-        poster={card.posterSrc}
+        poster={card.posterImage}
       />
       <h3 className="small-movie-card__title">
         <a
           className="small-movie-card__link"
-          href={card.link}
+          href="/details"
           onClick={_handleMovieCardTitleClick}
         >
-          {card.title}
+          {card.name}
         </a>
       </h3>
     </article>

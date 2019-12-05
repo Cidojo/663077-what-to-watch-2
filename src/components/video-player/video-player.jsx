@@ -8,6 +8,12 @@ class VideoPlayer extends React.PureComponent {
     this._videoRef = React.createRef();
   }
 
+  componentDidMount() {
+    const video = this._videoRef.current;
+
+    video.ontimeupdate = (e) => this.props.onProgress(e.currentTarget.currentTime);
+  }
+
   componentDidUpdate() {
     const video = this._videoRef.current;
 
@@ -20,6 +26,12 @@ class VideoPlayer extends React.PureComponent {
     if (this.props.fullscreen) {
       video.requestFullscreen();
     }
+  }
+
+  componentWillUnmount() {
+    const video = this._videoRef.current;
+
+    video.ontimeupdate = null;
   }
 
   render() {

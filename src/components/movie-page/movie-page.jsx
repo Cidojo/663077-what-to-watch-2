@@ -71,6 +71,12 @@ class MoviePage extends React.PureComponent {
     }
   }
 
+  _renderPlayer(props) {
+    return (
+      <div className="player">{props.player}</div>
+    );
+  }
+
   render() {
     const {
       movieCards,
@@ -91,8 +97,10 @@ class MoviePage extends React.PureComponent {
       });
 
     if (isPlayerShown) {
+      const PlayerWithControls = withPlayer(this._renderPlayer, withControls(VideoPlayer));
+
       return (
-        <Player
+        <PlayerWithControls
           src={currentCard.src}
           poster={currentCard.posterSrc}
           isPlaying={true}
