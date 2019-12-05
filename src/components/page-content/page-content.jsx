@@ -5,11 +5,10 @@ import {Footer} from './../footer/footer.jsx';
 import {Catalog} from './../catalog/catalog.jsx';
 import {ShowMoreButton} from './../show-more-button/show-more-button.jsx';
 import {movieCardPropTypes} from './../../global-custom-types.js';
-import withActiveItem from './../../hocs/with-active-item.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
 const SHOW_MORE_CARDS_STEP = 20;
 const GenreListWrapped = withActiveItem(GenreList);
-const CatalogWrapped = withActiveItem(Catalog);
 
 class PageContent extends React.PureComponent {
   constructor(props) {
@@ -46,21 +45,26 @@ class PageContent extends React.PureComponent {
       maxGenresToDisplay
     } = this.props;
 
-    const filteredCards = movieCards
-      .filter((card) => {
-        return card.genre === genre || genre === null || genre === genres.all;
-      });
+    const getGenresList = (movies) => {
+      return new Set([...movies].map((movie) => movie.genre));
+    };
+
+    const filterCardsByGenre = (movies) => movies.filter((card) => {
+      return card.genre === genre || genre === null || genre === `All genres`;
+    });
+
+    const filteredCards = filterCardsByGenre(movieCards);
 
     return (
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreListWrapped
-            genres={genres}
+            genres={[`All genres`, ...getGenresList(movieCards)].slice(0, maxGenresToDisplay)}
             maxGenresToDisplay={maxGenresToDisplay}
             onActiveChange={this._handleGenreTabChange}
           />
-          <CatalogWrapped
+          <Catalog
             maxCatalogCards={this.state.maxCatalogCards}
             movieCards={filteredCards}
           />

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {MovieCardThumbnail} from './movie-card-thumbnail.jsx';
+import {SmallMovieCard} from './small-movie-card.jsx';
 
 configure({adapter: new Adapter()});
 
 it(`should run onThumbnailClick handler from props on thumbnail click`, () => {
-  const onThumbnailClick = jest.fn();
+  const onMovieCardClick = jest.fn();
   const card = {
     id: 0,
     src: ``,
@@ -28,20 +28,20 @@ it(`should run onThumbnailClick handler from props on thumbnail click`, () => {
     runTime: 0
   };
 
-  const movieCardThumbnail = shallow(<MovieCardThumbnail
+  const smallMovieCard = shallow(<SmallMovieCard
     card={card}
-    onThumbnailClick={onThumbnailClick}
-    onThumbnailMouseEnter={() => {}}
-    onThumbnailMouseLeave={() => {}}
+    onMovieCardClick={onMovieCardClick}
+    onMovieCardMouseEnter={() => {}}
+    onMovieCardMouseLeave={() => {}}
   />);
 
-  const thumbNailTitle = movieCardThumbnail.find(`.small-movie-card__link`);
+  const thumbNailTitle = smallMovieCard.find(`.small-movie-card__link`);
   thumbNailTitle.simulate(`click`);
-  expect(onThumbnailClick).toHaveBeenCalledWith(0);
+  expect(onMovieCardClick).toHaveBeenCalledWith(0);
 });
 
 it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () => {
-  const onThumbnailMouseEnter = jest.fn();
+  const onMovieCardMouseEnter = jest.fn();
 
   const card = {
     id: 0,
@@ -64,20 +64,20 @@ it(`should run onThumbnailMouseEnter handler from props on thumbnail click`, () 
     runTime: 0
   };
 
-  const movieCardThumbnail = shallow(<MovieCardThumbnail
+  const smallMovieCard = shallow(<SmallMovieCard
     card={card}
-    onThumbnailClick={()=> {}}
-    onThumbnailMouseEnter={onThumbnailMouseEnter}
-    onThumbnailMouseLeave={() => {}}
+    onMovieCardClick={()=> {}}
+    onMovieCardMouseEnter={onMovieCardMouseEnter}
+    onMovieCardMouseLeave={() => {}}
   />);
 
-  const movieCardElement = movieCardThumbnail.find(`.small-movie-card`);
+  const movieCardElement = smallMovieCard.find(`.small-movie-card`);
   movieCardElement.simulate(`mouseEnter`);
-  expect(onThumbnailMouseEnter).toHaveBeenCalledWith(0);
+  expect(onMovieCardMouseEnter).toHaveBeenCalledWith(0);
 });
 
 it(`should run onThumbnailMouseLeave handler from props on thumbnail click`, () => {
-  const onThumbnailMouseLeave = jest.fn();
+  const onMovieCardMouseLeave = jest.fn();
 
   const card = {
     id: 0,
@@ -100,14 +100,14 @@ it(`should run onThumbnailMouseLeave handler from props on thumbnail click`, () 
     runTime: 0
   };
 
-  const movieCardThumbnail = shallow(<MovieCardThumbnail
+  const smallMovieCard = shallow(<SmallMovieCard
     card={card}
-    onThumbnailClick={()=> {}}
-    onThumbnailMouseEnter={() => {}}
-    onThumbnailMouseLeave={onThumbnailMouseLeave}
+    onMovieCardClick={()=> {}}
+    onMovieCardMouseEnter={() => {}}
+    onMovieCardMouseLeave={onMovieCardMouseLeave}
   />);
 
-  const movieCardElement = movieCardThumbnail.find(`.small-movie-card`);
+  const movieCardElement = smallMovieCard.find(`.small-movie-card`);
   movieCardElement.simulate(`mouseLeave`);
-  expect(onThumbnailMouseLeave).toHaveBeenCalledTimes(1);
+  expect(onMovieCardMouseLeave).toHaveBeenCalledTimes(1);
 });

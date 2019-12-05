@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`should render ThumbNail component without errors 1`] = `
-<video
-  className="player__video"
-  poster=""
-  src=""
-/>
-`;

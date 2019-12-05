@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const Logotype = () => {
+const Sprite = () => {
   return (
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -44,4 +44,4 @@ const Logotype = () => {
   );
 };
 
-export {Logotype};
+export {Sprite};

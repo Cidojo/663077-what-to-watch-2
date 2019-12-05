@@ -1,47 +1,21 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {MovieCardThumbnail} from './../movie-card-thumbnail/movie-card-thumbnail.jsx';
+import {SmallMovieCard} from '../small-movie-card/small-movie-card.jsx';
 import {movieCardPropTypes} from './../../global-custom-types';
 
-const ON_THUMBNAIL_MOUSE_ENTER_DELAY = 1000;
-
 const Catalog = (props) => {
-  let timerId = null;
 
   const {
-    active,
     movieCards,
-    onActiveChange,
-    maxCatalogCards
+    maxCatalogCards,
+    active
   } = props;
-
-  const _handleCardMouseEnter = (id) => {
-    timerId = setTimeout(() => onActiveChange(id), ON_THUMBNAIL_MOUSE_ENTER_DELAY);
-  };
-
-  const _handleCardMouseLeave = () => {
-    clearTimeout(timerId);
-
-    onActiveChange(null);
-  };
 
   return (
     <div className="catalog__movies-list">
-      {
-        movieCards
-          .slice(0, maxCatalogCards).map((card) => {
-            return (
-              <MovieCardThumbnail
-                key={`${card.id}`}
-                card={card}
-                isPlaying={active === card.id}
-                onThumbnailMouseEnter={_handleCardMouseEnter}
-                onThumbnailMouseLeave={_handleCardMouseLeave}
-                onThumbnailClick={onActiveChange}
-              />
-            );
-          })
-      }
+      {movieCards.slice(0, maxCatalogCards).map((card) => {
+        return <SmallMovieCard key={card.id} card={card} isActive={active === card} />;
+      })}
     </div>
   );
 };
@@ -49,15 +23,13 @@ const Catalog = (props) => {
 Catalog.propTypes = {
   active: PropTypes.number,
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
-  maxCatalogCards: PropTypes.number.isRequired,
-  onActiveChange: PropTypes.func
+  maxCatalogCards: PropTypes.number.isRequired
 };
 
 Catalog.defaultProps = {
-  active: 0,
+  active: null,
   movieCards: [],
-  maxCatalogCards: 0,
-  onActiveChange: () => {}
+  maxCatalogCards: 0
 };
 
 export {Catalog};

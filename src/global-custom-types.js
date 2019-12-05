@@ -1,24 +1,23 @@
 import * as PropTypes from 'prop-types';
 
 const movieCardPropTypes = PropTypes.exact({
-  id: PropTypes.number,
-  src: PropTypes.string,
-  imgSrc: PropTypes.string,
-  posterSrc: PropTypes.string,
-  imgDescription: PropTypes.string,
-  link: PropTypes.string,
-  title: PropTypes.string,
+  name: PropTypes.string,
+  posterImage: PropTypes.string,
+  previewImage: PropTypes.string,
+  backgroundImage: PropTypes.string,
   backgroundColor: PropTypes.string,
   description: PropTypes.string,
-  isFavorite: PropTypes.bool,
-  previewSrc: PropTypes.string,
-  genre: PropTypes.string,
-  year: PropTypes.number,
+  rating: PropTypes.number,
+  scoresCount: PropTypes.number,
   director: PropTypes.string,
   starring: PropTypes.arrayOf(PropTypes.string),
-  rating: PropTypes.number,
-  ratingCount: PropTypes.number,
-  runTime: PropTypes.number
+  runTime: PropTypes.number,
+  genre: PropTypes.string,
+  released: PropTypes.number,
+  id: PropTypes.number,
+  isFavorite: PropTypes.bool,
+  videoLink: PropTypes.string,
+  previewVideoLink: PropTypes.string
 });
 
 export {

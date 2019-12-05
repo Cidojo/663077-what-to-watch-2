@@ -1,35 +1,58 @@
-import {movieCards as mockMovieCards} from "./mocks/films";
+import {adapterMovie, adapterMovies} from './utils/adapter.js';
 
 const initialState = {
-  genre: `All genres`,
-  movieCards: mockMovieCards,
+  activeCard: null,
+  movieCards: [],
+  genre: null,
+  catalogMaxCards: 0
 };
 
 const ActionType = {
-  CHANGE_GENRE: `CHANGE_GENRE`,
-  CHANGE_CURRENT_VIDEO_ID: `CHANGE_CURRENT_VIDEO_ID`,
+  ASSIGN_ACTIVE_CARD: `CHANGE_ACTIVE_CARD`,
+  LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`
 };
 
 const ActionCreator = {
-  changeGenre: (genre) => {
-    return {
-      type: ActionType.CHANGE_GENRE,
-      payload: genre
-    };
-  },
-  changeCurrentVideoID: (id) => ({
-    type: ActionType.CHANGE_CURRENT_VIDEO_ID,
-    payload: id
+  assignActiveCard: (card) => ({
+    type: ActionType.ASSIGN_ACTIVE_CARD,
+    payload: card
+  }),
+  loadMovies: (movies) => ({
+    type: ActionType.LOAD_MOVIES,
+    payload: movies
+  }),
+  loadPromoMovie: (movie) => ({
+    type: ActionType.LOAD_PROMO_MOVIE,
+    payload: movie
   })
+};
+
+const Operation = {
+  loadMovies: () => (dispatch, _, api) => {
+    return api.get(`/films`)
+      .then((response) => {
+        dispatch(ActionCreator.loadMovies(adapterMovies(response.data)));
+      });
+  },
+  loadPromoMovie: () => (dispatch, _, api) => {
+    return api.get(`/films/promo`)
+      .then((response) => {
+        dispatch(ActionCreator.loadPromoMovie(adapterMovie(response.data)));
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_GENRE: return Object.assign({}, state, {
-      genre: action.payload
+    case ActionType.ASSIGN_ACTIVE_CARD: return Object.assign({}, state, {
+      activeCard: action.payload
     });
-    case ActionType.CHANGE_CURRENT_VIDEO_ID: return Object.assign({}, state, {
-      currentVideoID: action.payload
+    case ActionType.LOAD_MOVIES: return Object.assign({}, state, {
+      movieCards: action.payload
+    });
+    case ActionType.LOAD_PROMO_MOVIE: return Object.assign({}, state, {
+      currentVideoID: action.payload.id
     });
   }
 
@@ -40,5 +63,6 @@ export {
   initialState,
   ActionType,
   ActionCreator,
-  reducer
+  reducer,
+  Operation
 };
