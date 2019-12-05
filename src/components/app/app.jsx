@@ -12,7 +12,7 @@ const App = (props) => {
     userData,
     activeCard
   } = props;
-
+// opens next
   switch (location.pathname) {
     case `/`:
       return (
