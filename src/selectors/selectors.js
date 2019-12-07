@@ -1,21 +1,19 @@
 import {createSelector} from 'reselect';
+import NameSpace from "../reducers/name-spaces";
 
-const moviesSelector = (state) => state.movieCards;
-const genreSelector = (state) => state.genre;
+const getMovieCards = (state) => state[NameSpace.MOVIES].movieCards;
+const getGenre = (state) => state[NameSpace.GENRE].genre;
+const getActiveCard = (state) => state[NameSpace.ACTIVE_CARD].activeCard;
 
-const filterByGenre = (movies, genre) => (
-  genre === null ? movies :
-    movies.filter((movie) => movie.genre === genre)
-);
-
+const getRelatedMovies = (movies, genre) => movies.filter((movie) => movie.genre === genre || genre === `All genres`);
 const getGenresList = (movies) => [...new Set(movies.map((movie) => movie.genre))];
 
 const Selectors = {
-  filterByGenre: createSelector(
-      [moviesSelector, genreSelector],
-      filterByGenre
-  ),
-  getGenresList: createSelector(moviesSelector, getGenresList),
+  getGenre,
+  getMovieCards,
+  getActiveCard,
+  getRelatedMovies,
+  getGenresList
 };
 
 export default Selectors;

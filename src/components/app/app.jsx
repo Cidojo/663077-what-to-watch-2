@@ -1,53 +1,68 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {MainPage} from './../main-page/main-page.jsx';
-import {MoviePage} from './../movie-page/movie-page.jsx';
 import {connect} from 'react-redux';
-import {ActionCreator} from './../../reducer.js';
-import {movieCardPropTypes} from './../../global-custom-types';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+import Selectors from './../../selectors/selectors.js';
+import {HomePage} from './../pages/home-page/home-page.jsx';
+import {MovieDetails} from './../pages/movie-details/movie-details.jsx';
+
+import {movieCardPropTypes} from './../../global-custom-types.js';
+
+
 const App = (props) => {
   const {
     movieCards,
-    userData,
-    activeCard
+    activeCard,
+    genre
   } = props;
-// opens next
-  switch (location.pathname) {
-    case `/`:
-      return (
-        <MainPage
-          movieCards={movieCards}
-          userData={userData}
-          activeCard={activeCard}
-        />
-      );
-    case `/details`:
-      return (
-        <MoviePage
-          movieCards={movieCards}
-          activeCard={activeCard}
-          userData={userData}
-        />
-      );
+
+  if (!movieCards.length || !activeCard || !genre) {
+    return <h1>Loading</h1>;
   }
 
-  return null;
+  return (
+    <Router history={history}>
+      <Switch>
+        <Route exact path='/' render={() => (
+          <HomePage
+            genre={genre}
+            genres={Selectors.getGenresList(movieCards)}
+            activeCard={activeCard}
+            catalogCards={Selectors.getRelatedMovies(movieCards, genre)}
+          />)}
+        />
+        <Route exact path='/details' render={() => (
+          <MovieDetails
+            relatedMovies={Selectors.getRelatedMovies(movieCards, activeCard.genre)}
+            activeCard={activeCard}
+            genre={genre}
+          />)}
+        />
+      </Switch>
+    </Router>
+  );
 };
 
 App.propTypes = {
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
-  userData: PropTypes.shape({
-    name: PropTypes.string,
-    avatar: PropTypes.string
-  }),
-  activeCard: movieCardPropTypes
+  activeCard: movieCardPropTypes,
+  genre: PropTypes.string
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  movieCards: state.movieCards,
-  activeCard: state.activeCard
-});
+App.defaultProps = {
+  movieCards: PropTypes.arrayOf(movieCardPropTypes),
+  activeCard: {},
+  genre: ``
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    movieCards: Selectors.getMovieCards(state),
+    activeCard: Selectors.getActiveCard(state),
+    genre: Selectors.getGenre(state)
+  });
+};
 
 const mapDispatchToProps = (dispatch) => ({
 });
