@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-import {MovieCardImage} from './../movie-card-image/movie-card-image.jsx';
-
+import MovieCardImageWrapped from './../movie-card-image/movie-card-image.jsx';
 import {movieCardPropTypes} from './../../../global-custom-types.js';
 
 const SmallMovieCard = (props) => {
@@ -17,19 +17,19 @@ const SmallMovieCard = (props) => {
 
   return (
     <article className="small-movie-card catalog__movies-card">
-      <MovieCardImage
+      <MovieCardImageWrapped
         src={card.previewVideoLink}
         muted={true}
         poster={card.posterImage}
       />
       <h3 className="small-movie-card__title">
-        <a
+        <Link
           className="small-movie-card__link"
-          href="/details"
+          to={`/films/${card.id}`}
           onClick={_handleMovieCardTitleClick}
         >
           {card.name}
-        </a>
+        </Link>
       </h3>
     </article>
   );

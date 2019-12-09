@@ -1,12 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-const SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY = 1000;
+import {VideoPlayer} from './../video-player/video-player.jsx';
+import withPlayer from './../../../hocs/with-player/with-player.jsx';
+
+import {SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY} from '../../../constants/constants.js';
 
 const MovieCardImage = (props) => {
   let timerId = null;
 
-  const {player, onStatusUpdate} = props;
+  const {renderPlayer, src, poster, muted, onStatusUpdate} = props;
 
   const _handleMovieCardMouseEnter = () => {
     timerId = setTimeout(() => onStatusUpdate(true), SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY);
@@ -24,19 +27,20 @@ const MovieCardImage = (props) => {
       onMouseEnter={_handleMovieCardMouseEnter}
       onMouseLeave={_handleMovieCardMouseLeave}
     >
-      {player}
+      {renderPlayer(src, poster, muted)}
     </div>
   );
 };
 
 MovieCardImage.propTypes = {
-  player: PropTypes.element,
+  // player: PropTypes.element,
   onStatusUpdate: PropTypes.func
 };
 
 MovieCardImage.defaultProps = {
-  player: undefined,
+  renderPlayer: () => {},
   onStatusUpdate: () => {}
 };
 
 export {MovieCardImage};
+export default withPlayer(MovieCardImage, VideoPlayer);

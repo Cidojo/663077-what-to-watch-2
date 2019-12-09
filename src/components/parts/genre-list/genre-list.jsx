@@ -1,19 +1,19 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import {GenreItem} from './../genre-item/genre-item.jsx';
-import withActiveItem from './../../../hocs/with-active-item/with-active-item.jsx';
+
+import {GenreActionCreator} from './../../../reducers/genre-reducer/genre-reducer.js';
+import {DisplayCountActionCreator} from './../../../reducers/display-count-reducer/display-count-reducer.js';
+import Selectors from './../../../selectors/selectors.js';
 
 const GenreList = (props) => {
   const {
-    active,
+    activeGenre,
     genres,
-    onActiveChange
+    onGenreChange
   } = props;
-
-  const _handleActiveChange = (genre) => {
-    onActiveChange(genre);
-  };
 
   return (
     <ul className="catalog__genres-list">
@@ -22,9 +22,9 @@ const GenreList = (props) => {
           return (
             <GenreItem
               key={genre}
-              isActive={active === genre}
+              isActive={activeGenre === genre}
               genre={genre}
-              onGenreTabClick={_handleActiveChange}
+              onGenreTabClick={onGenreChange}
             />
           );
         })
@@ -34,16 +34,30 @@ const GenreList = (props) => {
 };
 
 GenreList.propTypes = {
-  active: PropTypes.string,
+  activeGenre: PropTypes.string,
   genres: PropTypes.arrayOf(PropTypes.string),
-  onActiveChange: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
 };
 
 GenreList.defaultProps = {
-  active: `All genres`,
+  activeGenre: ``,
   genres: [],
-  onActiveChange: () => {}
+  onGenreChange: () => {}
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreChange: (genre) => {
+    dispatch(GenreActionCreator.assignGenre(genre));
+    dispatch(DisplayCountActionCreator.resetCount());
+  }
+});
+
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    activeGenre: Selectors.getGenre(state),
+    genres: Selectors.getGenresList(state)
+  });
 };
 
 export {GenreList};
-export default withActiveItem(GenreList, `All genres`);
+export default connect(mapStateToProps, mapDispatchToProps)(GenreList);

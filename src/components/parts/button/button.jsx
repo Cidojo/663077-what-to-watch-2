@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {SvgIcon} from './../svg-icon/svg-icon.jsx';
-import {Icon} from './../../../constans/constants.js';
+import {IconProps} from '../../../constants/constants.js';
 
 const Button = (props) => {
   const {type, className, onClick, icon, children} = props;
@@ -12,7 +12,7 @@ const Button = (props) => {
       className={className}
       onClick={onClick}
     >
-      {icon && <SvgIcon {...Icon[icon]} />}
+      {icon && <SvgIcon {...IconProps[icon]} />}
       <span>{children}</span>
     </button>
   );

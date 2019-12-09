@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import {MovieTab} from './../../../constans/constants.js';
+import {MovieTab} from '../../../constants/constants.js';
 import {TabOverview} from './../tab-overview/tab-overview.jsx';
 import {TabDetails} from './../tab-details/tab-details.jsx';
 import {TabReviews} from './../tab-reviews/tab-reviews.jsx';

@@ -9,19 +9,16 @@ const withPlayer = (Wrapped, Player) => {
       this.state = {
         showPlayer: false,
         isPlaying: false,
-        secondsPlayed: 0
+        secondsPlayed: 0,
+        duration: 0
       };
 
       this.handleOpenPlayer = this.handleOpenPlayer.bind(this);
       this.handleClosePlayer = this.handleClosePlayer.bind(this);
       this.handleStatusUpdate = this.handleStatusUpdate.bind(this);
       this.handleProgress = this.handleProgress.bind(this);
-    }
-
-    static getDerivedStateFromProps(props) {
-      return (props.isPlaying === undefined) ? null : {
-        isPlaying: props.isPlaying
-      };
+      this.handleDurationSet = this.handleDurationSet.bind(this);
+      this.renderPlayer = this.renderPlayer.bind(this);
     }
 
     handleStatusUpdate(status) {
@@ -40,6 +37,8 @@ const withPlayer = (Wrapped, Player) => {
       this.setState({
         showPlayer: false
       });
+
+      this.props.onClosePlayer();
     }
 
     handleProgress(seconds) {
@@ -48,27 +47,44 @@ const withPlayer = (Wrapped, Player) => {
       });
     }
 
+    handleDurationSet(seconds) {
+      this.setState({
+        duration: seconds
+      });
+    }
+
+    renderPlayer(src, poster, muted) {
+      return (
+        <Player
+          secondsPlayed={this.state.secondsPlayed}
+          onProgress={this.handleProgress}
+          onCanPlay={this.handleDurationSet}
+          isPlaying={this.state.isPlaying}
+          onStatusUpdate={this.handleStatusUpdate}
+          onClosePlayer={this.handleClosePlayer}
+          duration={this.state.duration}
+          src={src}
+          poster={poster}
+          muted={muted}
+        />
+      );
+    }
+
     render() {
       return (
         <Wrapped
-          player={
-            <Player
-              secondsPlayed={this.state.secondsPlayed}
-              onProgress={this.handleProgress}
-              isPlaying={this.state.isPlaying}
-              onStatusUpdate={this.handleStatusUpdate}
-              onClosePlayer={this.handleClosePlayer}
-              src={this.props.src}
-              poster={this.props.poster}
-              muted={this.props.muted}
-            />
-          }
+          renderPlayer={this.renderPlayer}
           onStatusUpdate={this.handleStatusUpdate}
           onOpenPlayer={this.handleOpenPlayer}
-          showPlayer={this.state.showPlayer}
           {...this.props}
         />
       );
+    }
+
+    static getDerivedStateFromProps(props) {
+      return (props.isPlaying === undefined) ? null : {
+        isPlaying: props.isPlaying
+      };
     }
   }
 

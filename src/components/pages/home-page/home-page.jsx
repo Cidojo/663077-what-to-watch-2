@@ -1,23 +1,22 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-import {Sprite} from './../../parts/sprite/sprite.jsx';
 import {Header} from './../../parts/header/header.jsx';
 import {MovieCardButtons} from './../../parts/movie-card-buttons/movie-card-buttons.jsx';
-import {Catalog} from './../../parts/catalog/catalog.jsx';
+import Catalog from './../../parts/catalog/catalog.jsx';
 import {Footer} from './../../parts/footer/footer.jsx';
-import {ShowMoreButton} from './../../parts/show-more-button/show-more-button.jsx';
-import GenreListWithActiveItem from './../../parts/genre-list/genre-list.jsx';
+import GenreList from './../../parts/genre-list/genre-list.jsx';
 
 import {movieCardPropTypes} from './../../../global-custom-types.js';
-
-const MAX_CATALOG_CARDS = 8;
+import Selectors from './../../../selectors/selectors.js';
 
 const HomePage = (props) => {
   const {
     activeCard,
-    genres,
-    catalogCards
+    catalogCards,
+    isAuthorizationRequired
   } = props;
 
   const {
@@ -28,10 +27,14 @@ const HomePage = (props) => {
     released
   } = activeCard;
 
+  if (isAuthorizationRequired) {
+    return (
+      <Redirect to="/login"/>
+    );
+  }
+
   return (
     <>
-      <Sprite />
-
       <section className="movie-card">
         <div className="movie-card__bg">
           <img src={backgroundImage} alt={name} />
@@ -64,18 +67,11 @@ const HomePage = (props) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreListWithActiveItem
-            genres={genres}
-            onActiveChange={() => {}}
-          />
+          <GenreList />
           <Catalog
             movieCards={catalogCards}
+            withShowMoreButton={true}
           />
-          {catalogCards.length > MAX_CATALOG_CARDS &&
-            <ShowMoreButton
-              onButtonClick={() => {}}
-            />
-          }
         </section>
         <Footer/>
       </div>
@@ -87,14 +83,25 @@ HomePage.propTypes = {
   genre: PropTypes.string,
   genres: PropTypes.arrayOf(PropTypes.string),
   activeCard: movieCardPropTypes,
-  catalogCards: PropTypes.arrayOf(movieCardPropTypes)
+  catalogCards: PropTypes.arrayOf(movieCardPropTypes),
+  isAuthorizationRequired: PropTypes.bool
 };
 
 HomePage.defaultProps = {
   genre: ``,
   genres: [],
   activeCard: {},
-  catalogCards: []
+  catalogCards: [],
+  isAuthorizationRequired: true
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    isAuthorizationRequired: Selectors.getAuthState(state),
+    catalogCards: Selectors.getActiveGenreCards(state),
+    genre: Selectors.getGenre(state)
+  });
 };
 
 export {HomePage};
+export default connect(mapStateToProps)(HomePage);

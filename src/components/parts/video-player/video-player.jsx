@@ -11,6 +11,14 @@ class VideoPlayer extends React.PureComponent {
   componentDidMount() {
     const video = this._videoRef.current;
 
+    video.oncanplay = () => {
+      this.props.onCanPlay(video.duration);
+      if (this.props.isPlaying) {
+        video.play();
+      }
+    };
+
+
     video.ontimeupdate = (e) => this.props.onProgress(e.currentTarget.currentTime);
   }
 
@@ -23,8 +31,8 @@ class VideoPlayer extends React.PureComponent {
       video.load();
     }
 
-    if (this.props.fullscreen) {
-      video.requestFullscreen();
+    if (this.props.isFullscreen) {
+      this._handleFullscreen();
     }
   }
 
@@ -32,6 +40,23 @@ class VideoPlayer extends React.PureComponent {
     const video = this._videoRef.current;
 
     video.ontimeupdate = null;
+    video.oncanplay = null;
+  }
+
+  _handleFullscreen() {
+    const video = this._videoRef.current;
+
+    if (!video.requestFullscreen) {
+      if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullScreen) {
+        video.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    } else {
+      video.requestFullscreen();
+    }
   }
 
   render() {
@@ -41,7 +66,7 @@ class VideoPlayer extends React.PureComponent {
       <video
         className="player__video"
         ref={this._videoRef}
-        src={src}
+        src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
         poster={poster}
         muted={muted}
       />
@@ -58,6 +83,7 @@ VideoPlayer.propTypes = {
 };
 
 VideoPlayer.defaultProps = {
+  onCanPlay: () => {},
   isPlaying: false,
   poster: ``,
   src: ``,

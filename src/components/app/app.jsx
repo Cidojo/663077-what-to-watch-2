@@ -1,23 +1,24 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 
 import Selectors from './../../selectors/selectors.js';
-import {HomePage} from './../pages/home-page/home-page.jsx';
-import {MovieDetails} from './../pages/movie-details/movie-details.jsx';
-
+import HomePage from './../pages/home-page/home-page.jsx';
+import MovieDetails from './../pages/movie-details/movie-details.jsx';
+import SignIn from './../pages/sign-in/sign-in.jsx';
 import {movieCardPropTypes} from './../../global-custom-types.js';
 
+const history = createBrowserHistory();
 
 const App = (props) => {
   const {
     movieCards,
-    activeCard,
-    genre
+    activeCard
   } = props;
 
-  if (!movieCards.length || !activeCard || !genre) {
+  if (!movieCards.length || !activeCard) {
     return <h1>Loading</h1>;
   }
 
@@ -26,19 +27,15 @@ const App = (props) => {
       <Switch>
         <Route exact path='/' render={() => (
           <HomePage
-            genre={genre}
-            genres={Selectors.getGenresList(movieCards)}
             activeCard={activeCard}
-            catalogCards={Selectors.getRelatedMovies(movieCards, genre)}
           />)}
         />
-        <Route exact path='/details' render={() => (
+        <Route exact path='/films/:id' render={() => (
           <MovieDetails
-            relatedMovies={Selectors.getRelatedMovies(movieCards, activeCard.genre)}
             activeCard={activeCard}
-            genre={genre}
           />)}
         />
+        <Route exact path='/login' component={SignIn} />
       </Switch>
     </Router>
   );
@@ -64,8 +61,5 @@ const mapStateToProps = (state, ownProps) => {
   });
 };
 
-const mapDispatchToProps = (dispatch) => ({
-});
-
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

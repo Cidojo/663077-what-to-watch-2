@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import {Icon} from './../../../constans/constants.js';
+import {Icon} from '../../../constants/constants.js';
 import {Button} from './../button/button.jsx';
 
 const MovieCardButtons = (props) => {
@@ -13,13 +13,13 @@ const MovieCardButtons = (props) => {
       <Button
         onClick={onPlayButtonClick}
         className="btn btn--play movie-card__button"
-        icon={Icon.PLAY.name}
+        icon={Icon.PLAY}
       >
         Play
       </Button>
       <Button
         className="btn btn--list movie-card__button"
-        icon={Icon.ADD.name}
+        icon={Icon.ADD}
       >
         My list
       </Button>

@@ -1,7 +1,9 @@
+import {DEFAULT_GENRE} from './../../constants/constants.js';
+
 import GenreActionType from './../../actions/genre-actions/genre-actions.js';
 
 const initialState = {
-  genre: `All genres`
+  genre: DEFAULT_GENRE
 };
 
 const ActionCreator = {
