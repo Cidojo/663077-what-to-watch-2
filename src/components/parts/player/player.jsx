@@ -2,32 +2,33 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 import {Video} from './../video/video.jsx';
-import PlayerControls from './../player-controls/player-controls.jsx';
+import {PlayerControls} from './../player-controls/player-controls.jsx';
 import {Button} from './../button/button.jsx';
 import withPlayingState from './../../../hocs/with-playing-state/with-playing-state.jsx';
 import {movieCardPropTypes} from './../../../global-custom-types.js';
 
-const Player = (props) => {
+const Player = React.forwardRef(function Player(props, ref) {
   const {
     card,
     muted,
     controls,
     onClosePlayer,
-    videoRef,
     isPlaying,
     onFullscreenButtonClick,
-    onPlayToggle
+    onPlayToggle,
+    secondsPlayed,
+    duration
   } = props;
 
-  const {previewVideoLink, posterImage} = card;
+  const {previewVideoLink, videoLink, posterImage, name} = card;
 
   return (
     <>
       <Video
-        videoLink={previewVideoLink}
+        videoLink={controls ? videoLink : previewVideoLink}
         posterImage={posterImage}
         muted={muted}
-        ref={videoRef}
+        ref={ref}
       />
       {controls &&
         <>
@@ -38,7 +39,9 @@ const Player = (props) => {
             Exit
           </Button>
           <PlayerControls
-            videoRef={videoRef}
+            movieTitle={name}
+            secondsPlayed={secondsPlayed}
+            duration={duration}
             isPlaying={isPlaying}
             onPlayToggle={onPlayToggle}
             onFullscreenButtonClick={onFullscreenButtonClick}
@@ -47,22 +50,23 @@ const Player = (props) => {
       }
     </>
   );
-};
+});
 
 Player.propTypes = {
+  secondsPlayed: PropTypes.number,
+  duration: PropTypes.number,
   card: movieCardPropTypes,
   muted: PropTypes.bool,
   controls: PropTypes.bool,
   onClosePlayer: PropTypes.func,
-  videoRef: PropTypes.shape({
-    current: PropTypes.instanceOf(Element)
-  }),
   isPlaying: PropTypes.bool,
   onFullscreenButtonClick: PropTypes.func,
   onPlayToggle: PropTypes.func
 };
 
 Player.defaultProps = {
+  secondsPlayed: 0,
+  duration: 0,
   card: movieCardPropTypes,
   muted: false,
   controls: false,

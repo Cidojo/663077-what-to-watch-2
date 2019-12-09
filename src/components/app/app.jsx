@@ -35,6 +35,7 @@ const App = (props) => {
             activeCard={activeCard}
           />)}
         />
+        <Route exact path='/films/:id/review' component={SignIn} />
         <Route exact path='/login' component={SignIn} />
       </Switch>
     </Router>

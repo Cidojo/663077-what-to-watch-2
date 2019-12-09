@@ -54,7 +54,7 @@ const formatCurrentTime = (seconds) => {
 };
 
 const evalProgress = (seconds, duration) => {
-  return duration ? Math.floor((seconds / duration) * 100) : 0;
+  return duration ? Math.floor((seconds / duration) * 10000) / 100 : 0;
 };
 
 export {
