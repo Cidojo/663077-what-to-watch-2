@@ -22,7 +22,6 @@ const withPlayerScreen = (Component) => {
       return (
         <Component
           {...this.props}
-          isPlaying={this.state.isPlayerShown}
           isPlayerShown={this.state.isPlayerShown}
           onShowPlayer={this.handlePlayerVisibility}
           onClosePlayer={this.handlePlayerVisibility}

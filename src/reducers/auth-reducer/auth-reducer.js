@@ -1,7 +1,7 @@
 import AuthActionType from './../../actions/auth-actions/auth-actions.js';
 
 const initialState = {
-  isAuthorizationRequired: true,
+  isAuthorizationRequired: false,
   userData: {}
 };
 

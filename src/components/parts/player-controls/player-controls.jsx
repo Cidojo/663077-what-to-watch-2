@@ -3,20 +3,24 @@ import PropTypes from 'prop-types';
 
 import {Button} from './../button/button.jsx';
 import {PlayerTime} from './../player-time/player-time.jsx';
+import withTimeline from './../../../hocs/with-timeline/with-timeline.jsx';
+
+import {Icon} from './../../../constants/constants.js';
+
+const PlayButtonText = {
+  PLAY: `Play`,
+  PAUSE: `Pause`
+};
 
 const PlayerControls = (props) => {
   const {
     isPlaying,
     onFullscreenButtonClick,
-    onStatusUpdate,
+    onPlayToggle,
     secondsPlayed,
     duration,
     movieTitle
   } = props;
-
-  const handlePlayClick = () => {
-    onStatusUpdate();
-  };
 
   return (
     <div className="player__controls">
@@ -30,17 +34,17 @@ const PlayerControls = (props) => {
       <div className="player__controls-row">
         <Button
           className="player__play"
-          icon={isPlaying ? `PAUSE` : `PLAY`}
-          onClick={handlePlayClick}
+          icon={isPlaying ? Icon.PAUSE : Icon.PLAY}
+          onClick={onPlayToggle}
         >
-          {isPlaying ? `Pause` : `Play`}
+          {isPlaying ? PlayButtonText.PAUSE : PlayButtonText.PLAY}
         </Button>
 
         <div className="player__name">{duration ? movieTitle : `Transpotting`}</div>
 
         <Button
           className="player__full-screen"
-          icon="FULL_SCREEN"
+          icon={Icon.FULL_SCREEN}
           onClick={onFullscreenButtonClick}
         >
           Full screen
@@ -53,19 +57,20 @@ const PlayerControls = (props) => {
 PlayerControls.propTypes = {
   isPlaying: PropTypes.oneOf([true, false, null]),
   duration: PropTypes.number.isRequired,
-  currentTime: PropTypes.number.isRequired,
+  secondsPlayed: PropTypes.number.isRequired,
   movieTitle: PropTypes.string.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onPlayToggle: PropTypes.func.isRequired,
   onFullscreenButtonClick: PropTypes.func.isRequired
 };
 
 PlayerControls.defaultProps = {
   isPlaying: false,
-  currentTime: 0,
+  secondsPlayed: 0,
   duration: 0,
   movieTitle: ``,
-  onPlayButtonClick: () => {},
+  onPlayToggle: () => {},
   onFullscreenButtonClick: () => {}
 };
 
 export {PlayerControls};
+export default withTimeline(PlayerControls);

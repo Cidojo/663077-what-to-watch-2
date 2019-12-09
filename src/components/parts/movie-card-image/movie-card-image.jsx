@@ -1,24 +1,29 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import {VideoPlayer} from './../video-player/video-player.jsx';
-import withPlayer from './../../../hocs/with-player/with-player.jsx';
+import {Player} from './../player/player.jsx';
+import withAutoplay from './../../../hocs/with-autoplay/with-autoplay.jsx';
 
 import {SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY} from '../../../constants/constants.js';
+import {movieCardPropTypes} from "../../../global-custom-types";
 
 const MovieCardImage = (props) => {
   let timerId = null;
 
-  const {renderPlayer, src, poster, muted, onStatusUpdate} = props;
+  const {
+    card,
+    autoplay,
+    onAutoplayStatusUpdate
+  } = props;
 
   const _handleMovieCardMouseEnter = () => {
-    timerId = setTimeout(() => onStatusUpdate(true), SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY);
+    timerId = setTimeout(() => onAutoplayStatusUpdate(true), SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY);
   };
 
   const _handleMovieCardMouseLeave = () => {
     clearTimeout(timerId);
 
-    onStatusUpdate(false);
+    onAutoplayStatusUpdate(false);
   };
 
   return (
@@ -27,20 +32,27 @@ const MovieCardImage = (props) => {
       onMouseEnter={_handleMovieCardMouseEnter}
       onMouseLeave={_handleMovieCardMouseLeave}
     >
-      {renderPlayer(src, poster, muted)}
+      <Player
+        card={card}
+        autoplay={autoplay}
+        controls={false}
+        muted={true}
+      />
     </div>
   );
 };
 
 MovieCardImage.propTypes = {
-  // player: PropTypes.element,
-  onStatusUpdate: PropTypes.func
+  card: movieCardPropTypes,
+  autoplay: PropTypes.bool,
+  onAutoplayStatusUpdate: PropTypes.func
 };
 
 MovieCardImage.defaultProps = {
-  renderPlayer: () => {},
-  onStatusUpdate: () => {}
+  card: {},
+  autoplay: false,
+  onAutoplayStatusUpdate: () => {}
 };
 
 export {MovieCardImage};
-export default withPlayer(MovieCardImage, VideoPlayer);
+export default withAutoplay(MovieCardImage);

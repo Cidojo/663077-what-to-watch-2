@@ -18,9 +18,7 @@ const SmallMovieCard = (props) => {
   return (
     <article className="small-movie-card catalog__movies-card">
       <MovieCardImageWrapped
-        src={card.previewVideoLink}
-        muted={true}
-        poster={card.posterImage}
+        card={card}
       />
       <h3 className="small-movie-card__title">
         <Link
@@ -36,7 +34,7 @@ const SmallMovieCard = (props) => {
 };
 
 SmallMovieCard.propTypes = {
-  card: movieCardPropTypes.isRequired,
+  card: movieCardPropTypes,
   onMovieCardTitleClick: PropTypes.func.isRequired
 };
 

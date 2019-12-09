@@ -9,10 +9,8 @@ import {MovieCardButtons} from './../../parts/movie-card-buttons/movie-card-butt
 import {MovieCardMeta} from './../../parts/movie-card-meta/movie-card-meta.jsx';
 import {MovieCardPoster} from './../../parts/movie-card-poster/movie-card-poster.jsx';
 import Catalog from './../../parts/catalog/catalog.jsx';
-import {VideoPlayer} from './../../parts/video-player/video-player.jsx';
+import Player from './../../parts/player/player.jsx';
 import MovieCardTabWithActiveTab from './../../parts/movie-card-tabs/movie-card-tabs.jsx';
-import withPlayer from './../../../hocs/with-player/with-player.jsx';
-import withControls from './../../../hocs/with-controls/with-controls.jsx';
 import withPlayerScreen from './../../../hocs/with-player-screen/with-player-screen.jsx';
 
 import {movieCardPropTypes} from './../../../global-custom-types.js';
@@ -23,8 +21,8 @@ const MovieDetails = (props) => {
     activeCard,
     relatedMovies,
     genre,
-    renderPlayer,
     onShowPlayer,
+    onClosePlayer,
     isPlayerShown
   } = props;
 
@@ -45,7 +43,13 @@ const MovieDetails = (props) => {
   if (isPlayerShown) {
     return (
       <div className="player">
-        {renderPlayer(videoLink, posterImage, false)}
+        <Player
+          card={activeCard}
+          muted={true}
+          autoplay={true}
+          controls={true}
+          onClosePlayer={onClosePlayer}
+        />
       </div>
     );
   }
@@ -115,16 +119,22 @@ const MovieDetails = (props) => {
 MovieDetails.propTypes = {
   genre: PropTypes.string,
   activeCard: movieCardPropTypes,
-  relatedMovies: PropTypes.array
+  relatedMovies: PropTypes.array,
+  onShowPlayer: PropTypes.func,
+  onClosePlayer: PropTypes.func,
+  isPlayerShown: PropTypes.func
 };
 
 MovieDetails.defaultProps = {
   genre: ``,
   activeCard: {},
-  relatedMovies: []
+  relatedMovies: [],
+  onShowPlayer: () => {},
+  onClosePlayer: () => {},
+  isPlayerShown: () => {}
 };
 
-const MovieDetailsWrapped = withPlayerScreen(withPlayer(MovieDetails, withControls(VideoPlayer)));
+const MovieDetailsWrapped = withPlayerScreen(MovieDetails);
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
