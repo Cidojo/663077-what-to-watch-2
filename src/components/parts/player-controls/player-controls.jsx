@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import {Button} from './../button/button.jsx';
 import {PlayerTime} from './../player-time/player-time.jsx';
-import withTimeline from './../../../hocs/with-timeline/with-timeline.jsx';
 
 import {Icon} from './../../../constants/constants.js';
 
@@ -73,4 +72,3 @@ PlayerControls.defaultProps = {
 };
 
 export {PlayerControls};
-export default withTimeline(PlayerControls);

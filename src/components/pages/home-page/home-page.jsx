@@ -11,15 +11,21 @@ import GenreList from './../../parts/genre-list/genre-list.jsx';
 
 import {movieCardPropTypes} from './../../../global-custom-types.js';
 import Selectors from './../../../selectors/selectors.js';
+import withPlayerScreen from './../../../hocs/with-player-screen/with-player-screen.jsx';
+import Player from './../../parts/player/player.jsx';
 
 const HomePage = (props) => {
   const {
     activeCard,
     catalogCards,
-    isAuthorizationRequired
+    isAuthorizationRequired,
+    onShowPlayer,
+    onClosePlayer,
+    isPlayerShown
   } = props;
 
   const {
+    id,
     name,
     backgroundImage,
     posterImage,
@@ -30,6 +36,20 @@ const HomePage = (props) => {
   if (isAuthorizationRequired) {
     return (
       <Redirect to="/login"/>
+    );
+  }
+
+  if (isPlayerShown) {
+    return (
+      <div className="player">
+        <Player
+          card={activeCard}
+          muted={true}
+          autoplay={true}
+          controls={true}
+          onClosePlayer={onClosePlayer}
+        />
+      </div>
     );
   }
 
@@ -58,7 +78,10 @@ const HomePage = (props) => {
                 <span className="movie-card__year">{released}</span>
               </p>
 
-              <MovieCardButtons />
+              <MovieCardButtons
+                movieId={id}
+                onPlayButtonClick={onShowPlayer}
+              />
             </div>
           </div>
         </div>
@@ -84,7 +107,10 @@ HomePage.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string),
   activeCard: movieCardPropTypes,
   catalogCards: PropTypes.arrayOf(movieCardPropTypes),
-  isAuthorizationRequired: PropTypes.bool
+  isAuthorizationRequired: PropTypes.bool,
+  onShowPlayer: PropTypes.func,
+  onClosePlayer: PropTypes.func,
+  isPlayerShown: PropTypes.bool
 };
 
 HomePage.defaultProps = {
@@ -92,8 +118,13 @@ HomePage.defaultProps = {
   genres: [],
   activeCard: {},
   catalogCards: [],
-  isAuthorizationRequired: true
+  isAuthorizationRequired: true,
+  onShowPlayer: () => {},
+  onClosePlayer: () => {},
+  isPlayerShown: false
 };
+
+const HomePageWrapped = withPlayerScreen(HomePage);
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
@@ -104,4 +135,4 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export {HomePage};
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps)(HomePageWrapped);

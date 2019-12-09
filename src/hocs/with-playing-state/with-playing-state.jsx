@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 const withPlayingState = (Component) => {
-  class WithPlayingState extends React.PureComponent {
+  class WithPlayingState extends React.Component {
     constructor(props) {
       super(props);
 
@@ -10,7 +10,9 @@ const withPlayingState = (Component) => {
 
       this.state = {
         autoplay: false,
-        isPlaying: false
+        isPlaying: false,
+        duration: 0,
+        secondsPlayed: 0
       };
 
       this.handlePlayToggle = this.handlePlayToggle.bind(this);
@@ -18,23 +20,48 @@ const withPlayingState = (Component) => {
 
       this._handlePauseEvent = this._handlePauseEvent.bind(this);
       this._handlePlayEvent = this._handlePlayEvent.bind(this);
+      this._setDuration = this._setDuration.bind(this);
+      this._handleTimeUpdate = this._handleTimeUpdate.bind(this);
     }
 
     componentDidMount() {
       const video = this.videoRef.current;
       const autoplay = this.props.autoplay;
 
+      if (!video) {
+        return;
+      }
+
       if (autoplay) {
         video.play();
       }
 
-      video.onplay = () => {
+      video.onplay = (e) => {
+        e.preventDefault();
         this._handlePlayEvent();
       };
 
-      video.onpause = () => {
+      video.onended = (e) => {
+        e.preventDefault();
+        e.currentTarget.load();
+      };
+
+      video.onpause = (e) => {
+        e.preventDefault();
         this._handlePauseEvent();
       };
+
+      video.ontimeupdate = (e) => {
+        this._handleTimeUpdate(e.currentTarget.currentTime);
+      };
+
+      video.onloadedmetadata = (e) => {
+        this._setDuration(e.currentTarget.duration);
+      };
+    }
+
+    shouldComponentUpdate(_, nextState) {
+      return !((document.fullscreenElement === this.videoRef.current) && nextState.isPlaying);
     }
 
     componentDidUpdate() {
@@ -44,7 +71,7 @@ const withPlayingState = (Component) => {
       if (!this.props.autoplay && video.currentTime) {
         video.load();
       } else if (isPlaying) {
-        video.play();
+        video.play().catch((err) => void (err));
       } else {
         video.pause();
       }
@@ -57,18 +84,35 @@ const withPlayingState = (Component) => {
       video.onpause = null;
       video.ontimeupdate = null;
       video.onloadedmetadata = null;
+      video.onended = null;
+    }
+
+    _handleTimeUpdate(seconds) {
+      this.setState(() => ({
+        secondsPlayed: seconds
+      }));
+    }
+
+    _setDuration(seconds) {
+      this.setState(() => ({
+        duration: seconds
+      }));
     }
 
     _handlePauseEvent() {
-      this.setState({
-        isPlaying: false
-      });
+      if (this.state.isPlaying) {
+        this.setState(() => ({
+          isPlaying: false
+        }));
+      }
     }
 
     _handlePlayEvent() {
-      this.setState({
-        isPlaying: true
-      });
+      if (!this.state.isPlaying) {
+        this.setState({
+          isPlaying: true
+        });
+      }
     }
 
     handlePlayToggle() {
@@ -98,10 +142,12 @@ const withPlayingState = (Component) => {
       return (
         <Component
           {...this.props}
-          videoRef={this.videoRef}
+          ref={this.videoRef}
           isPlaying={this.state.isPlaying}
           onPlayToggle={this.handlePlayToggle}
           onFullscreenButtonClick={this.handleEnterFullscreen}
+          duration={this.state.duration}
+          secondsPlayed={this.state.secondsPlayed}
         />
       );
     }
@@ -113,7 +159,7 @@ const withPlayingState = (Component) => {
           autoplay: props.autoplay
         };
       } else {
-        return state;
+        return null;
       }
     }
   }
