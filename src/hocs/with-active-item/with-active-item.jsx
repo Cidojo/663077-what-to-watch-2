@@ -1,23 +1,20 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const withActiveItem = (Component) => {
+const withActiveItem = (Component, defaultActiveItem) => {
   class WithActiveItem extends React.PureComponent {
     constructor(props) {
       super(props);
 
       this.state = {
-        active: null
+        active: defaultActiveItem || null
       };
 
-      this._handleActiveChange = this._handleActiveChange.bind(this);
+      this.handleActiveChange = this.handleActiveChange.bind(this);
     }
 
-    _handleActiveChange(active) {
+    handleActiveChange(active) {
       this.setState({active});
-      if (this.props.onActiveChange) {
-        this.props.onActiveChange(active);
-      }
     }
 
     render() {
@@ -27,7 +24,7 @@ const withActiveItem = (Component) => {
         <Component
           {...this.props}
           active={active}
-          onActiveChange={this._handleActiveChange}
+          onActiveChange={this.handleActiveChange}
         />
       );
     }

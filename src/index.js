@@ -1,28 +1,15 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
-import {reducer, Operation} from './reducer';
-import {compose} from 'recompose';
+
+import store from './store/store.js';
 import App from './components/app/app.jsx';
-import createAPI from './api.js';
+import {MovieOperation} from './reducers/movies-reducer/movies-reducer.js';
+import {ActiveCardOperation} from './reducers/active-card-reducer/active-card-reducer.js';
 
 const init = () => {
-  const composeEnhancers = (typeof window !== `undefined` && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-
-  const api = createAPI((...args) => store.dispatch(...args));
-
-  const store = createStore(
-      reducer,
-      compose(
-          applyMiddleware(thunk.withExtraArgument(api)),
-          composeEnhancers && composeEnhancers()
-      )
-  );
-
-  store.dispatch(Operation.loadMovies());
-  store.dispatch(Operation.loadPromoMovie());
+  store.dispatch(MovieOperation.loadMovies());
+  store.dispatch(ActiveCardOperation.loadPromoMovie());
 
   ReactDom.render(
       <Provider store={store}>
