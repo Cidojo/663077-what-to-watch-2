@@ -34,7 +34,6 @@ const MovieDetails = (props) => {
     id,
     name,
     backgroundImage,
-    videoLink,
     released,
     isFavorite,
     posterImage
@@ -117,21 +116,21 @@ const MovieDetails = (props) => {
 };
 
 MovieDetails.propTypes = {
-  genre: PropTypes.string,
   activeCard: movieCardPropTypes,
+  genre: PropTypes.string,
   relatedMovies: PropTypes.array,
+  isPlayerShown: PropTypes.bool,
   onShowPlayer: PropTypes.func,
-  onClosePlayer: PropTypes.func,
-  isPlayerShown: PropTypes.func
+  onClosePlayer: PropTypes.func
 };
 
 MovieDetails.defaultProps = {
   genre: ``,
   activeCard: {},
   relatedMovies: [],
+  isPlayerShown: false,
   onShowPlayer: () => {},
-  onClosePlayer: () => {},
-  isPlayerShown: () => {}
+  onClosePlayer: () => {}
 };
 
 const MovieDetailsWrapped = withPlayerScreen(MovieDetails);

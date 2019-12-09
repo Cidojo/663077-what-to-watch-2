@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-const Video = React.forwardRef((props, ref) => {
-  const {posterImage, videoLink, muted} = props;
+const Video = React.forwardRef(function Video(props, ref) {
+  const {posterImage, muted} = props;
 
   return (
     <video

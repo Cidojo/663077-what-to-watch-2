@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import {ShowMoreButton} from './../../components/_old/show-more-button/show-more-button.jsx';
-
-const INITIAL_PAGE = 1;
+import {ShowMoreButton} from './../../components/parts/show-more-button/show-more-button.jsx';
 
 const withShowMoreButton = (Component) => {
   class WithShowMoreButton extends React.PureComponent {

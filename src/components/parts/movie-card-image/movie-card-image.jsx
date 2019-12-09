@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import {Player} from './../player/player.jsx';
+import Player from './../player/player.jsx';
 import withAutoplay from './../../../hocs/with-autoplay/with-autoplay.jsx';
 
 import {SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY} from '../../../constants/constants.js';

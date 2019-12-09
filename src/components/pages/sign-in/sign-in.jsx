@@ -58,5 +58,17 @@ const SignIn = (props) => {
   );
 };
 
+SignIn.propTypes = {
+  onEmailInput: PropTypes.func,
+  onPasswordInput: PropTypes.func,
+  onSubmit: PropTypes.func
+};
+
+SignIn.defaultProps = {
+  onEmailInput: () => {},
+  onPasswordInput: () => {},
+  onSubmit: () => {}
+};
+
 export {SignIn};
 export default withLoginForm(SignIn);

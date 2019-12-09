@@ -4,8 +4,8 @@ import * as PropTypes from 'prop-types';
 import {Review} from './../review/review.jsx';
 import {reviews} from './../../../mocks/reviews.js';
 
-const TabReviews = (props) => {
-  const {comment} = props;
+const TabReviews = () => {
+  // const {comment} = props;
   const thisMovieReviews = reviews.filter((review) => review.id === 1);
 
   return (

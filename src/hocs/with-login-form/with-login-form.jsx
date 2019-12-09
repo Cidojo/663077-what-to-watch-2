@@ -52,7 +52,15 @@ const withLoginForm = (Component) => {
     }
   }
 
-  const mapStateToProps = (state) => ({
+  WithLoginForm.propTypes = {
+    onAuthorize: PropTypes.func
+  };
+
+  WithLoginForm.defaultProps = {
+    onAuthorize: () => {}
+  };
+
+  const mapStateToProps = () => ({
     authorized: false
   });
 

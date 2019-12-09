@@ -57,9 +57,9 @@ Player.propTypes = {
   videoRef: PropTypes.shape({
     current: PropTypes.instanceOf(Element)
   }),
-  isPlaying: false,
-  onFullscreenButtonClick: () => {},
-  onPlayToggle: () => {}
+  isPlaying: PropTypes.bool,
+  onFullscreenButtonClick: PropTypes.func,
+  onPlayToggle: PropTypes.func
 };
 
 Player.defaultProps = {

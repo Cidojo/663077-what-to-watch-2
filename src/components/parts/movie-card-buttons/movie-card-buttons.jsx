@@ -6,7 +6,7 @@ import {Icon} from '../../../constants/constants.js';
 import {Button} from './../button/button.jsx';
 
 const MovieCardButtons = (props) => {
-  const {onPlayButtonClick, movieId, isFavorite} = props;
+  const {onPlayButtonClick, movieId} = props;
 
   return (
     <div className="movie-card__buttons">
