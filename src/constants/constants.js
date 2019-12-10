@@ -4,6 +4,13 @@ const MAX_RELATED_CARDS_COUNT = 4;
 const SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY = 1000;
 const DEFAULT_GENRE = `All genres`;
 
+const Url = {
+  BASE: `https://htmlacademy-react-2.appspot.com/wtw`,
+  LOGIN: `/login`,
+  MY_LIST: `/my-list`,
+  FILM: `/films`
+};
+
 const Icon = {
   PLAY: `play`,
   PAUSE: `pause`,
@@ -55,6 +62,7 @@ export {
   SHOW_MORE_STEP,
   SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY,
   DEFAULT_GENRE,
+  Url,
   Icon,
   IconProps,
   MovieTab,

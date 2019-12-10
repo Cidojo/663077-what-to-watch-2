@@ -7,7 +7,13 @@ const getMovieCards = (state) => state[NameSpace.MOVIES].movieCards;
 const getGenre = (state) => state[NameSpace.GENRE].genre;
 const getActiveCard = (state) => state[NameSpace.ACTIVE_CARD].activeCard;
 const getDisplayCount = (state) => state[NameSpace.DISPLAY_COUNT].displayCount;
-const getAuthState = (state) => state[NameSpace.AUTH].isAuthorizationRequired;
+const getUserData = (state) => state[NameSpace.AUTH].userData;
+const getAuthRequiredStatus = (state) => state[NameSpace.AUTH].isAuthorizationRequired;
+
+const getAuthStatus = createSelector(
+    [getUserData],
+    (userData) => Object.keys(userData).length > 0
+);
 
 const getActiveGenreCards = createSelector(
     [getMovieCards, getGenre],
@@ -36,8 +42,10 @@ const Selectors = {
   getGenre,
   getMovieCards,
   getActiveCard,
-  getAuthState,
+  getUserData,
+  getAuthRequiredStatus,
   getDisplayCount,
+  getAuthStatus,
   getRelatedMovies,
   getGenresList,
   getCatalogCards,

@@ -1,49 +1,46 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-import {Header} from './../../parts/header/header.jsx';
+import {Logo} from './../../parts/logo/logo.jsx';
+import {MovieCardBackground} from './../../parts/movie-card-background/movie-card-background.jsx';
+import {MovieCardPoster} from './../../parts/movie-card-poster/movie-card-poster.jsx';
+import {Breadcrumbs} from './../../parts/breadcrumbs/breadcrumbs.jsx';
+import UserBlock from './../../parts/user-block/user-block.jsx';
+import Selectors from './../../../selectors/selectors.js';
+import {movieCardPropTypes} from './../../../global-custom-types.js';
 
 const AddReview = (props) => {
+  const {activeCard} = props;
+  const {posterImage, name, backgroundImage} = activeCard;
+
+
   return (
     <section className="movie-card movie-card--full">
+
       <div className="movie-card__header">
-        <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
-        </div>
+        <MovieCardBackground
+          backgroundImage={backgroundImage}
+          name={name}
+        />
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
 
-          <nav className="breadcrumbs">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
-              </li>
-              <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
-              </li>
-            </ul>
-          </nav>
+          <Breadcrumbs
+            activeCard={activeCard}
+          />
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
+          <UserBlock />
         </header>
 
-        <div className="movie-card__poster movie-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
-            height="327"/>
-        </div>
+        <MovieCardPoster
+          posterImage={posterImage}
+          name={name}
+          extraClassName={`movie-card__poster--small`}
+        />
       </div>
 
       <div className="add-review">
@@ -83,11 +80,18 @@ const AddReview = (props) => {
 };
 
 AddReview.propTypes = {
-
+  activeCard: movieCardPropTypes
 };
 
 AddReview.defaultProps = {
+  activeCard: {}
+};
 
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    activeCard: Selectors.getActiveCard(state)
+  });
 };
 
 export {AddReview};
+export default connect(mapStateToProps)(AddReview);

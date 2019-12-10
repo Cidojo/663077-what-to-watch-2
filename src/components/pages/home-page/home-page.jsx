@@ -18,7 +18,6 @@ const HomePage = (props) => {
   const {
     activeCard,
     catalogCards,
-    isAuthorizationRequired,
     onShowPlayer,
     onClosePlayer,
     isPlayerShown
@@ -32,12 +31,6 @@ const HomePage = (props) => {
     genre,
     released
   } = activeCard;
-
-  if (isAuthorizationRequired) {
-    return (
-      <Redirect to="/login"/>
-    );
-  }
 
   if (isPlayerShown) {
     return (
@@ -62,7 +55,9 @@ const HomePage = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header />
+        <Header
+          isWithUserBlock={true}
+        />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -107,7 +102,6 @@ HomePage.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string),
   activeCard: movieCardPropTypes,
   catalogCards: PropTypes.arrayOf(movieCardPropTypes),
-  isAuthorizationRequired: PropTypes.bool,
   onShowPlayer: PropTypes.func,
   onClosePlayer: PropTypes.func,
   isPlayerShown: PropTypes.bool
@@ -118,7 +112,6 @@ HomePage.defaultProps = {
   genres: [],
   activeCard: {},
   catalogCards: [],
-  isAuthorizationRequired: true,
   onShowPlayer: () => {},
   onClosePlayer: () => {},
   isPlayerShown: false
@@ -128,7 +121,6 @@ const HomePageWrapped = withPlayerScreen(HomePage);
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    isAuthorizationRequired: Selectors.getAuthState(state),
     catalogCards: Selectors.getActiveGenreCards(state),
     genre: Selectors.getGenre(state)
   });
