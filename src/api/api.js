@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import {AuthActionCreator} from './../reducers/auth-reducer/auth-reducer.js';
+import {Url} from './../constants/constants.js';
 
 const createAPI = (dispatch, history) => {
   const api = axios.create({
@@ -12,7 +13,7 @@ const createAPI = (dispatch, history) => {
   const onSuccess = (response) => response;
   const onError = (err) => {
     if (err.response.status === 401 || err.response.status === 403) {
-      history.push(`/login`);
+      history.push(Url.LOGIN);
       dispatch(AuthActionCreator.resetUser());
     }
 
