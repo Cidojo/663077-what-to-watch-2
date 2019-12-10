@@ -1,5 +1,5 @@
 import ActiveCardActionType from './../../actions/active-card-actions/active-card-actions.js';
-import {adapterMovie} from './../../utils/adapter.js';
+import {adaptMovie} from './../../utils/adapter.js';
 
 const initialState = {
   activeCard: {}
@@ -20,7 +20,7 @@ const Operation = {
   loadPromoMovie: () => (dispatch, _, api) => {
     return api.get(`/films/promo`)
       .then((response) => {
-        dispatch(ActionCreator.loadPromoMovie(adapterMovie(response.data)));
+        dispatch(ActionCreator.loadPromoMovie(adaptMovie(response.data)));
       });
   }
 };

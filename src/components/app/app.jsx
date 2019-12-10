@@ -2,15 +2,14 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Router, Route, Switch} from 'react-router-dom';
-import {createBrowserHistory} from 'history';
 
 import Selectors from './../../selectors/selectors.js';
 import HomePage from './../pages/home-page/home-page.jsx';
 import MovieDetails from './../pages/movie-details/movie-details.jsx';
 import SignIn from './../pages/sign-in/sign-in.jsx';
+import AddReview from './../pages/add-review/add-review.jsx';
 import {movieCardPropTypes} from './../../global-custom-types.js';
-
-const history = createBrowserHistory();
+import {history} from './../../store/store.js';
 
 const App = (props) => {
   const {
@@ -35,7 +34,7 @@ const App = (props) => {
             activeCard={activeCard}
           />)}
         />
-        <Route exact path='/films/:id/review' component={SignIn} />
+        <Route exact path='/films/:id/review' component={AddReview} />
         <Route exact path='/login' component={SignIn} />
       </Switch>
     </Router>

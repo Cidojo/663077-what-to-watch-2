@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import {MovieCardBackground} from './../../parts/movie-card-background/movie-card-background.jsx';
 import {Header} from './../../parts/header/header.jsx';
@@ -15,6 +16,7 @@ import withPlayerScreen from './../../../hocs/with-player-screen/with-player-scr
 
 import {movieCardPropTypes} from './../../../global-custom-types.js';
 import Selectors from './../../../selectors/selectors.js';
+import {AuthActionCreator} from './../../../reducers/auth-reducer/auth-reducer.js';
 
 const MovieDetails = (props) => {
   const {
@@ -23,7 +25,9 @@ const MovieDetails = (props) => {
     genre,
     onShowPlayer,
     onClosePlayer,
-    isPlayerShown
+    isPlayerShown,
+    isAuthorizationRequired,
+    requireAuth
   } = props;
 
   if (!activeCard) {
@@ -38,6 +42,14 @@ const MovieDetails = (props) => {
     isFavorite,
     posterImage
   } = activeCard;
+
+  // requireAuth();
+
+  if (isAuthorizationRequired) {
+    return (
+      <Redirect to="/login"/>
+    );
+  }
 
   if (isPlayerShown) {
     return (
@@ -121,7 +133,9 @@ MovieDetails.propTypes = {
   relatedMovies: PropTypes.array,
   isPlayerShown: PropTypes.bool,
   onShowPlayer: PropTypes.func,
-  onClosePlayer: PropTypes.func
+  onClosePlayer: PropTypes.func,
+  isAuthorizationRequired: PropTypes.bool,
+  requireAuth: PropTypes.func
 };
 
 MovieDetails.defaultProps = {
@@ -130,16 +144,23 @@ MovieDetails.defaultProps = {
   relatedMovies: [],
   isPlayerShown: false,
   onShowPlayer: () => {},
-  onClosePlayer: () => {}
+  onClosePlayer: () => {},
+  isAuthorizationRequired: false,
+  requireAuth: () => {}
 };
 
 const MovieDetailsWrapped = withPlayerScreen(MovieDetails);
 
+const mapDispatchToProps = (dispatch) => ({
+  requireAuth: () => dispatch(AuthActionCreator.requiredAuthorization(true))
+});
+
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
+    isAuthorizationRequired: Selectors.getAuthRequiredStatus(state),
     relatedMovies: Selectors.getRelatedMovies(state),
   });
 };
 
 export {MovieDetails};
-export default connect(mapStateToProps)(MovieDetailsWrapped);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsWrapped);

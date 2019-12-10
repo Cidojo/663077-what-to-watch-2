@@ -1,13 +1,16 @@
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
+import {createBrowserHistory} from 'history';
+
+const history = createBrowserHistory();
 
 import reducer from './../reducers/root-reducer.js';
 import createAPI from './../api/api.js';
 
 const composeEnhancers = (typeof window !== `undefined` && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-const api = createAPI((...args) => store.dispatch(...args));
+const api = createAPI((...args) => store.dispatch(...args), history);
 
 const store = createStore(
     reducer,
@@ -17,4 +20,5 @@ const store = createStore(
     )
 );
 
+export {history};
 export default store;

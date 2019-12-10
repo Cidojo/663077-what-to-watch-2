@@ -1,5 +1,5 @@
 import MovieActionType from './../../actions/movie-actions/movie-actions.js';
-import {adapterMovies} from './../../utils/adapter.js';
+import {adaptMovies} from './../../utils/adapter.js';
 
 const initialState = {
   movieCards: []
@@ -16,7 +16,7 @@ const Operation = {
   loadMovies: () => (dispatch, _, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.loadMovies(adapterMovies(response.data)));
+        dispatch(ActionCreator.loadMovies(adaptMovies(response.data)));
       });
   }
 };

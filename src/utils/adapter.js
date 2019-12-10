@@ -1,4 +1,4 @@
-const serverKeyMap = {
+const movieServerKeyMap = {
   [`name`]: `name`,
   [`poster_image`]: `posterImage`,
   [`preview_image`]: `previewImage`,
@@ -18,18 +18,33 @@ const serverKeyMap = {
   [`preview_video_link`]: `previewVideoLink`
 };
 
-const adapterMovie = (movie) => {
+const userServerKeyMap = {
+  [`email`]: `email`,
+  [`id`]: `id`,
+  [`name`]: `name`,
+  [`avatar_url`]: `avatarUrl`,
+};
+
+const adaptMovie = (movie) => {
   return Object.keys(movie).reduce((adaptedCard, key) => {
-    adaptedCard[serverKeyMap[key]] = movie[key];
+    adaptedCard[movieServerKeyMap[key]] = movie[key];
 
     return adaptedCard;
   }, {});
 };
 
-const adapterMovies = (movies) => {
+const adaptUserData = (userData) => {
+  return Object.keys(userServerKeyMap).reduce((user, key) => {
+    user[userServerKeyMap[key]] = userData[key];
+
+    return user;
+  }, {});
+};
+
+const adaptMovies = (movies) => {
   return movies.map((movie) => {
-    return adapterMovie(movie);
+    return adaptMovie(movie);
   });
 };
 
-export {adapterMovie, adapterMovies};
+export {adaptMovie, adaptMovies, adaptUserData};

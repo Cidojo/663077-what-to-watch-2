@@ -1,10 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Logo} from './../logo/logo.jsx';
-import {UserBlock} from './../user-block/user-block.jsx';
+import UserBlock from './../user-block/user-block.jsx';
 
 const Header = (props) => {
-  const {extraClassName, title, isWithUserBlock} = props;
+  const {
+    extraClassName,
+    title,
+    isWithUserBlock
+  } = props;
+
   return (
     <header className={`page-header ${extraClassName}`}>
       <Logo/>

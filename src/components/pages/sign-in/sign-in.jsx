@@ -9,7 +9,8 @@ const SignIn = (props) => {
   const {
     onEmailInput,
     onPasswordInput,
-    onSubmit
+    onSubmit,
+    errorMessages
   } = props;
 
   return (
@@ -23,6 +24,11 @@ const SignIn = (props) => {
             className="sign-in__form"
             onSubmit={onSubmit}
           >
+            {errorMessages.length > 0 &&
+              <div className="sign-in__message">
+                {errorMessages.map((message) => <p key={message}>{message}</p>)}
+              </div>
+            }
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input
@@ -61,13 +67,15 @@ const SignIn = (props) => {
 SignIn.propTypes = {
   onEmailInput: PropTypes.func,
   onPasswordInput: PropTypes.func,
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  errorMessages: PropTypes.arrayOf(PropTypes.string)
 };
 
 SignIn.defaultProps = {
   onEmailInput: () => {},
   onPasswordInput: () => {},
-  onSubmit: () => {}
+  onSubmit: () => {},
+  errorMessages: []
 };
 
 export {SignIn};

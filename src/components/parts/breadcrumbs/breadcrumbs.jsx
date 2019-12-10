@@ -1,15 +1,18 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import {Logo} from './../logo/logo.jsx';
-import {UserBlock} from './../user-block/user-block.jsx';
+import {Link} from 'react-router-dom';
+
+import {Url} from './../../../constants/constants.js';
+import {movieCardPropTypes} from './../../../global-custom-types.js';
 
 const Breadcrumbs = (props) => {
-  const {extraClassName, title, isWithUserBlock} = props;
+  const {activeCard} = props;
+  const {id, name} = activeCard;
+
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
         <li className="breadcrumbs__item">
-          <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+          <Link to={`${Url.FILM}/${id}`} className="breadcrumbs__link">{name}</Link>
         </li>
         <li className="breadcrumbs__item">
           <a className="breadcrumbs__link">Add review</a>
@@ -19,16 +22,12 @@ const Breadcrumbs = (props) => {
   );
 };
 
-Header.propTypes = {
-  extraClassName: PropTypes.string,
-  title: PropTypes.string,
-  isWithUserBlock: PropTypes.bool
+Breadcrumbs.propTypes = {
+  activeCard: movieCardPropTypes
 };
 
-Header.defaultProps = {
-  extraClassName: `movie-card__head`,
-  title: ``,
-  isWithUserBlock: false
+Breadcrumbs.defaultProps = {
+  activeCard: {}
 };
 
-export {Header};
+export {Breadcrumbs};
