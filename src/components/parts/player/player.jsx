@@ -20,13 +20,13 @@ const Player = React.forwardRef(function Player(props, ref) {
     duration
   } = props;
 
-  const {previewVideoLink, videoLink, posterImage, name} = card;
+  const {previewVideoLink, videoLink, posterImage, previewImage, name} = card;
 
   return (
     <>
       <Video
         videoLink={controls ? videoLink : previewVideoLink}
-        posterImage={posterImage}
+        posterImage={controls ? posterImage : previewImage}
         muted={muted}
         ref={ref}
       />

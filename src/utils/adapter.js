@@ -1,23 +1,3 @@
-const movieServerKeyMap = {
-  [`name`]: `name`,
-  [`poster_image`]: `posterImage`,
-  [`preview_image`]: `previewImage`,
-  [`background_image`]: `backgroundImage`,
-  [`background_color`]: `backgroundColor`,
-  [`description`]: `description`,
-  [`rating`]: `rating`,
-  [`scores_count`]: `scoresCount`,
-  [`director`]: `director`,
-  [`starring`]: `starring`,
-  [`run_time`]: `runTime`,
-  [`genre`]: `genre`,
-  [`released`]: `released`,
-  [`id`]: `id`,
-  [`is_favorite`]: `isFavorite`,
-  [`video_link`]: `videoLink`,
-  [`preview_video_link`]: `previewVideoLink`
-};
-
 const userServerKeyMap = {
   [`email`]: `email`,
   [`id`]: `id`,
@@ -25,9 +5,26 @@ const userServerKeyMap = {
   [`avatar_url`]: `avatarUrl`,
 };
 
-const adaptMovie = (movie) => {
+const createHash = (template) => {
+  return Object.keys(template).reduce((hash, key) => {
+    hash[key] = convertString(key);
+    return hash;
+  }, {});
+};
+
+const adaptMovie = (movie, providedHash) => {
+  if (!movie) {
+    return movie;
+  }
+
+  let localHash = providedHash;
+
+  if (!localHash) {
+    localHash = createHash(movie);
+  }
+
   return Object.keys(movie).reduce((adaptedCard, key) => {
-    adaptedCard[movieServerKeyMap[key]] = movie[key];
+    adaptedCard[localHash[key]] = movie[key];
 
     return adaptedCard;
   }, {});
@@ -42,9 +39,17 @@ const adaptUserData = (userData) => {
 };
 
 const adaptMovies = (movies) => {
+  if (!movies.length) {
+    return movies;
+  }
+  const hash = createHash(movies[0]);
   return movies.map((movie) => {
-    return adaptMovie(movie);
+    return adaptMovie(movie, hash);
   });
+};
+
+const convertString = (str) => {
+  return str.split(``).reduceRight((res, prev) => prev === `_` ? res[0].toUpperCase() + res.substr(1) : prev + res, ``);
 };
 
 export {adaptMovie, adaptMovies, adaptUserData};

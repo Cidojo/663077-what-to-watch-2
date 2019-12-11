@@ -1,16 +1,12 @@
 import AuthActionType from './../../actions/auth-actions/auth-actions.js';
 import {adaptUserData} from './../../utils/adapter.js';
+import {Url} from './../../constants/constants.js';
 
 const initialState = {
-  isAuthorizationRequired: false,
   userData: {}
 };
 
 const ActionCreator = {
-  requiredAuthorization: (status) => ({
-    type: AuthActionType.REQUIRED_AUTHORIZATION,
-    payload: status
-  }),
   assignUser: (userData) => ({
     type: AuthActionType.ASSIGN_USER,
     payload: userData
@@ -22,20 +18,21 @@ const ActionCreator = {
 
 const Operation = {
   authorize: (authData) => (dispatch, _, api) => {
-    return api.post(`/login`, authData)
+    return api.post(Url.LOGIN, authData)
       .then((response) => {
-        dispatch(ActionCreator.assignUser(adaptUserData(response.data)));
-        return response.data;
+        if (response.data) {
+          dispatch(ActionCreator.assignUser(adaptUserData(response.data)));
+        }
+        return response;
       })
-      .catch((err) => void err);
+      .catch((err) => {
+        throw new Error(`${err} on login`);
+      });
   }
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case AuthActionType.REQUIRED_AUTHORIZATION: return Object.assign({}, state, {
-      isAuthorizationRequired: action.payload
-    });
     case AuthActionType.ASSIGN_USER: return Object.assign({}, state, {
       userData: action.payload
     });
@@ -47,5 +44,5 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator as AuthActionCreator, Operation as AuthOperation};
+export {ActionCreator as AuthActionCreator, Operation as AuthOperation, initialState as AuthInitialState};
 export default reducer;

@@ -1,12 +1,28 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {bindActionCreators} from 'redux';
 
-import {Icon} from '../../../constants/constants.js';
 import {Button} from './../button/button.jsx';
 
+import {Icon} from '../../../constants/constants.js';
+import {MoviesOperation} from './../../../reducers/movies-reducer/movies-reducer.js';
+import {Url} from './../../../constants/constants.js';
+import Selectors from './../../../selectors/selectors.js';
+
 const MovieCardButtons = (props) => {
-  const {onPlayButtonClick, movieId} = props;
+  const {
+    onPlayButtonClick,
+    onAddToFavoriteClick,
+    card
+  } = props;
+
+  const {id, isFavorite} = card;
+
+  const handleAddToFavoriteClick = () => {
+    onAddToFavoriteClick(id, isFavorite);
+  };
 
   return (
     <div className="movie-card__buttons">
@@ -19,14 +35,15 @@ const MovieCardButtons = (props) => {
       </Button>
       <Button
         className="btn btn--list movie-card__button"
-        icon={Icon.ADD}
+        icon={isFavorite ? Icon.IN_LIST : Icon.ADD}
+        onClick={handleAddToFavoriteClick}
       >
         My list
       </Button>
 
       {window.location.pathname !== `/` &&
         <Link
-          to={`/films/${movieId}/review`}
+          to={`${Url.FILM}/${id + Url.REVIEWS}`}
           className="btn movie-card__button"
         >
           Add review
@@ -37,15 +54,31 @@ const MovieCardButtons = (props) => {
 };
 
 MovieCardButtons.propTypes = {
-  movieId: PropTypes.number,
-  isFavorite: PropTypes.bool,
+  card: PropTypes.shape({
+    id: PropTypes.number,
+    isFavorite: PropTypes.bool
+  }),
+  cardId: PropTypes.number,
   onPlayButtonClick: PropTypes.func.isRequired,
+  onAddToFavoriteClick: PropTypes.func,
 };
 
 MovieCardButtons.defaultProps = {
-  movieId: 1,
-  isFavorite: false,
-  onPlayButtonClick: () => {}
+  card: {},
+  cardId: 0,
+  onPlayButtonClick: () => {},
+  onAddToFavoriteClick: () => {},
 };
 
+const mapStateToProps = (state, ownProps) => (
+  Object.assign({}, ownProps, {
+    card: Selectors.getActiveCardById(state, ownProps.cardId)
+  })
+);
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddToFavoriteClick: bindActionCreators(MoviesOperation.addToFavorite, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCardButtons);
 export {MovieCardButtons};

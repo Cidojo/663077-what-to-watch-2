@@ -3,10 +3,12 @@ import axios from 'axios';
 import {AuthActionCreator} from './../reducers/auth-reducer/auth-reducer.js';
 import {Url} from './../constants/constants.js';
 
+const TIMEOUT = 5000;
+
 const createAPI = (dispatch, history) => {
   const api = axios.create({
-    baseURL: `https://htmlacademy-react-2.appspot.com/wtw`,
-    timeout: 1000 * 5,
+    baseURL: Url.BASE,
+    timeout: TIMEOUT,
     withCredentials: true
   });
 
@@ -14,13 +16,13 @@ const createAPI = (dispatch, history) => {
   const onError = (err) => {
     if (err.response.status === 401 || err.response.status === 403) {
       history.push(Url.LOGIN);
-      dispatch(AuthActionCreator.resetUser());
+      dispatch(AuthActionCreator.resetUser);
     }
 
     return err;
   };
 
-  api.interceptors.request.use(onSuccess, onError);
+  api.interceptors.response.use(onSuccess, onError);
 
   return api;
 };

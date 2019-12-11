@@ -1,10 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 import {Header} from './../../parts/header/header.jsx';
-import {MovieCardButtons} from './../../parts/movie-card-buttons/movie-card-buttons.jsx';
+import MovieCardButtons from './../../parts/movie-card-buttons/movie-card-buttons.jsx';
 import Catalog from './../../parts/catalog/catalog.jsx';
 import {Footer} from './../../parts/footer/footer.jsx';
 import GenreList from './../../parts/genre-list/genre-list.jsx';
@@ -24,12 +23,11 @@ const HomePage = (props) => {
   } = props;
 
   const {
-    id,
     name,
     backgroundImage,
     posterImage,
     genre,
-    released
+    released,
   } = activeCard;
 
   if (isPlayerShown) {
@@ -37,7 +35,6 @@ const HomePage = (props) => {
       <div className="player">
         <Player
           card={activeCard}
-          muted={true}
           autoplay={true}
           controls={true}
           onClosePlayer={onClosePlayer}
@@ -74,7 +71,7 @@ const HomePage = (props) => {
               </p>
 
               <MovieCardButtons
-                movieId={id}
+                cardId={activeCard.id}
                 onPlayButtonClick={onShowPlayer}
               />
             </div>
@@ -121,6 +118,7 @@ const HomePageWrapped = withPlayerScreen(HomePage);
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
+    activeCard: Selectors.getPromoCard(state),
     catalogCards: Selectors.getActiveGenreCards(state),
     genre: Selectors.getGenre(state)
   });

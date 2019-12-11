@@ -12,7 +12,7 @@ const Header = (props) => {
 
   return (
     <header className={`page-header ${extraClassName}`}>
-      <Logo/>
+      <Logo />
 
       {title && <h1 className="page-title user-page__title">{title}</h1>}
 
@@ -28,7 +28,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  extraClassName: `movie-card__head`,
+  extraClassName: ``,
   title: ``,
   isWithUserBlock: false
 };

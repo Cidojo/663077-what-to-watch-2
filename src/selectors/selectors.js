@@ -1,14 +1,18 @@
 import {createSelector} from 'reselect';
-import NameSpace from "../reducers/name-spaces";
+import NameSpace from './../reducers/name-spaces.js';
 
 import {DEFAULT_GENRE, MAX_RELATED_CARDS_COUNT} from '../constants/constants.js';
 
 const getMovieCards = (state) => state[NameSpace.MOVIES].movieCards;
+const getPromoCard = (state) => state[NameSpace.MOVIES].promoCard;
+const getActiveCardById = (state, id) => state[NameSpace.MOVIES].movieCards.find((card) => card.id === parseInt(id, 10));
 const getGenre = (state) => state[NameSpace.GENRE].genre;
-const getActiveCard = (state) => state[NameSpace.ACTIVE_CARD].activeCard;
 const getDisplayCount = (state) => state[NameSpace.DISPLAY_COUNT].displayCount;
 const getUserData = (state) => state[NameSpace.AUTH].userData;
-const getAuthRequiredStatus = (state) => state[NameSpace.AUTH].isAuthorizationRequired;
+const getReviews = (state) => state[NameSpace.REVIEWS].reviews
+    .sort((reviewCurrent, reviewNext) => Date.parse(reviewCurrent.date) - Date.parse(reviewNext.date));
+const getRelatedMovies = (state, activeCard) => state[NameSpace.MOVIES].movieCards.filter((movie) => movie.genre === activeCard.genre && movie.id !== activeCard.id).slice(0, MAX_RELATED_CARDS_COUNT);
+const getFavoriteCards = (state) => state[NameSpace.MOVIES].movieCards.filter((card) => card.isFavorite);
 
 const getAuthStatus = createSelector(
     [getUserData],
@@ -19,11 +23,6 @@ const getActiveGenreCards = createSelector(
     [getMovieCards, getGenre],
     (movies, genre) => movies
     .filter((movie) => movie.genre === genre || genre === DEFAULT_GENRE)
-);
-
-const getRelatedMovies = createSelector(
-    [getActiveGenreCards],
-    (activeMovies) => activeMovies.slice(0, MAX_RELATED_CARDS_COUNT)
 );
 
 const getGenresList = createSelector(
@@ -41,12 +40,14 @@ const getCatalogCards = createSelector(
 const Selectors = {
   getGenre,
   getMovieCards,
-  getActiveCard,
   getUserData,
-  getAuthRequiredStatus,
   getDisplayCount,
-  getAuthStatus,
+  getActiveCardById,
+  getReviews,
+  getFavoriteCards,
+  getPromoCard,
   getRelatedMovies,
+  getAuthStatus,
   getGenresList,
   getCatalogCards,
   getActiveGenreCards

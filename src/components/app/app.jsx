@@ -1,65 +1,29 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {Router, Route, Switch} from 'react-router-dom';
 
-import Selectors from './../../selectors/selectors.js';
 import HomePage from './../pages/home-page/home-page.jsx';
 import MovieDetails from './../pages/movie-details/movie-details.jsx';
 import SignIn from './../pages/sign-in/sign-in.jsx';
+import MyList from './../pages/my-list/my-list.jsx';
 import AddReview from './../pages/add-review/add-review.jsx';
-import {movieCardPropTypes} from './../../global-custom-types.js';
+import {NotFound} from './../pages/not-found/not-found.jsx';
+
 import {history} from './../../store/store.js';
+import {Url} from './../../constants/constants.js';
 
-const App = (props) => {
-  const {
-    movieCards,
-    activeCard
-  } = props;
-
-  if (!movieCards.length || !activeCard) {
-    return <h1>Loading</h1>;
-  }
-
+const App = () => {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path='/' render={() => (
-          <HomePage
-            activeCard={activeCard}
-          />)}
-        />
-        <Route exact path='/films/:id' render={() => (
-          <MovieDetails
-            activeCard={activeCard}
-          />)}
-        />
-        <Route exact path='/films/:id/review' component={AddReview} />
-        <Route exact path='/login' component={SignIn} />
+        <Route exact path='/' component={HomePage} />
+        <Route exact path={`${Url.FILM}/:id`} component={MovieDetails} />
+        <Route exact path={`${Url.FILM}/:id${Url.REVIEWS}`} component={AddReview} />
+        <Route exact path={`${Url.LOGIN}`} component={SignIn} />
+        <Route exact path={`${Url.MY_LIST}`} component={MyList} />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   );
 };
 
-App.propTypes = {
-  movieCards: PropTypes.arrayOf(movieCardPropTypes),
-  activeCard: movieCardPropTypes,
-  genre: PropTypes.string
-};
-
-App.defaultProps = {
-  movieCards: PropTypes.arrayOf(movieCardPropTypes),
-  activeCard: {},
-  genre: ``
-};
-
-const mapStateToProps = (state, ownProps) => {
-  return Object.assign({}, ownProps, {
-    movieCards: Selectors.getMovieCards(state),
-    activeCard: Selectors.getActiveCard(state),
-    genre: Selectors.getGenre(state)
-  });
-};
-
 export {App};
-export default connect(mapStateToProps)(App);
