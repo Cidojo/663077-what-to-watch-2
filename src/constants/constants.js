@@ -7,15 +7,17 @@ const DEFAULT_GENRE = `All genres`;
 const Url = {
   BASE: `https://htmlacademy-react-2.appspot.com/wtw`,
   LOGIN: `/login`,
-  MY_LIST: `/my-list`,
-  FILM: `/films`
+  MY_LIST: `/mylist`,
+  FILM: `/films`,
+  REVIEWS: `/review`
 };
 
 const Icon = {
   PLAY: `play`,
   PAUSE: `pause`,
   FULL_SCREEN: `full-screen`,
-  ADD: `add`
+  ADD: `add`,
+  IN_LIST: `in-list`
 };
 
 const IconProps = {
@@ -42,6 +44,12 @@ const IconProps = {
     viewBox: `0 0 19 19`,
     width: 19,
     height: 19
+  },
+  [Icon.IN_LIST]: {
+    name: `in-list`,
+    viewBox: `0 0 18 14`,
+    width: 18,
+    height: 14
   }
 };
 
@@ -49,11 +57,6 @@ const MovieTab = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
   REVIEWS: `Reviews`
-};
-
-const CatalogCardAmount = {
-  MAIN: 8,
-  Movie: 4
 };
 
 export {
@@ -65,6 +68,5 @@ export {
   Url,
   Icon,
   IconProps,
-  MovieTab,
-  CatalogCardAmount
+  MovieTab
 };

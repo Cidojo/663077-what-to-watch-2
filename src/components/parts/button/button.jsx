@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+
 import {SvgIcon} from './../svg-icon/svg-icon.jsx';
 import {IconProps} from '../../../constants/constants.js';
 

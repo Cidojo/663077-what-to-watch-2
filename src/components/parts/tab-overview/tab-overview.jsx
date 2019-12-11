@@ -25,8 +25,7 @@ const TabOverview = (props) => {
         <p>{description}</p>
         <p className="movie-card__director"><strong>Director: {director}</strong></p>
 
-        <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)} and
-          other</strong></p>
+        <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)}</strong></p>
       </div>
     </>
   );

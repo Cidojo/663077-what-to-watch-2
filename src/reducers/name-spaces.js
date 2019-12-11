@@ -1,9 +1,9 @@
 const NameSpace = {
   MOVIES: `MOVIES`,
   GENRE: `GENRE`,
-  ACTIVE_CARD: `ACTIVE_CARD`,
   DISPLAY_COUNT: `DISPLAY_COUNT`,
-  AUTH: `AUTH`
+  AUTH: `AUTH`,
+  REVIEWS: `REVIEWS`
 };
 
 export default NameSpace;

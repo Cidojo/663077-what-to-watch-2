@@ -95,22 +95,13 @@ MovieCardTabs.propTypes = {
     date: PropTypes.string,
     rating: PropTypes.number,
     comment: PropTypes.string
-  })),
+  }))
 };
 
 MovieCardTabs.defaultProps = {
   active: MovieTab.OVERVIEW,
   onActiveChange: () => {},
-  movie: {
-    genre: ``,
-    description: ``,
-    released: 0,
-    rating: 0,
-    runTime: 0,
-    director: ``,
-    starring: [],
-    scoresCount: 0,
-  },
+  movie: {},
   reviews: []
 };
 

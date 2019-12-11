@@ -71,7 +71,9 @@ const withPlayingState = (Component) => {
       if (!this.props.autoplay && video.currentTime) {
         video.load();
       } else if (isPlaying) {
-        video.play().catch((err) => void (err));
+        video.play().catch((err) => {
+          throw new Error(`${err} on video play`);
+        });
       } else {
         video.pause();
       }

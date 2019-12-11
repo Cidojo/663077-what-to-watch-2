@@ -51,7 +51,6 @@ Catalog.defaultProps = {
   active: null,
   movieCards: [],
   withShowMoreButton: false,
-  displayCount: 0,
   onShowMore: () => {}
 };
 

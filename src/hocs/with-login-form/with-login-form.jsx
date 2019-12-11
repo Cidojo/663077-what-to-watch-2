@@ -4,6 +4,8 @@ import * as PropTypes from 'prop-types';
 import {AuthOperation} from './../../reducers/auth-reducer/auth-reducer';
 import {connect} from 'react-redux';
 
+const SERVER_VALIDATION_ERROR_REGEX = /\[(.*?)]/;
+
 const FieldName = {
   EMAIL: `email`,
   PASSWORD: `password`
@@ -84,7 +86,15 @@ const withLoginForm = (Component) => {
             history.goBack();
           }
         })
-        .catch((err) => void err);
+        .catch((err) => {
+          // throw new Error(`${err} on login redirect`);
+          const error = SERVER_VALIDATION_ERROR_REGEX.exec(err.message);
+          if (error && error[1]) {
+            this.setState({
+              errors: [error[1]]
+            });
+          }
+        });
       } else {
         this.setState({
           errors
@@ -124,7 +134,9 @@ const withLoginForm = (Component) => {
 
   WithLoginForm.defaultProps = {
     onAuthorize: () => {},
-    history: {}
+    history: {
+      goBack: () => {}
+    }
   };
 
   const mapStateToProps = () => ({
