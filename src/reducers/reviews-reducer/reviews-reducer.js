@@ -16,10 +16,10 @@ const Operation = {
     return api.post(`/comments/${id}`, review)
       .then((response) => {
         dispatch(ActionCreator.setReviews(response.data));
-        return response;
+        return response.data;
       })
-      .catch((err) => {
-        throw new Error(`${err} on post review`);
+      .catch(() => {
+        throw new Error(`SESSION EXPIRED OR SERVER ERROR`);
       });
   },
   loadReviews: (id) => (dispatch, _, api) => {

@@ -17,7 +17,7 @@ const createAPI = (dispatch, history) => {
     if (err.response.status === 401 || err.response.status === 403) {
       history.push(Url.LOGIN);
       dispatch(AuthActionCreator.resetUser());
-    } if (err.response.status === 400) {
+    } else if (err.response.status === 400) {
       throw new Error(`SERVER ERROR: ${err.response.data.error}`);
     }
 

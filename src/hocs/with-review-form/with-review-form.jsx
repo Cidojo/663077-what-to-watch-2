@@ -58,9 +58,9 @@ const withReviewForm = (Component) => {
             this.handleBlockStatus(false);
           }
         })
-        .catch((err) => {
+        .catch(() => {
           this.handleBlockStatus(false);
-          throw new Error(`${err} on review submit`);
+          throw new Error(`SESSION EXPIRED OR SERVER ERROR`);
         });
     }
 
