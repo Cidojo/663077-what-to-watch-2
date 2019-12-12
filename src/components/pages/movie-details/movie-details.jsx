@@ -162,19 +162,10 @@ MovieDetails.defaultProps = {
   onShowPlayer: () => {},
   onClosePlayer: () => {},
   onLoadReviews: () => {},
-  reviews: {
-    id: 0,
-    user: {
-      id: 0,
-      name: ``,
-    },
-    rating: 0,
-    comment: 0,
-    date: ``
-  },
+  reviews: [],
   match: {
     params: {
-      id: 0
+      id: `0`
     }
   }
 };

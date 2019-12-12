@@ -25,7 +25,7 @@ const props = {
   },
   match: {
     params: {
-      id: 0
+      id: `0`
     }
   }
 };
