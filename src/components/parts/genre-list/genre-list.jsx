@@ -7,6 +7,7 @@ import {GenreItem} from './../genre-item/genre-item.jsx';
 import {GenreActionCreator} from './../../../reducers/genre-reducer/genre-reducer.js';
 import {DisplayCountActionCreator} from './../../../reducers/display-count-reducer/display-count-reducer.js';
 import Selectors from './../../../selectors/selectors.js';
+import {SHOW_MORE_STEP} from './../../../constants/constants.js';
 
 const GenreList = (props) => {
   const {
@@ -48,7 +49,7 @@ GenreList.defaultProps = {
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (genre) => {
     dispatch(GenreActionCreator.assignGenre(genre));
-    dispatch(DisplayCountActionCreator.resetCount());
+    dispatch(DisplayCountActionCreator.setCount(SHOW_MORE_STEP));
   }
 });
 

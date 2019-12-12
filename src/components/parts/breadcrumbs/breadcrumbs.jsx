@@ -1,8 +1,8 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import {Url} from './../../../constants/constants.js';
-import {movieCardPropTypes} from './../../../global-custom-types.js';
 
 const Breadcrumbs = (props) => {
   const {activeCard} = props;
@@ -23,11 +23,17 @@ const Breadcrumbs = (props) => {
 };
 
 Breadcrumbs.propTypes = {
-  activeCard: movieCardPropTypes
+  activeCard: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string
+  })
 };
 
 Breadcrumbs.defaultProps = {
-  activeCard: {}
+  activeCard: {
+    id: 0,
+    name: ``
+  }
 };
 
 export {Breadcrumbs};

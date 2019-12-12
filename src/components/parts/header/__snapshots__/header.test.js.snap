@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header component without errors 1`] = `
+<header
+  className="page-header "
+>
+  <Logo />
+</header>
+`;
+
+exports[`should render Header component without errors when with UserBlock 1`] = `
+<header
+  className="page-header "
+>
+  <Logo />
+  <Connect(UserBlock) />
+</header>
+`;

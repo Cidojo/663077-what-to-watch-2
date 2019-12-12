@@ -1,10 +1,3 @@
-const userServerKeyMap = {
-  [`email`]: `email`,
-  [`id`]: `id`,
-  [`name`]: `name`,
-  [`avatar_url`]: `avatarUrl`,
-};
-
 const createHash = (template) => {
   return Object.keys(template).reduce((hash, key) => {
     hash[key] = convertString(key);
@@ -31,8 +24,10 @@ const adaptMovie = (movie, providedHash) => {
 };
 
 const adaptUserData = (userData) => {
-  return Object.keys(userServerKeyMap).reduce((user, key) => {
-    user[userServerKeyMap[key]] = userData[key];
+  const hash = createHash(userData);
+
+  return Object.keys(hash).reduce((user, key) => {
+    user[hash[key]] = userData[key];
 
     return user;
   }, {});

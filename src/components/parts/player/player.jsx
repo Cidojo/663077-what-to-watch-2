@@ -67,7 +67,7 @@ Player.propTypes = {
 Player.defaultProps = {
   secondsPlayed: 0,
   duration: 0,
-  card: movieCardPropTypes,
+  card: {},
   muted: false,
   controls: false,
   onClosePlayer: () => {},

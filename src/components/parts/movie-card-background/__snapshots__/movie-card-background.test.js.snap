@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render MovieCardBackground component without errors 1`] = `
+<div
+  className="movie-card__bg"
+>
+  <img
+    alt=""
+    src=""
+  />
+</div>
+`;

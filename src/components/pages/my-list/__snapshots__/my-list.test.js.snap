@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render MyList component without errors 1`] = `
+<div
+  className="user-page"
+>
+  <Header
+    extraClassName="user-page__head"
+    isWithUserBlock={true}
+    title="My list"
+  />
+  <section
+    className="catalog"
+  >
+    <h2
+      className="catalog__title visually-hidden"
+    >
+      Catalog
+    </h2>
+    <WithActiveItem
+      movieCards={Array []}
+    />
+  </section>
+  <Footer />
+</div>
+`;

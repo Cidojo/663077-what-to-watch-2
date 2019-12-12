@@ -21,4 +21,8 @@ ShowMoreButton.propTypes = {
   onButtonClick: PropTypes.func.isRequired
 };
 
+ShowMoreButton.defaultProps = {
+  onButtonClick: () => {}
+};
+
 export {ShowMoreButton};

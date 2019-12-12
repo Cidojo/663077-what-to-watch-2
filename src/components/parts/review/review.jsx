@@ -31,10 +31,7 @@ const Review = (props) => {
 
 Review.propTypes = {
   review: PropTypes.shape({
-    id: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
+    id: PropTypes.number,
     user: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
@@ -43,6 +40,19 @@ Review.propTypes = {
     comment: PropTypes.string,
     date: PropTypes.string
   })
+};
+
+Review.defaultProps = {
+  review: {
+    id: 0,
+    user: {
+      id: 0,
+      name: ``,
+    },
+    rating: 0,
+    comment: ``,
+    date: ``
+  }
 };
 
 export {Review};

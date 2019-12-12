@@ -4,6 +4,8 @@ import * as PropTypes from 'prop-types';
 import {AuthOperation} from './../../reducers/auth-reducer/auth-reducer';
 import {connect} from 'react-redux';
 
+import Selectors from './../../selectors/selectors.js';
+
 const SERVER_VALIDATION_ERROR_REGEX = /\[(.*?)]/;
 
 const FieldName = {
@@ -42,6 +44,14 @@ const withLoginForm = (Component) => {
       this._resetErrors = this._resetErrors.bind(this);
     }
 
+    componentDidUpdate() {
+      const {isAuthorized, history} = this.props;
+
+      if (isAuthorized) {
+        history.goBack();
+      }
+    }
+
     handleEmailInput(e) {
       this.setState({
         inputData: Object.assign({}, this.state.inputData, {
@@ -62,17 +72,9 @@ const withLoginForm = (Component) => {
       this._resetErrors();
     }
 
-    _resetErrors() {
-      if (this.state.errors.length) {
-        this.setState({
-          errors: []
-        });
-      }
-    }
-
     handleSubmit(e) {
       e.preventDefault();
-      const {onAuthorize, history} = this.props;
+      const {onAuthorize} = this.props;
 
       const errors = this._validate();
 
@@ -81,14 +83,9 @@ const withLoginForm = (Component) => {
           email: this.state.inputData[FieldName.EMAIL],
           password: this.state.inputData[FieldName.PASSWORD]
         })
-        .then((data) => {
-          if (data) {
-            history.goBack();
-          }
-        })
         .catch((err) => {
-          // throw new Error(`${err} on login redirect`);
           const error = SERVER_VALIDATION_ERROR_REGEX.exec(err.message);
+
           if (error && error[1]) {
             this.setState({
               errors: [error[1]]
@@ -98,6 +95,14 @@ const withLoginForm = (Component) => {
       } else {
         this.setState({
           errors
+        });
+      }
+    }
+
+    _resetErrors() {
+      if (this.state.errors.length) {
+        this.setState({
+          errors: []
         });
       }
     }
@@ -129,18 +134,20 @@ const withLoginForm = (Component) => {
     onAuthorize: PropTypes.func,
     history: PropTypes.shape({
       goBack: PropTypes.func
-    })
+    }),
+    isAuthorized: PropTypes.bool
   };
 
   WithLoginForm.defaultProps = {
     onAuthorize: () => {},
     history: {
       goBack: () => {}
-    }
+    },
+    isAuthorized: false
   };
 
-  const mapStateToProps = () => ({
-    authorized: false
+  const mapStateToProps = (state) => ({
+    isAuthorized: Selectors.getAuthStatus(state)
   });
 
   const mapDispatchToProps = (dispatch) => ({

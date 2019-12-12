@@ -23,10 +23,8 @@ const Operation = {
         if (response.data) {
           dispatch(ActionCreator.assignUser(adaptUserData(response.data)));
         }
+
         return response;
-      })
-      .catch((err) => {
-        throw new Error(`${err} on login`);
       });
   }
 };

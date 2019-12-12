@@ -23,5 +23,5 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator as GenreActionCreator};
+export {ActionCreator as GenreActionCreator, initialState as GenreInitialState};
 export default reducer;

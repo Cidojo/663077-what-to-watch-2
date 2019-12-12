@@ -44,5 +44,5 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator as ReviewsActionCreator, Operation as ReviewsOperation};
+export {ActionCreator as ReviewsActionCreator, Operation as ReviewsOperation, initialState as ReviewsInitialState};
 export default reducer;

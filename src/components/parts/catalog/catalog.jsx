@@ -56,7 +56,7 @@ Catalog.defaultProps = {
 
 const mapDispatchToProps = (dispatch) => ({
   onShowMore: (shownCount) => {
-    dispatch(DisplayCountActionCreator.incrementCount(shownCount + SHOW_MORE_STEP));
+    dispatch(DisplayCountActionCreator.setCount(shownCount + SHOW_MORE_STEP));
   }
 });
 

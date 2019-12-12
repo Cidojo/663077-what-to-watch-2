@@ -23,6 +23,13 @@ class MovieDetails extends React.PureComponent {
     super(props);
   }
 
+  componentDidMount() {
+    const {onLoadReviews, match} = this.props;
+    const requestedId = parseInt(match.params.id, 10);
+
+    onLoadReviews(requestedId);
+  }
+
   componentDidUpdate(prevProps) {
     const {onLoadReviews, match} = this.props;
     const requestedId = parseInt(match.params.id, 10);

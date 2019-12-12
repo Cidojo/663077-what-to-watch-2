@@ -39,8 +39,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.replaceCard(adaptMovie(response.data)));
       })
-      .catch((err) => {
-        throw new Error(`${err} on post get favorite card`);
+      .catch(() => {
+        throw new Error(`SESSION EXPIRED OR SERVER ERROR`);
       });
   }
 };
@@ -62,5 +62,5 @@ const reducer = (state = initialState, action) => {
 };
 
 
-export {Operation as MoviesOperation, ActionCreator as MoviesActionCreator};
+export {Operation as MoviesOperation, ActionCreator as MoviesActionCreator, initialState as MoviesInitialState};
 export default reducer;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render GenreList component without errors 1`] = `
+<ul
+  className="catalog__genres-list"
+/>
+`;

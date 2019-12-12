@@ -1,6 +1,5 @@
 const ActionType = {
-  INCREMENT_COUNT: `INCREMENT_COUNT`,
-  RESET_COUNT: `RESET_COUNT`
+  SET_COUNT: `SET_COUNT`
 };
 
 export default ActionType;
