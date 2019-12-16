@@ -39,8 +39,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.replaceCard(adaptMovie(response.data)));
       })
-      .catch(() => {
-        throw new Error(`SESSION EXPIRED OR SERVER ERROR`);
+      .catch((err) => {
+        void (err);
       });
   }
 };

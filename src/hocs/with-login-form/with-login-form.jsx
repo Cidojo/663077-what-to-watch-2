@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
 
 import {AuthOperation} from './../../reducers/auth-reducer/auth-reducer';
 import {connect} from 'react-redux';
@@ -40,8 +41,8 @@ const withLoginForm = (Component) => {
       this.handleEmailInput = this.handleEmailInput.bind(this);
       this.handlePasswordInput = this.handlePasswordInput.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this._validate = this._validate.bind(this);
-      this._resetErrors = this._resetErrors.bind(this);
+      this._handleValidate = this._handleValidate.bind(this);
+      this._handleResetErrors = this._handleResetErrors.bind(this);
     }
 
     componentDidUpdate() {
@@ -59,7 +60,7 @@ const withLoginForm = (Component) => {
         })
       });
 
-      this._resetErrors();
+      this._handleResetErrors();
     }
 
     handlePasswordInput(e) {
@@ -69,14 +70,14 @@ const withLoginForm = (Component) => {
         })
       });
 
-      this._resetErrors();
+      this._handleResetErrors();
     }
 
     handleSubmit(e) {
       e.preventDefault();
       const {onAuthorize} = this.props;
 
-      const errors = this._validate();
+      const errors = this._handleValidate();
 
       if (!errors.length) {
         onAuthorize({
@@ -99,7 +100,7 @@ const withLoginForm = (Component) => {
       }
     }
 
-    _resetErrors() {
+    _handleResetErrors() {
       if (this.state.errors.length) {
         this.setState({
           errors: []
@@ -107,7 +108,7 @@ const withLoginForm = (Component) => {
       }
     }
 
-    _validate() {
+    _handleValidate() {
       return Object.entries(this.state.inputData).reduce((resultErrors, [fieldName, value]) => {
         const isValid = !!value.match(FieldValidity[fieldName]);
         if (!isValid) {
@@ -119,6 +120,10 @@ const withLoginForm = (Component) => {
     }
 
     render() {
+      if (this.props.isAuthorized) {
+        return <Redirect to="/" />;
+      }
+
       return (
         <Component
           errorMessages={this.state.errors}

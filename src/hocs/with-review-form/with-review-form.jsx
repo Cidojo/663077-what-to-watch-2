@@ -26,10 +26,10 @@ const withReviewForm = (Component) => {
     }
 
     componentDidUpdate() {
-      this._validateOnInput();
+      this._handleValidateOnInput();
     }
 
-    _validateOnInput() {
+    _handleValidateOnInput() {
       if (this.state.rating !== null) {
         this.setState({
           isValid: !!this.state.comment.match(COMMENT_VALIDATION)
@@ -60,7 +60,6 @@ const withReviewForm = (Component) => {
         })
         .catch(() => {
           this.handleBlockStatus(false);
-          throw new Error(`SESSION EXPIRED OR SERVER ERROR`);
         });
     }
 

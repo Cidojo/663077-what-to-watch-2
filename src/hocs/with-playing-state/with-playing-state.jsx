@@ -20,7 +20,7 @@ const withPlayingState = (Component) => {
 
       this._handlePauseEvent = this._handlePauseEvent.bind(this);
       this._handlePlayEvent = this._handlePlayEvent.bind(this);
-      this._setDuration = this._setDuration.bind(this);
+      this._handleDurationSet = this._handleDurationSet.bind(this);
       this._handleTimeUpdate = this._handleTimeUpdate.bind(this);
     }
 
@@ -56,7 +56,7 @@ const withPlayingState = (Component) => {
       };
 
       video.onloadedmetadata = (e) => {
-        this._setDuration(e.currentTarget.duration);
+        this._handleDurationSet(e.currentTarget.duration);
       };
     }
 
@@ -95,7 +95,7 @@ const withPlayingState = (Component) => {
       }));
     }
 
-    _setDuration(seconds) {
+    _handleDurationSet(seconds) {
       this.setState(() => ({
         duration: seconds
       }));

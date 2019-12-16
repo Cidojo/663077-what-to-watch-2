@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import MovieCardImageWrapped from './../movie-card-image/movie-card-image.jsx';
@@ -7,24 +6,20 @@ import {movieCardPropTypes} from './../../../global-custom-types.js';
 
 const SmallMovieCard = (props) => {
   const {
-    card,
-    onMovieCardTitleClick
+    card
   } = props;
-
-  const _handleMovieCardTitleClick = () => {
-    onMovieCardTitleClick(card);
-  };
 
   return (
     <article className="small-movie-card catalog__movies-card">
-      <MovieCardImageWrapped
-        card={card}
-      />
+      <Link to={`/films/${card.id}`}>
+        <MovieCardImageWrapped
+          card={card}
+        />
+      </Link>
       <h3 className="small-movie-card__title">
         <Link
           className="small-movie-card__link"
           to={`/films/${card.id}`}
-          onClick={_handleMovieCardTitleClick}
         >
           {card.name}
         </Link>
@@ -34,13 +29,11 @@ const SmallMovieCard = (props) => {
 };
 
 SmallMovieCard.propTypes = {
-  card: movieCardPropTypes,
-  onMovieCardTitleClick: PropTypes.func.isRequired
+  card: movieCardPropTypes
 };
 
 SmallMovieCard.defaultProps = {
-  card: {},
-  onMovieCardTitleClick: () => {},
+  card: {}
 };
 
 export {SmallMovieCard};

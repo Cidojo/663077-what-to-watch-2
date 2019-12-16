@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 import {Redirect} from 'react-router-dom';
 
 import {Url} from './../../constants/constants.js';
@@ -25,13 +26,14 @@ const withAuthAccess = (Component) => {
     isAuthorized: false,
   };
 
-  const mapStateToProps = (state, ownProps) => {
-    return Object.assign({}, ownProps, {
-      isAuthorized: Selectors.getAuthStatus(state)
-    });
-  };
-
-  return connect(mapStateToProps)(WithAuthAccess);
+  return WithAuthAccess;
 };
 
-export default withAuthAccess;
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    isAuthorized: Selectors.getAuthStatus(state)
+  });
+};
+
+export {withAuthAccess};
+export default compose(connect(mapStateToProps), withAuthAccess);

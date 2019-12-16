@@ -13,7 +13,6 @@ import {SHOW_MORE_STEP} from './../../../constants/constants.js';
 const Catalog = (props) => {
   const {
     movieCards,
-    active,
     withShowMoreButton,
     displayCount,
     onShowMore
@@ -27,7 +26,7 @@ const Catalog = (props) => {
     <>
       <div className="catalog__movies-list">
         {movieCards.slice(0, displayCount).map((card) => {
-          return <SmallMovieCard key={card.id} card={card} isActive={active === card} />;
+          return <SmallMovieCard key={card.id} card={card} />;
         })}
       </div>
       {withShowMoreButton && movieCards.length >= displayCount &&
@@ -40,7 +39,6 @@ const Catalog = (props) => {
 };
 
 Catalog.propTypes = {
-  active: PropTypes.number,
   movieCards: PropTypes.arrayOf(movieCardPropTypes),
   displayCount: PropTypes.number,
   withShowMoreButton: PropTypes.bool,
@@ -48,7 +46,6 @@ Catalog.propTypes = {
 };
 
 Catalog.defaultProps = {
-  active: null,
   movieCards: [],
   withShowMoreButton: false,
   onShowMore: () => {}

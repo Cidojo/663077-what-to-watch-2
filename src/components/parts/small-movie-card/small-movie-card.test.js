@@ -4,8 +4,7 @@ import * as renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
 const props = {
-  card: {},
-  onMovieCardTitleClick: () => {},
+  card: {}
 };
 
 it(`should render SmallMovieCard component without errors`, () => {

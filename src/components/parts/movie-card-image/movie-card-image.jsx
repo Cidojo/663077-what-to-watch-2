@@ -5,42 +5,54 @@ import Player from './../player/player.jsx';
 import withAutoplay from './../../../hocs/with-autoplay/with-autoplay.jsx';
 
 import {SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY} from '../../../constants/constants.js';
-import {movieCardPropTypes} from "../../../global-custom-types";
+import {movieCardPropTypes} from './../../../global-custom-types.js';
 
-const MovieCardImage = (props) => {
-  let timerId = null;
+class MovieCardImage extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  const {
-    card,
-    autoplay,
-    onAutoplayStatusUpdate
-  } = props;
+    this.timerId = null;
 
-  const _handleMovieCardMouseEnter = () => {
-    timerId = setTimeout(() => onAutoplayStatusUpdate(true), SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY);
-  };
+    this.handleMovieCardMouseEnter = this.handleMovieCardMouseEnter.bind(this);
+    this.handleMovieCardMouseLeave = this.handleMovieCardMouseLeave.bind(this);
+  }
 
-  const _handleMovieCardMouseLeave = () => {
-    clearTimeout(timerId);
+  componentWillUnmount() {
+    clearTimeout(this.timerId);
+  }
 
-    onAutoplayStatusUpdate(false);
-  };
+  handleMovieCardMouseLeave() {
+    clearTimeout(this.timerId);
 
-  return (
-    <div
-      className="small-movie-card__image"
-      onMouseEnter={_handleMovieCardMouseEnter}
-      onMouseLeave={_handleMovieCardMouseLeave}
-    >
-      <Player
-        card={card}
-        autoplay={autoplay}
-        controls={false}
-        muted={true}
-      />
-    </div>
-  );
-};
+    this.props.onAutoplayStatusUpdate(false);
+  }
+
+  handleMovieCardMouseEnter() {
+    this.timerId = setTimeout(() => this.props.onAutoplayStatusUpdate(true), SMALL_MOVIE_CARD_MOUSE_ENTER_DELAY);
+  }
+
+  render() {
+    const {
+      card,
+      autoplay
+    } = this.props;
+
+    return (
+      <div
+        className="small-movie-card__image"
+        onMouseEnter={this.handleMovieCardMouseEnter}
+        onMouseLeave={this.handleMovieCardMouseLeave}
+      >
+        <Player
+          card={card}
+          autoplay={autoplay}
+          controls={false}
+          muted={true}
+        />
+      </div>
+    );
+  }
+}
 
 MovieCardImage.propTypes = {
   card: movieCardPropTypes,

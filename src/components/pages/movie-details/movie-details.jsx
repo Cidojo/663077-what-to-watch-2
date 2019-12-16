@@ -134,7 +134,7 @@ class MovieDetails extends React.PureComponent {
 
 MovieDetails.propTypes = {
   activeCard: movieCardPropTypes,
-  relatedMovies: PropTypes.array,
+  relatedMovies: PropTypes.arrayOf(movieCardPropTypes),
   isPlayerShown: PropTypes.bool,
   onShowPlayer: PropTypes.func,
   onClosePlayer: PropTypes.func,
