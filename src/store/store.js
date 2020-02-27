@@ -3,9 +3,7 @@ import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 import {createBrowserHistory} from 'history';
 
-const history = createBrowserHistory({
-  basename: process.env.PUBLIC_URL // eslint-disable-line
-});
+const history = createBrowserHistory();
 
 import reducer from './../reducers/root-reducer.js';
 import createAPI from './../api/api.js';

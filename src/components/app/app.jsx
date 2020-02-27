@@ -13,14 +13,13 @@ import {Url} from './../../constants/constants.js';
 
 const App = () => {
   return (
-    // eslint-disable-next-line
-    <Router history={history} basename={process.env.PUBLIC_URL}>
+    <Router history={history}>
       <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route exact path={`${Url.FILM}/:id`} component={MovieDetails} />
-        <Route exact path={`${Url.FILM}/:id${Url.REVIEWS}`} component={AddReview} />
-        <Route exact path={`${Url.LOGIN}`} component={SignIn} />
-        <Route exact path={`${Url.MY_LIST}`} component={MyList} />
+        <Route path={`${Url.FILM}/:id${Url.REVIEWS}`} component={AddReview} />
+        <Route path={`${Url.FILM}/:id`} component={MovieDetails} />
+        <Route path={`${Url.LOGIN}`} component={SignIn} />
+        <Route path={`${Url.MY_LIST}`} component={MyList} />
+        <Route path='/' component={HomePage} />
         <Route component={NotFound} />
       </Switch>
     </Router>
